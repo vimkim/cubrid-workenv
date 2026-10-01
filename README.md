@@ -6,7 +6,7 @@ CLI 이름: `cub-workenv` (구현 예정).
 
 프로젝트 홈: `/home/vimkim/gh/cubrid-workenv`
 
-[요구사항](docs/requirements.md)에 목적, 초기화 범위, 수용한 위험과 구현 확인 기준을 기록했다. 현재는 요구사항을 정리한 단계이며 CLI 구현은 포함하지 않는다.
+[구현 명세](.scratch/workenv/spec.md)에 최종 동작 계약과 검증 기준을 정리했다. [요구사항](docs/requirements.md)은 목표와 책임 범위의 요약이며, [native DB 중복 실행 실험](experiments/native-db-exclusion/README.md)에 검증 결과와 제한을 기록했다. CLI 구현은 아직 포함하지 않는다.
 
 컨테이너 실행 도구의 프로젝트 홈은 `/home/vimkim/gh/cubrid-box`이다. 컨테이너 내부에서는 `cubrid-workenv` 초기화를 요구하지 않는다.
 

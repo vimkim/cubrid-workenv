@@ -1,6 +1,6 @@
 # cub-workenv design interview
 
-Status: in progress; implementation requires confirmed shared understanding.
+Status: synthesized into spec.md; use that spec for the current implementation contract. Earlier rounds below are chronological history, not independent current requirements.
 Work tracker: 249.
 
 ## Settled in round 1
@@ -129,7 +129,7 @@ This agreement supersedes earlier uncertainty about standalone coverage and pres
 - Do not interpose cubrid/csql through a special PATH wrapper directory in the first version. Existing raw commands retain their behavior and are outside workenv-mediated exclusivity.
 - Ordinary client connections can use csql directly with the prepared environment.
 - On worktree entry, direnv loads prepared environment variables and the installed binaries' PATH. It does not initialize, build, create databases, or run full validation.
-- Behavior when no prepared environment exists remains to be settled.
+- Before initialization, provide build context and a clear instruction to build/install and then initialize; do not inherit another worktree runtime.
 
 ## Agent execution guidance
 

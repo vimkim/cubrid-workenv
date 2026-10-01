@@ -1,45 +1,30 @@
 # cubrid-workenv 인계
 
-## 다음 에이전트의 담당 범위
-
-당신은 `/home/vimkim/gh/cubrid-workenv`을 담당하는 주 에이전트다. 사용자는 별도의 주 에이전트를 `/home/vimkim/gh/cubrid-box`에 배정할 예정이다. 사용자와 이 프로젝트의 다음 작업 범위를 확인하고, 구현을 요청받으면 [요구사항](docs/requirements.md)을 기준으로 진행한다.
-
-요구사항 문서는 긴 소크라테스식 문답의 최종 결론이다. 두 도구의 역할을 다시 처음부터 탐색할 필요는 없다. 구체적인 CLI, 자원 배정 방식 등 미결정 사항은 문서의 마지막 부분에 모았다.
-
-## 현재 상태
-
-- 새 프로젝트 저장소에 README, 요구사항과 이 인계 문서만 준비했다. 구현과 성능 검증은 아직 하지 않았다.
-- 요구사항은 `docs/requirements` 브랜치에 있으며, 프로젝트 이름과 CLI 이름(`cub-workenv`) 변경은 이를 기반으로 한 `rename/cubrid-workenv` 브랜치에 있다. `main`에는 빈 초기화 커밋만 있다. 시작 시 실제 Git 상태를 확인한다.
-- 사용자의 원래 증상은 direnv가 느리다는 것이다. 과도한 초기화 책임이 원인일 수 있다는 문제의식만 있으며, 재현 명령·측정값·확정된 원인은 없다.
-- 이번 세션의 범위는 요구사항 문서화와 두 주 에이전트에 대한 인계다. 기존 도구 교체, 배포 또는 사용자 환경 변경은 수행하지 않았다.
-
 ## 시작 순서
 
-1. `/home/vimkim/my-cubrid/CUBRID.md`와 이 저장소에 적용되는 `AGENTS.md`를 읽고, `git status`, 현재 브랜치와 worktree를 확인한다. 이 인계의 상태 설명보다 실제 Git 상태를 우선한다.
-2. `docs/requirements.md`를 읽는다. 호스트 초기화의 범위, 수용한 위험과 완료 시나리오를 파악하면 요구사항 확인을 마친다.
-   포트·UDS·shared memory 배정을 설계하거나 구현하기 전에 [인스턴스 격리 인계](docs/handoff-instance-isolation.md)를 읽는다. CUBRID 인스턴스가 서로를 찾는 경로와 분리해야 할 자원을 소스 근거와 함께 정리했다.
-3. 기존 구현을 조사할 필요가 있으면 `/home/vimkim/my-cubrid`의 도구와 `/home/vimkim/gh/cb/my-cubrid-runtime-testdir`의 설정을 읽기부터 한다. 이 경로들은 탐색 시작점이며 기존 구현 파일의 위치나 현재 동작을 검증한 결과가 아니다. 기존 사용자 환경을 보존한다.
-4. direnv 성능을 진단한다면 사용자 증상에 대응하는 반복 가능한 시간 측정부터 만든다. 소스 추측을 원인으로 보고하지 않는다.
-5. 구현을 요청받으면 이 저장소를 중심으로 작업한다. 다른 프로젝트의 변경이 필요하면 필요한 인터페이스와 이유를 기록하여 사용자 또는 상대 주 에이전트에게 전달한다.
+1. `/home/vimkim/my-cubrid/CUBRID.md`와 적용되는 `AGENTS.md`를 읽고 현재 branch, worktree, working-tree 상태를 확인한다. 기존 사용자 변경을 보존한다.
+2. [구현 명세](.scratch/workenv/spec.md)를 현재 동작 계약으로 읽는다. [용어집](GLOSSARY.md)과 [요구사항](docs/requirements.md)은 용어와 배경을 제공한다. 시간순 [인터뷰](.scratch/workenv/design-interview.md)에 남아 있는 과거 제안보다 최종 명세를 우선한다.
+3. 포트·UDS·shared memory 배정 전에 [인스턴스 격리 소스 인계](docs/handoff-instance-isolation.md)를 읽는다. 공유 물리 DB 관련 결정에는 [native 실험 결과](experiments/native-db-exclusion/README.md)를 사용하되 검증 범위를 넓혀 주장하지 않는다.
+4. 구현을 요청받으면 local Markdown tracker에 명세로부터 작은 구현 티켓을 만들거나 주어진 티켓을 수행한다. tracker 규칙은 [issue-tracker](docs/agents/issue-tracker.md)에 있다. 명세 작성 자체는 CLI 구현 요청이 아니다.
 
-## 별도 주 에이전트와의 경계
+## 현재 완료된 것
 
-컨테이너 실행은 상대 프로젝트의 책임이다. 상대 문서는 `/home/vimkim/gh/cubrid-box/docs/requirements.md`와 `HANDOFF.md`에서 읽을 수 있다. 공통 맥락을 확인할 때만 참조하고 상대 작업 파일은 직접 수정하지 않는다.
+프로젝트 이름은 `cubrid-workenv`, CLI 이름은 `cub-workenv`다. 초기화·진단·환경 로딩·자원 배정·DB 수명에 대한 사용자 합의를 명세로 정리했다. CLI는 아직 구현하지 않았다.
 
-호스트에서 수용한 위험을 컨테이너의 요구 수준으로 확대하거나, 컨테이너를 `cubrid-workenv` 초기화에 의존시키는 변경은 합의한 경계에 영향을 준다. 이 경우 구현 전에 변경 이유와 영향을 사용자에게 설명한다.
+설치된 Linux debug 빌드 `11.5.0.2602-a0026f9`에서 동일 물리 DB의 두 번째 서버와 `csql -S`가 native 잠금으로 거부되는 것을 검증했다. 기존 서버의 쓰기·조회와 정상 종료 뒤 순차 재사용도 확인했다. 사용자·호스트·PID·DB 경로가 native 오류에 포함된다. 다른 버전, 비정상 종료, 특수 유틸리티 경로는 이 실험의 증명 범위가 아니다.
 
-## 작업 환경과 검증
+일반 `cubrid`·`csql` 사용에는 `cub-workenv run`을 강제하지 않는다. workenv는 명시적 초기화와 설정 충돌 회피에 집중한다. 전체 도구의 다중 인스턴스 격리나 빠른 환경 로딩이 구현·검증 완료된 것은 아니다.
 
-이 서버는 SSH와 X11 forwarding 환경이다. GUI를 실행하지 않고 CLI와 headless 도구를 사용한다. 저장소 변경은 사용자 지침에 따라 별도 topic worktree에서 수행하고 관련 검사 후 커밋한다. 검토된 변경의 병합은 별도 사용자 승인을 따른다. `docs/requirements`의 요구사항이 새 구현 worktree에 포함되도록 시작 커밋을 확인한다.
+## 기존 도구와 연동
 
-문서 작성 단계에서 확인한 것은 요구사항 일치 여부, 로컬 링크, 공백 오류와 Git 상태다. CUBRID 실행, DB 생성, 포트 격리와 direnv 성능은 아직 검증하지 않았다. 구현 완료 시에는 요구사항의 확인 시나리오별 실제 결과와 미검증 항목을 구분한다.
+`/home/vimkim/my-cubrid`의 기존 runtime 도구, build coordinator와 공유 envrc를 조사했다. 기존 흐름에는 설치 후 자동 runtime 초기화와 진입 시 전체 validation이 있으므로 새 흐름과의 연동 작업이 필요하다. 기존 설정을 일괄 덮어쓰거나 기존 DB를 자동 이관하지 않는다.
 
-## Suggested skills
+`/home/vimkim/gh/cb/my-cubrid-runtime-testdir`는 이전 조사 시작점이다. 이름만으로 초기화된 실험 환경이라고 가정하지 않고 현재 파일을 확인한다. direnv 지연의 이전 개선은 별도 도구의 측정 결과이며 새 CLI 성능 검증이 아니다.
 
-각 스킬이 필요한 작업을 시작할 때 최신 `SKILL.md`를 읽거나, 해당 환경의 Skill 도구로 호출한다.
+컨테이너는 별도 `/home/vimkim/gh/cubrid-box` 프로젝트의 책임이다. 호스트 초기화를 container의 전제조건으로 추가하거나 상대 프로젝트 파일을 직접 변경하지 않는다.
 
-- `diagnosing-bugs`: direnv 지연의 재현·측정·원인 규명·수정 검증.
-- `cubrid-build`: CUBRID configure·build·install 및 빌드 검증이 필요할 때.
-- `track-work`: 구현이 30분 이상 걸리거나 세션을 넘길 때 이 프로젝트의 작업을 별도로 등록.
-- `writing-for-agents`: 도구 사용을 유도하는 에이전트 지침을 작성할 때.
-- `question-socratically`: 사용자가 요구사항 탐색을 다시 요청할 때만 사용.
+## 작업 상태와 검토
+
+관련 work-tracker 항목은 249다. 현재 상태와 다음 작업은 ledger 및 Git 상태로 확인한다. 저장소 변경은 sibling topic worktree에서 수행하고 의미 있는 변경을 검증·커밋한다. 로컬 rebase와 fast-forward merge는 사용자 확인 후 수행하며 push는 별도 요청이 필요하다.
+
+다음 단계는 명세 검토 후 구현 티켓 분할이다. 일반 소스 worktree의 agent guidance 연결, 기존 도구 연동, 수동 복구 절차와 최종 사용자 흐름은 실제 구현에서 완료해야 한다.

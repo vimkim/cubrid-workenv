@@ -10,6 +10,8 @@ This repository uses a single context:
 - Explicitly flag proposals that conflict with an existing ADR.
 
 Read HANDOFF.md and docs/requirements.md for project context.
+Use .scratch/workenv/spec.md as the current implementation contract;
+chronological interview notes may contain superseded proposals.
 Before designing or implementing instance resource allocation,
 read docs/handoff-instance-isolation.md. Its source findings
 still require runtime verification.
