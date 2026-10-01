@@ -17,6 +17,7 @@
 
 1. `/home/vimkim/my-cubrid/CUBRID.md`와 이 저장소에 적용되는 `AGENTS.md`를 읽고, `git status`, 현재 브랜치와 worktree를 확인한다. 이 인계의 상태 설명보다 실제 Git 상태를 우선한다.
 2. `docs/requirements.md`를 읽는다. 호스트 초기화의 범위, 수용한 위험과 완료 시나리오를 파악하면 요구사항 확인을 마친다.
+   포트·UDS·shared memory 배정을 설계하거나 구현하기 전에 [인스턴스 격리 인계](docs/handoff-instance-isolation.md)를 읽는다. CUBRID 인스턴스가 서로를 찾는 경로와 분리해야 할 자원을 소스 근거와 함께 정리했다.
 3. 기존 구현을 조사할 필요가 있으면 `/home/vimkim/my-cubrid`의 도구와 `/home/vimkim/gh/cb/my-cubrid-runtime-testdir`의 설정을 읽기부터 한다. 이 경로들은 탐색 시작점이며 기존 구현 파일의 위치나 현재 동작을 검증한 결과가 아니다. 기존 사용자 환경을 보존한다.
 4. direnv 성능을 진단한다면 사용자 증상에 대응하는 반복 가능한 시간 측정부터 만든다. 소스 추측을 원인으로 보고하지 않는다.
 5. 구현을 요청받으면 이 저장소를 중심으로 작업한다. 다른 프로젝트의 변경이 필요하면 필요한 인터페이스와 이유를 기록하여 사용자 또는 상대 주 에이전트에게 전달한다.
