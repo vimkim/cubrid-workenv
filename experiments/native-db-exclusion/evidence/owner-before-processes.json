@@ -1,0 +1,12 @@
+[
+  {
+    "pid": 3801265,
+    "instance": "a",
+    "cmdline": "cub_master "
+  },
+  {
+    "pid": 3801883,
+    "instance": "a",
+    "cmdline": "cub_server lockprobe "
+  }
+]

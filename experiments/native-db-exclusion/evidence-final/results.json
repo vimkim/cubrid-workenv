@@ -1,0 +1,229 @@
+{
+  "runtime_root": "/tmp/cwe-lock-hlaz7_16",
+  "install_source": "/home/vimkim/.cub/install/develop/debug_gcc",
+  "steps": [
+    {
+      "label": "version",
+      "instance": "a",
+      "argv": [
+        "cubrid",
+        "--version"
+      ],
+      "returncode": 0,
+      "seconds": 0.032
+    },
+    {
+      "label": "create",
+      "instance": "a",
+      "argv": [
+        "cubrid",
+        "createdb",
+        "--db-volume-size=64M",
+        "--log-volume-size=32M",
+        "-F",
+        "/tmp/cwe-lock-hlaz7_16/shared/data",
+        "-L",
+        "/tmp/cwe-lock-hlaz7_16/shared/logs",
+        "-B",
+        "/tmp/cwe-lock-hlaz7_16/shared/lob",
+        "--server-name=localhost",
+        "lockprobe",
+        "en_US.utf8"
+      ],
+      "returncode": 0,
+      "seconds": 3.17
+    },
+    {
+      "label": "a-start",
+      "instance": "a",
+      "argv": [
+        "cubrid",
+        "server",
+        "start",
+        "lockprobe"
+      ],
+      "returncode": 0,
+      "seconds": 2.118
+    },
+    {
+      "label": "seed",
+      "instance": "a",
+      "argv": [
+        "csql",
+        "-C",
+        "-u",
+        "dba",
+        "-c",
+        "create table marker (id integer primary key); insert into marker values (1); commit;",
+        "lockprobe"
+      ],
+      "returncode": 0,
+      "seconds": 0.064
+    },
+    {
+      "label": "b-server-rejected",
+      "instance": "b",
+      "argv": [
+        "cubrid",
+        "server",
+        "start",
+        "lockprobe"
+      ],
+      "returncode": 1,
+      "seconds": 2.068
+    },
+    {
+      "label": "a-health-after-server",
+      "instance": "a",
+      "argv": [
+        "csql",
+        "-C",
+        "-u",
+        "dba",
+        "-c",
+        "insert into marker values (2); commit; select count(*) as marker_count from marker;",
+        "lockprobe"
+      ],
+      "returncode": 0,
+      "seconds": 0.064
+    },
+    {
+      "label": "b-status-after-rejection",
+      "instance": "b",
+      "argv": [
+        "cubrid",
+        "server",
+        "status"
+      ],
+      "returncode": 0,
+      "seconds": 0.065
+    },
+    {
+      "label": "b-standalone-rejected",
+      "instance": "b",
+      "argv": [
+        "csql",
+        "-S",
+        "-u",
+        "dba",
+        "-c",
+        "select count(*) from marker;",
+        "lockprobe"
+      ],
+      "returncode": 1,
+      "seconds": 0.032
+    },
+    {
+      "label": "a-health-after-standalone",
+      "instance": "a",
+      "argv": [
+        "csql",
+        "-C",
+        "-u",
+        "dba",
+        "-c",
+        "insert into marker values (3); commit; select count(*) as marker_count from marker;",
+        "lockprobe"
+      ],
+      "returncode": 0,
+      "seconds": 0.064
+    },
+    {
+      "label": "a-stop",
+      "instance": "a",
+      "argv": [
+        "cubrid",
+        "server",
+        "stop",
+        "lockprobe"
+      ],
+      "returncode": 0,
+      "seconds": 1.066
+    },
+    {
+      "label": "b-start-after-release",
+      "instance": "b",
+      "argv": [
+        "cubrid",
+        "server",
+        "start",
+        "lockprobe"
+      ],
+      "returncode": 0,
+      "seconds": 1.116
+    },
+    {
+      "label": "b-read-after-handoff",
+      "instance": "b",
+      "argv": [
+        "csql",
+        "-C",
+        "-u",
+        "dba",
+        "-c",
+        "select count(*) as marker_count from marker;",
+        "lockprobe"
+      ],
+      "returncode": 0,
+      "seconds": 0.064
+    },
+    {
+      "label": "b-stop",
+      "instance": "b",
+      "argv": [
+        "cubrid",
+        "server",
+        "stop",
+        "lockprobe"
+      ],
+      "returncode": 0,
+      "seconds": 1.066
+    },
+    {
+      "label": "b-standalone-after-release",
+      "instance": "b",
+      "argv": [
+        "csql",
+        "-S",
+        "-u",
+        "dba",
+        "-c",
+        "select count(*) as marker_count from marker;",
+        "lockprobe"
+      ],
+      "returncode": 0,
+      "seconds": 0.164
+    }
+  ],
+  "ports": {
+    "a": 41059,
+    "b": 55011
+  },
+  "binary_sha256": {
+    "bin/cubrid": "82171bed028cb92a57ed8144d76654f51975abcef9b79a176bb0eddac1778b39",
+    "bin/csql": "65f46b0d7cff6a2632c088d986da5cad4db278147a1d190fac488f942cfcdc79",
+    "bin/cub_server": "e1ef6f682ee541338f251747c3db93c0ca7104fb7b074ec5024d430d79307fe5",
+    "lib/libcubridsa.so": "8d87eee4eab56fa338735613af0aa42b6a856bffb94da3a89d02f83dd2ac1958",
+    "lib/libcubrid.so": "2b6c9097f2f25b644659c00d3ae6fb953e04bfe06a8ad3af42a080ac2a69d585"
+  },
+  "owner_pid": 3845094,
+  "active_log_identity": {
+    "device": 64768,
+    "inode": 138126808
+  },
+  "verdict": "pass",
+  "cleanup_processes": [
+    {
+      "pid": 3843982,
+      "instance": "a",
+      "cmdline": "cub_master "
+    },
+    {
+      "pid": 3846012,
+      "instance": "b",
+      "cmdline": "cub_master "
+    }
+  ],
+  "cleanup_remaining": [],
+  "disposable_runtime_removed": true
+}

@@ -1,0 +1,5 @@
+@ cubrid server stop: lockprobe
+
+Server lockprobe notified of shutdown.
+This may take several minutes. Please wait.
+++ cubrid server stop: success

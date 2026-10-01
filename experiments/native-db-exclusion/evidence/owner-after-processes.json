@@ -1,0 +1,22 @@
+[
+  {
+    "pid": 3801265,
+    "instance": "a",
+    "cmdline": "cub_master "
+  },
+  {
+    "pid": 3801883,
+    "instance": "a",
+    "cmdline": "cub_server lockprobe "
+  },
+  {
+    "pid": 3802093,
+    "instance": "b",
+    "cmdline": "/tmp/cwe-lock-zmmx5l_j/b/bin/cub_master "
+  },
+  {
+    "pid": 3802141,
+    "instance": "b",
+    "cmdline": "cub_master "
+  }
+]

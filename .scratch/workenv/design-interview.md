@@ -91,11 +91,11 @@ This agreement supersedes earlier uncertainty about standalone coverage and pres
 - Manual recovery of residual ownership state after abnormal termination is acceptable. Automatic crash cleanup is not a requirement.
 - Neither read-only database access nor cross-version on-disk compatibility is promised.
 - The enforcement mechanism is undecided: inspect code and experiment before choosing native locking, additional flock coordination, or another implementation. The requirement is exclusion and useful attribution, not redundant locking machinery.
-- Concurrent native server starts and server-plus-standalone access have not been experimentally verified. User statements that native rejection is absent were explicitly clarified as expectations, not observations.
+- At the time of this discussion, competing native server starts and server-plus-standalone access had not been experimentally verified; see the later experiment results below. User statements that native rejection is absent were explicitly clarified as expectations, not observations.
 
 ## Pending verification and design
 
-- Experimentally check competing server starts and standalone access against a running server using disposable database storage; verify the existing owner remains healthy and subsequent opening works after release.
+- Completed the normal-path competing server and standalone experiment for installed build 11.5.0.2602-a0026f9; see results below. Broader abnormal-path coverage remains outside that experiment.
 - Determine how owner attribution and physical database identity will work, and document the manual recovery procedure.
 - Finish detailed CLI and environment integration, and check/exit-status behavior; initialization defaults are settled below.
 
@@ -144,3 +144,11 @@ This agreement supersedes earlier uncertainty about standalone coverage and pres
 - Separate physical databases use their prepared worktree settings directly. Initialization is the resource-conflict prevention boundary, with explicit diagnosis for later interference.
 - Shared physical storage still requires exclusive opening. Test native server/server and server/standalone exclusion before choosing additional locking or owner diagnostics.
 - Earlier managed-launch assumptions are conditional on that implementation decision; they are not a mandate to wrap every test.
+
+## Native exclusion experiment completed
+
+- See ../../experiments/native-db-exclusion/README.md for reproducible evidence and limits.
+- Installed Linux debug build 11.5.0.2602-a0026f9 rejected the second server and csql -S against an active database, preserving the original server's ability to write and query.
+- After normal shutdown, the other environment successfully opened and queried the same database in server and standalone modes.
+- Native errors already reported owner PID, user, host, and physical database location. A separate ownership marker is not necessary merely to obtain those facts.
+- These results support relying on native exclusion for the tested normal path and do not establish a need to add workenv locking or require run globally. Worktree-name diagnostics and abnormal-path behavior remain separate design questions.

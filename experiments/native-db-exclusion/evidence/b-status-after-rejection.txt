@@ -1,0 +1,1 @@
+@ cubrid server status

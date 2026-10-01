@@ -1,0 +1,7 @@
+@ cubrid master start
+++ cubrid master start: success
+@ cubrid server start: lockprobe
+
+This may take a long time depending on the amount of recovery works to do.
+Unable to restart/initialize the database server. Unable to mount disk volume "/tmp/cwe-lock-zmmx5l_j/shared/logs/lockprobe_lgat". The database "/tmp/cwe-lock-zmmx5l_j/shared/data/lockprobe", to which the disk volume belongs, is in use by user vimkim on process 3801883 of host dev2 since Thu Oct  1 16:32:11 2026.
+++ cubrid server start: fail

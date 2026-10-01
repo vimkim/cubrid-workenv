@@ -1,0 +1,6 @@
+{
+  "kernel": "5.14.0-570.30.1.el9_6.x86_64",
+  "platform": "Linux-5.14.0-570.30.1.el9_6.x86_64-x86_64-with-glibc2.34",
+  "filesystem": "xfs",
+  "reported_build_commit": "a0026f9293523bed2af4c52d8c7299c6ce9b14d0"
+}

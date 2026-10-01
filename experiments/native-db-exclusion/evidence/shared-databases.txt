@@ -1,0 +1,2 @@
+#db-name	vol-path		db-host		log-path		lob-base-path
+lockprobe	/tmp/cwe-lock-zmmx5l_j/shared/data	localhost	/tmp/cwe-lock-zmmx5l_j/shared/logs	file:/tmp/cwe-lock-zmmx5l_j/shared/lob

@@ -14,9 +14,9 @@ Use the selected worktree's binaries, configuration, database registry, and reso
 
 Different worktrees may intentionally reuse one physical database, but concurrent independent opening must be prevented. This concerns both a second server and standalone access such as `csql -S`. An ordinary `csql` client connecting to an existing server is allowed and does not need another exclusive database lock.
 
-First verify native CUBRID behavior using a disposable database: competing server starts and standalone access while a server is running must reject the second opener without disturbing the owner. No such runtime verification has been completed yet.
+A disposable-database experiment on Linux debug build 11.5.0.2602-a0026f9 verified rejection of a competing server and standalone access while the first server remained healthy, followed by successful use after normal shutdown. See [results and limits](../../experiments/native-db-exclusion/README.md). Abnormal termination, altered locking settings, and other builds remain unverified.
 
-Use those results to decide whether `cub-workenv run` is needed for additional exclusion, useful owner diagnostics, or both. It is a candidate interface, not an established requirement for all tests or all database launches. If provided, it should be explicit rather than transparently replacing `cubrid` or `csql` through PATH wrappers.
+The tested normal path does not establish a need for additional workenv locking. Native errors already identify the owner PID, user, host, and database path; mapping that information to a worktree may still be useful. Use further requirements and evidence to decide whether `cub-workenv run` is needed for additional exclusion, useful owner diagnostics, or both. It is a candidate interface, not an established requirement for all tests or all database launches. If provided, it should be explicit rather than transparently replacing `cubrid` or `csql` through PATH wrappers.
 
 Report the owning worktree and process when possible. Any additional protection must last for database use, not merely the launch command. Manual recovery after abnormal termination is acceptable; database format compatibility between versions remains the user's responsibility.
 
