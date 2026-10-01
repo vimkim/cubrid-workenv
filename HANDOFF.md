@@ -27,4 +27,4 @@
 
 관련 work-tracker 항목은 249다. 현재 상태와 다음 작업은 ledger 및 Git 상태로 확인한다. 저장소 변경은 sibling topic worktree에서 수행하고 의미 있는 변경을 검증·커밋한다. 로컬 rebase와 fast-forward merge는 사용자 확인 후 수행하며 push는 별도 요청이 필요하다.
 
-다음 단계는 명세 검토 후 구현 티켓 분할이다. 일반 소스 worktree의 agent guidance 연결, 기존 도구 연동, 수동 복구 절차와 최종 사용자 흐름은 실제 구현에서 완료해야 한다.
+구현 티켓은 [티켓 목록](.scratch/workenv/tickets.md)에 있으며, 다음 시작점은 선행 조건이 없는 01번이다. 일반 소스 worktree의 agent guidance 연결, 기존 도구 연동, 수동 복구 절차와 최종 사용자 흐름은 실제 구현에서 완료해야 한다.
