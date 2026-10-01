@@ -17,6 +17,6 @@ See `docs/agents/domain.md`.
 
 ## CUBRID host test execution
 
-Agents must use `cub-workenv run ...` for host-side CUBRID tests and database-opening operations. Read `docs/agents/test-execution.md` before running them. Use the target worktree's prepared environment and keep operations scoped to that environment.
+Use the intended worktree's prepared environment for host-side CUBRID tests. Ordinary `cubrid` and `csql` commands may run directly; `cub-workenv run` is not mandatory for all tests. Read `docs/agents/test-execution.md` for the distinction between separate databases and shared physical database storage.
 
-The CLI is currently planned, not implemented. Until it is available and its protection is verified, report the missing prerequisite rather than falling back to an unguarded host test.
+The CLI is currently planned, not implemented. Native shared-database exclusion and any need for additional `run` protection or owner diagnostics remain to be experimentally verified.

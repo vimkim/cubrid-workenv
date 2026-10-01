@@ -2,31 +2,30 @@
 
 ## Status and scope
 
-This is the agreed usage contract for the planned `cub-workenv` CLI. The CLI and its protection have not been implemented or verified yet. These instructions govern host-side CUBRID database tests, not pure unit tests that open no database. Container tests follow the separate `cubrid-box` workflow.
+The `cub-workenv` CLI is planned, not implemented. These instructions describe the agreed execution model; they do not claim that initialization or runtime protection has already been verified. Container tests follow the separate `cubrid-box` workflow.
 
-## Required execution path
+## Separate physical databases
 
-Agents must launch host-side database tests, database servers, and standalone database access through `cub-workenv run ...` from the intended initialized worktree. This is mandatory to participate in physical-database exclusion and use the intended worktree's runtime settings.
+After initialization assigns nonconflicting resources and direnv loads the intended worktree environment, ordinary `cubrid` and `csql` commands may run directly. Agents do not have to prefix every host database test with `cub-workenv run`.
 
-Planned direct-command examples:
+Use the selected worktree's binaries, configuration, database registry, and resource assignments. Test runners must preserve that selection in child processes. Initialization avoids known resource conflicts at that time; it does not continuously defend against later interference by external tools. Diagnose suspected problems explicitly, using `cub-workenv doctor` once available.
 
-```sh
-cub-workenv run cubrid server start testdb
-cub-workenv run csql -S testdb
-cub-workenv run cubrid server stop testdb
-cub-workenv run cubrid broker stop
-```
+## Shared physical database storage
 
-For a test runner, place its command and arguments after `cub-workenv run`. Confirm that the runner and its child processes preserve the selected environment and participate in the required database protection; merely wrapping an arbitrary script is not proof of that behavior. Supported runner integration must be verified during implementation.
+Different worktrees may intentionally reuse one physical database, but concurrent independent opening must be prevented. This concerns both a second server and standalone access such as `csql -S`. An ordinary `csql` client connecting to an existing server is allowed and does not need another exclusive database lock.
 
-If workenv is unavailable, uninitialized, or refuses access because the database is in use, report the reason and owning worktree/process when available. Do not retry through raw binaries to bypass the refusal. Use `cub-workenv doctor` for diagnosis once the CLI exists.
+First verify native CUBRID behavior using a disposable database: competing server starts and standalone access while a server is running must reject the second opener without disturbing the owner. No such runtime verification has been completed yet.
+
+Use those results to decide whether `cub-workenv run` is needed for additional exclusion, useful owner diagnostics, or both. It is a candidate interface, not an established requirement for all tests or all database launches. If provided, it should be explicit rather than transparently replacing `cubrid` or `csql` through PATH wrappers.
+
+Report the owning worktree and process when possible. Any additional protection must last for database use, not merely the launch command. Manual recovery after abnormal termination is acceptable; database format compatibility between versions remains the user's responsibility.
 
 ## Protect other instances
 
 Use the selected environment's instance-specific stop commands. Do not use host-wide name-based termination such as `pkill cub_server` or `pkill cub_master`, or remove another environment's sockets, shared-memory segments, or ownership records. Escalate uncertain manual recovery to the user; permission for user-managed recovery does not authorize automatic takeover.
 
-`run` is not a container or a sandbox. It cannot make a script containing broad process-killing or global cleanup commands safe. Inspect such runners and use an appropriately contained workflow rather than treating the command prefix as complete isolation.
+Neither initialization nor a command wrapper is a container or sandbox. Inspect runners that perform broad process termination or global cleanup rather than assuming a command prefix provides complete isolation.
 
 ## Discovery by agents in CUBRID worktrees
 
-This repository's AGENTS.md applies only within this repository. Before adopting this workflow for agents working in CUBRID source worktrees, add a pointer to this execution contract in their applicable agent guidance. Installing that cross-repository guidance and verifying runner behavior are implementation tasks, not completed effects of this document.
+This repository's AGENTS.md applies only within this repository. When this workflow is implemented, link the verified execution guidance from the instructions applicable to CUBRID source worktrees. No external repository guidance has been changed by this document.

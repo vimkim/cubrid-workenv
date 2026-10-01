@@ -71,7 +71,7 @@ Existing personal coordinator locks are per installation, not physical database,
 
 Database name alone cannot identify shared physical storage. Aliased paths and shared log/data inventory need consideration. Sequential exclusion also does not establish binary/on-disk compatibility across versions.
 
-## Settled in round 5
+## Round 5 (managed-launch requirement revised below)
 
 - Both owner and borrower must use workenv-managed launches for the shared-physical-database exclusivity guarantee. Arbitrary direct binaries are outside that guarantee.
 - Ownership must span the full database server lifetime, not merely the start command.
@@ -86,7 +86,7 @@ This agreement supersedes earlier uncertainty about standalone coverage and pres
 - Prevent workenv-mediated concurrent opening of one physical database from different worktrees. This includes server launches and standalone opening such as csql -S.
 - Ordinary client connections to an already running database server remain allowed.
 - Explain rejection with the owning worktree and process information.
-- All managed databases participate from first use; no preliminary declaration that a database is shared is required.
+- Earlier blanket participation from first use is superseded: first validate native exclusion, then determine whether additional guarding is necessary.
 - The lifetime of the launching AI agent is irrelevant. Protection must cover database use, not just the start command.
 - Manual recovery of residual ownership state after abnormal termination is acceptable. Automatic crash cleanup is not a requirement.
 - Neither read-only database access nor cross-version on-disk compatibility is promised.
@@ -97,7 +97,7 @@ This agreement supersedes earlier uncertainty about standalone coverage and pres
 
 - Experimentally check competing server starts and standalone access against a running server using disposable database storage; verify the existing owner remains healthy and subsequent opening works after release.
 - Determine how owner attribution and physical database identity will work, and document the manual recovery procedure.
-- Decide initial database selection/defaults, detailed CLI and environment integration, and check/exit-status behavior.
+- Finish detailed CLI and environment integration, and check/exit-status behavior; initialization defaults are settled below.
 
 
 ## Initialization defaults
@@ -125,7 +125,7 @@ This agreement supersedes earlier uncertainty about standalone coverage and pres
 
 ## Invocation and environment loading
 
-- Use explicit cub-workenv run ... for managed operations, including server launch and standalone database access.
+- Ordinary cubrid/csql commands may run directly in the prepared worktree environment. Explicit cub-workenv run is a candidate for shared-physical-database protection or diagnostics, pending native exclusion experiments; it is not mandatory for all operations.
 - Do not interpose cubrid/csql through a special PATH wrapper directory in the first version. Existing raw commands retain their behavior and are outside workenv-mediated exclusivity.
 - Ordinary client connections can use csql directly with the prepared environment.
 - On worktree entry, direnv loads prepared environment variables and the installed binaries' PATH. It does not initialize, build, create databases, or run full validation.
@@ -133,7 +133,14 @@ This agreement supersedes earlier uncertainty about standalone coverage and pres
 
 ## Agent execution guidance
 
-- User requested and accepted clear agent instructions requiring cub-workenv run for host database tests, to use worktree settings and participate in database exclusion.
-- Recorded the rule in AGENTS.md and docs/agents/test-execution.md, explicitly marked as a planned CLI contract.
+- The user corrected the blanket run requirement: use the initialized worktree environment for ordinary host tests without requiring a wrapper.
+- Updated AGENTS.md and docs/agents/test-execution.md accordingly. Shared-storage exclusion and owner attribution remain goals; whether run is needed depends on native locking experiments.
 - Tests are not automatically sandboxed by the command prefix; child-process/runner integration must be validated. Existing container test workflows remain separate.
 - Source worktree agents will need a pointer in their applicable guidance; no external repository instructions have been changed.
+
+## Latest correction: initialization versus runtime guarding
+
+- The blanket requirement that every host database test use cub-workenv run is withdrawn.
+- Separate physical databases use their prepared worktree settings directly. Initialization is the resource-conflict prevention boundary, with explicit diagnosis for later interference.
+- Shared physical storage still requires exclusive opening. Test native server/server and server/standalone exclusion before choosing additional locking or owner diagnostics.
+- Earlier managed-launch assumptions are conditional on that implementation decision; they are not a mandate to wrap every test.
