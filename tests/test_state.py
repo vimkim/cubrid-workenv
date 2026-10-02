@@ -12,6 +12,18 @@ import time
 import unittest
 
 CLI = Path(__file__).resolve().parents[1] / 'bin/cub-workenv'
+# Native createdb publishes one row to its selected registry. Parse its actual
+# public arguments so fixture paths stay aligned with disposable storage.
+REGISTER_DB = r'''while [ "$#" -gt 0 ]; do
+    case "$1" in
+        -F) data=$2; shift 2 ;;
+        -L) log=$2; shift 2 ;;
+        -B) lob=$2; shift 2 ;;
+        *) previous=$last; last=$1; shift ;;
+    esac
+done
+printf '%s %s localhost %s file:%s\n' "$previous" "$data" "$log" "$lob" >> "$CUBRID_DATABASES/databases.txt"
+'''
 
 
 class StateTest(unittest.TestCase):
@@ -22,7 +34,7 @@ class StateTest(unittest.TestCase):
         (self.install / 'bin').mkdir(parents=True)
         for name in ('cubrid', 'csql'):
             path = self.install / 'bin' / name
-            path.write_text('#!/bin/sh\nexit 0\n')
+            path.write_text('#!/bin/sh\n' + (REGISTER_DB if name == 'cubrid' else '') + 'exit 0\n')
             path.chmod(0o755)
         self.worktree = self.root / 'source'
         self.worktree.mkdir()
@@ -84,7 +96,7 @@ class StateTest(unittest.TestCase):
         result = self.doctor()
         self.assertNotEqual(result.returncode, 0)
         self.assertIn('database', result.stdout)
-        self.assertIn('createdb.log', result.stdout)
+        self.assertIn('createdb-testdb.log', result.stdout)
         self.assertEqual(before, self.snapshot())
 
     def wait_for(self, path):
@@ -105,7 +117,7 @@ class StateTest(unittest.TestCase):
                 (self.worktree / '.cub-workenv/conf').mkdir()
             finally:
                 fcntl.flock(lock, fcntl.LOCK_UN)
-            stdout, stderr = process.communicate(timeout=10)
+                stdout, stderr = self.join_processes([process])[0][1:]
         self.assertNotEqual(process.returncode, 0, stdout + stderr)
         state = json.loads((self.worktree / '.cub-workenv/state.json').read_text())
         self.assertEqual(state['stage'], 'settings')
@@ -116,7 +128,7 @@ class StateTest(unittest.TestCase):
         self.assertEqual(before, self.snapshot())
 
     def test_failure_after_database_does_not_publish_environment(self):
-        (self.install / 'bin/cubrid').write_text('#!/bin/sh\nmkdir env.sh\nexit 0\n')
+        (self.install / 'bin/cubrid').write_text('#!/bin/sh\n' + REGISTER_DB + 'mkdir env.sh\nexit 0\n')
         result = self.run_init()
         self.assertNotEqual(result.returncode, 0)
         state = json.loads((self.worktree / '.cub-workenv/state.json').read_text())
@@ -143,24 +155,24 @@ class StateTest(unittest.TestCase):
         # A native process waits on an owned gate. B must finish before A is
         # released; another init of A must not invoke a second native process.
         native = self.install / 'bin/cubrid'
-        native.write_text('#!/bin/sh\necho call >> calls\ntouch entered\nwhile [ -f hold ]; do sleep 0.02; done\nexit 0\n')
+        native.write_text('#!/bin/sh\necho call >> calls\ntouch entered\nwhile [ -f hold ]; do sleep 0.02; done\n' + REGISTER_DB + 'exit 0\n')
         # Wait on allocation so that the gate can be inserted after initialization
         # accepts the empty root, before the native command is reached.
         import fcntl
         host = self.root / 'host'
         host.mkdir()
         processes = []
-        with (host / 'allocations.lock').open('w') as lock:
-            fcntl.flock(lock, fcntl.LOCK_EX)
-            first = subprocess.Popen(self.command(), text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-            processes.append(first)
-            try:
-                self.wait_for(self.worktree / '.cub-workenv/state.json')
-                gate = self.worktree / '.cub-workenv/hold'
-                gate.touch()
-            finally:
-                fcntl.flock(lock, fcntl.LOCK_UN)
+        gate = self.worktree / '.cub-workenv/hold'
         try:
+            with (host / 'allocations.lock').open('w') as lock:
+                fcntl.flock(lock, fcntl.LOCK_EX)
+                first = subprocess.Popen(self.command(), text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+                processes.append(first)
+                try:
+                    self.wait_for(self.worktree / '.cub-workenv/state.json')
+                    gate.touch()
+                finally:
+                    fcntl.flock(lock, fcntl.LOCK_UN)
             self.wait_for(self.worktree / '.cub-workenv/entered')
             repeat = subprocess.Popen(self.command(), text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             processes.append(repeat)
@@ -181,11 +193,24 @@ class StateTest(unittest.TestCase):
             self.assertEqual(len({r['tmp'] for r in records}), 2)
         finally:
             gate.unlink(missing_ok=True)
-            for process in processes:
-                stdout, stderr = process.communicate(timeout=10)
-                self.assertEqual(process.returncode, 0, stdout + stderr)
+            results = self.join_processes(processes)
+        for returncode, stdout, stderr in results:
+            self.assertEqual(returncode, 0, stdout + stderr)
         self.assertEqual((self.worktree / '.cub-workenv/calls').read_text(), 'call\n')
         self.assertIn('already initialized', stdout)
+
+    def join_processes(self, processes):
+        # Collect every child before making assertions, including on a timeout.
+        results = []
+        for process in processes:
+            try:
+                stdout, stderr = process.communicate(timeout=10)
+            except subprocess.TimeoutExpired:
+                process.kill()
+                stdout, stderr = process.communicate()
+                stderr += '\nFixture CLI timed out and was killed.'
+            results.append((process.returncode, stdout, stderr))
+        return results
 
     def test_corrupt_state_diagnosis_and_uninitialized_diagnosis_are_read_only(self):
         before = self.snapshot()

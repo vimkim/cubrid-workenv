@@ -45,3 +45,21 @@ DB registration and owner inspection belongs to ticket 06.
   `doctor.diagnose(args)` provides the CLI boundary for ticket 06 to extend.
 - Repeated init checks the recorded installation and state home, ignores new
   options, and performs no DB opens or host process scans.
+
+## Ticket 03 integration follow-up
+
+On parent-provided base `d8781009bcb2b7a1ac59ea135a327ae90542bdeb`,
+updated ticket 02's successful native fixtures to emit a registry row from
+createdb's public `-F`, `-L`, `-B` and DB-name arguments. This includes the
+post-DB publication failure and concurrent initialization fixtures. The fixtures
+therefore reach their intended lifecycle stages under ticket 03's registry
+publication contract. Failure/SIGKILL fixtures still exit before registration.
+
+Doctor now points to the actual initialization log, `createdb-testdb.log`.
+Concurrent-test cleanup releases the gate and joins every started child before
+asserting exit status; its cleanup also covers failures during gate setup.
+Timeout cleanup kills only the owned fixture CLI and collects its output.
+
+Validation: `python3 -m unittest discover -s tests -p 'test*.py' -v`
+passed all 18 tests (including all seven ticket 02 tests); `git diff --check`
+passed. This is fixture integration evidence, not a new native-engine claim.

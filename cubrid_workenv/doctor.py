@@ -68,7 +68,7 @@ def diagnose(args):
         print(f'Last stage: {state.get("stage", "unknown")}')
         if state.get('error'):
             print(f'Last error: {state["error"]}')
-        print(f'Inspect {root / "state.json"}, {root / "createdb.log"}, and recorded allocation before manual recovery.')
+        print(f'Inspect {root / "state.json"}, {root / "createdb-testdb.log"}, and recorded allocation before manual recovery.')
         print('Preserve DB files and settings; confirm the initializing process has stopped. No retry, deletion or rollback performed.')
         raise ValueError('Incomplete initialization; manual recovery required')
     problems = ready_problems(state, worktree)
