@@ -12,7 +12,7 @@ The approved [specification](spec.md) and [tickets](tickets.md) govern implement
 | 01 | — | Verified and integrated | `1e50074` | [Ticket01](issues/01-initialize-and-connect.md), 6 CLI tests and real server/client flow |
 | 02 | 01 | Verified and integrated | `3b73e0f` | [Ticket02](issues/02-initialization-state.md), 13 CLI/state tests |
 | 03 | 01 | Verified and integrated | `61184cb` | [Ticket03](issues/03-database-selection.md), 21 integrated tests, combined native evidence in tests/evidence/integration03-05 |
-| 04 | 02 | In progress | — | — |
+| 04 | 02 | Verified and integrated | `46e4904` | [Ticket04](issues/04-allocation-reclamation.md), 22 discovery tests including 9 namespace cases |
 | 05 | 01 | Verified and integrated | `9878abc` | [Ticket05](issues/05-multiple-instances.md), native JDBC/PL/stop proof, 16 integrated tests |
 | 06 | 02, 03, 05 | In progress | — | — |
 | 07 | 02 | In progress | — | — |
