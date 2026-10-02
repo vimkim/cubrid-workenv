@@ -15,9 +15,9 @@ The approved [specification](spec.md) and [tickets](tickets.md) govern implement
 | 04 | 02 | Verified and integrated | `46e4904` | [Ticket04](issues/04-allocation-reclamation.md), 22 discovery tests including 9 namespace cases |
 | 05 | 01 | Verified and integrated | `9878abc` | [Ticket05](issues/05-multiple-instances.md), native JDBC/PL/stop proof, 16 integrated tests |
 | 06 | 02, 03, 05 | Verified and integrated | `c7776ac` | [Ticket06](issues/06-doctor.md), 31 tests plus native read-only/PID/syscall proof |
-| 07 | 02 | In progress | — | — |
+| 07 | 02 | Verified and integrated; tooling topic retained | `29555b7`; tooling `aea8078` | [Ticket07](issues/07-environment-integration.md), 34 integrated tests and native/cross-repository flow |
 | 08 | 03 | Verified and integrated | `68060e0` | [Ticket08](issues/08-database-lifetime.md), real non-force Git removal and external SQL/BLOB preservation |
-| 09 | 04, 06, 07, 08 | Waiting | — | — |
+| 09 | 04, 06, 07, 08 | In progress | — | — |
 
 Ticket triage remains `ready-for-human` after implementation and verification; this table records actual integration separately. Acceptance evidence belongs in each ticket and its linked artifacts. Only verified integrated tickets unblock successors.
 
@@ -28,3 +28,7 @@ Pending Standards and Spec review of the integrated diff against the starting ma
 ## Binary evidence provenance
 
 Tickets01/03/05 and parent integration03-05 used copied `11.5.0.2602-a0026f9`. The shared source installation changed externally during implementation: ticket08 records `11.5.0.2635-30043f4`. These are distinct evidence sets, not an unchanged binary. Each native run records its actual version; final workflow must identify its own isolated build. Existing engine develop user changes were observed and preserved.
+
+## Personal tooling boundary
+
+Verified companion commits are in `/home/vimkim/my-cubrid-workenv-07`, branch `impl/workenv-07`, tip `aea80789165951be4602d042476c88bd5105e049`, based on `f2aa990`. Existing CUBRID worktrees link directly into the personal tooling main worktree. The candidate is tested through `MY_CUBRID`; changing that live shared main worktree would affect existing environments, so it is retained for separate explicit application rather than silently rolled out.
