@@ -1,0 +1,2 @@
+#db-name	vol-path		db-host		log-path		lob-base-path
+testdb		/home/vimkim/tmp/cwe-first-8ctruo6y/source/.cub-workenv/db/testdb/data	localhost	/home/vimkim/tmp/cwe-first-8ctruo6y/source/.cub-workenv/db/testdb/log	file:/home/vimkim/tmp/cwe-first-8ctruo6y/source/.cub-workenv/db/testdb/lob

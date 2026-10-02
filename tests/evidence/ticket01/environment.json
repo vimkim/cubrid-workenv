@@ -1,0 +1,9 @@
+{
+  "CUBRID_DATABASES": "/home/vimkim/tmp/cwe-first-8ctruo6y/source/.cub-workenv/databases",
+  "CUBRID_CONF_FILE": "/home/vimkim/tmp/cwe-first-8ctruo6y/source/.cub-workenv/conf/cubrid.conf",
+  "CUBRID_CUBRID_PORT_ID": "41000",
+  "CUBRID_TMP": "/tmp/cwe-1000/ad1937306140",
+  "CUBRID": "/home/vimkim/tmp/cwe-first-8ctruo6y/install",
+  "LD_LIBRARY_PATH": "/home/vimkim/tmp/cwe-first-8ctruo6y/install/lib",
+  "PATH": "/home/vimkim/tmp/cwe-first-8ctruo6y/install/bin:/usr/local/bin:/usr/bin:/bin"
+}

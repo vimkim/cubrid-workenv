@@ -1,0 +1,2 @@
+Initialized /home/vimkim/tmp/cwe-first-8ctruo6y/source with /home/vimkim/tmp/cwe-first-8ctruo6y/install (preset debug_gcc).
+Source /home/vimkim/tmp/cwe-first-8ctruo6y/source/.cub-workenv/env.sh in bash; use ordinary cubrid and csql commands.

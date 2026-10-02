@@ -1,0 +1,91 @@
+{
+  "root": "/home/vimkim/tmp/cwe-first-8ctruo6y",
+  "install_source": "/home/vimkim/.cub/install/develop/debug_gcc",
+  "steps": [
+    {
+      "label": "init",
+      "argv": [
+        "/home/vimkim/gh/cubrid-workenv-01/bin/cub-workenv",
+        "init",
+        "--worktree",
+        "/home/vimkim/tmp/cwe-first-8ctruo6y/source",
+        "--install",
+        "/home/vimkim/tmp/cwe-first-8ctruo6y/install",
+        "--preset",
+        "debug_gcc",
+        "--state-home",
+        "/home/vimkim/tmp/cwe-first-8ctruo6y/host"
+      ],
+      "returncode": 0
+    },
+    {
+      "label": "environment",
+      "argv": [
+        "/bin/bash",
+        "--noprofile",
+        "--norc",
+        "-c",
+        "source \"$1\" && env -0",
+        "bash",
+        "/home/vimkim/tmp/cwe-first-8ctruo6y/source/.cub-workenv/env.sh"
+      ],
+      "returncode": 0
+    },
+    {
+      "label": "version",
+      "argv": [
+        "cubrid",
+        "--version"
+      ],
+      "returncode": 0
+    },
+    {
+      "label": "start",
+      "argv": [
+        "cubrid",
+        "server",
+        "start",
+        "testdb"
+      ],
+      "returncode": 0
+    },
+    {
+      "label": "sql",
+      "argv": [
+        "csql",
+        "-C",
+        "-u",
+        "dba",
+        "-c",
+        "create table marker (id integer); insert into marker values (42); commit; select id from marker;",
+        "testdb"
+      ],
+      "returncode": 0
+    },
+    {
+      "label": "stop",
+      "argv": [
+        "cubrid",
+        "server",
+        "stop",
+        "testdb"
+      ],
+      "returncode": 0
+    }
+  ],
+  "state": {
+    "schema": 1,
+    "status": "ready",
+    "worktree": "/home/vimkim/tmp/cwe-first-8ctruo6y/source",
+    "install": "/home/vimkim/tmp/cwe-first-8ctruo6y/install",
+    "preset": "debug_gcc",
+    "state_home": "/home/vimkim/tmp/cwe-first-8ctruo6y/host",
+    "allocation": {
+      "worktree": "/home/vimkim/tmp/cwe-first-8ctruo6y/source",
+      "master_port": 41000,
+      "tmp": "/tmp/cwe-1000/ad1937306140"
+    }
+  },
+  "verdict": "pass",
+  "cleanup_remaining": []
+}
