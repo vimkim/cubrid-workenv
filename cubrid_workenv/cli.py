@@ -17,6 +17,9 @@ def main():
     init.add_argument('--port-end', type=int, default=41999)
     doctor = commands.add_parser('doctor', help='inspect initialization without changing it')
     doctor.add_argument('--worktree', type=Path, default=Path.cwd())
+    doctor.add_argument('--install', type=Path, help='expected selected installation')
+    doctor.add_argument('--preset', help='expected selected preset')
+    doctor.add_argument('--native-error-file', type=Path, help='preserve and explain an existing native error; never reproduce it')
     init.add_argument('--shm-start', type=lambda value: int(value, 0), default=0x62000000)
     init.add_argument('--shm-end', type=lambda value: int(value, 0), default=0x6200ffff)
     init.add_argument('--java-home', type=Path, default=Path(os.environ['JAVA_HOME']) if os.environ.get('JAVA_HOME') else None,

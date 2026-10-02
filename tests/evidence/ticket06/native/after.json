@@ -1,0 +1,35 @@
+{
+  "hashes": {
+    "/tmp/cwe-doctor-native-xhvbojy0/host/allocations.lock": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/tmp/cwe-doctor-native-xhvbojy0/host/allocations.json": "98de99897a14479368851d718852fc2287ee9eb7b345dd7ae724b05f075d6872",
+    "/tmp/cwe-doctor-native-xhvbojy0/a-source/.cub-workenv/init.lock": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/tmp/cwe-doctor-native-xhvbojy0/a-source/.cub-workenv/state.json": "c25da341511f195b06a7c49837200748998d12ed4a18ab209d2371535bc1f126",
+    "/tmp/cwe-doctor-native-xhvbojy0/a-source/.cub-workenv/env.sh": "0cc1e851e67c3d5e828ca86991739f6dc9ef2515117bd5b48be1b7bc3801c40c",
+    "/tmp/cwe-doctor-native-xhvbojy0/a-source/.cub-workenv/createdb-testdb.log": "ff48e444b7ab17b59063ee5c9eec56b01ea8fd04dcb8bd8a597ac5a77551c7a5",
+    "/tmp/cwe-doctor-native-xhvbojy0/a-source/.cub-workenv/conf/cubrid.conf": "d3e781982010805e68cbd0990c27c25867952e9314595e0bbea41a16babd2fc4",
+    "/tmp/cwe-doctor-native-xhvbojy0/a-source/.cub-workenv/conf/cubrid_broker.conf": "cec6a80649877191cda942c67a551cfb4b73810b5710b57857766c15da0e2dfe",
+    "/tmp/cwe-doctor-native-xhvbojy0/a-source/.cub-workenv/databases/databases.txt": "9386436867ddb8a5575465f672d7fbaabe0e3ad788226ed83fd419c84385c373",
+    "/tmp/cwe-doctor-native-xhvbojy0/b-source/.cub-workenv/init.lock": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/tmp/cwe-doctor-native-xhvbojy0/b-source/.cub-workenv/state.json": "6e508f56436f76eb617a6131cad80cf06092763a4dd77b889e28ac551161de67",
+    "/tmp/cwe-doctor-native-xhvbojy0/b-source/.cub-workenv/env.sh": "e30ce21c86bf2ae96c74754275ae40759e8dd5fb39dff59c5a1d308eb2d55b14",
+    "/tmp/cwe-doctor-native-xhvbojy0/b-source/.cub-workenv/conf/cubrid.conf": "30d5a6b19caf927d2565ea3bc9f93cb4d37a99e9d95deb26fd13626667b361bb",
+    "/tmp/cwe-doctor-native-xhvbojy0/b-source/.cub-workenv/conf/cubrid_broker.conf": "17bb38e862fae63220748b21b07b67b0f0c9b80fd0c2160deeebbcd709315422",
+    "/tmp/cwe-doctor-native-xhvbojy0/b-source/.cub-workenv/databases/databases.txt": "9386436867ddb8a5575465f672d7fbaabe0e3ad788226ed83fd419c84385c373",
+    "/tmp/cwe-doctor-native-xhvbojy0/shared/data/testdb_vinf": "3e4c68acbaed1f27fdd6b454baaff3371af9da6efa42f3b947c2ca09b1608221",
+    "/tmp/cwe-doctor-native-xhvbojy0/shared/data/testdb": "5fccfb957713c1378f3e5f7b0fc0a0cc884bdd64c1acccd0076dfcdfd87c239a",
+    "/tmp/cwe-doctor-native-xhvbojy0/shared/data/testdb_keys": "1382b82cac413389db6353d41518fd871c15c9a8fa8cb89e901f32816e1a00d4",
+    "/tmp/cwe-doctor-native-xhvbojy0/shared/data/testdb_x001": "98f85065b779e62ff19c72803f1a4a6e0670b37b5916528e1d196b6bffe45ac6",
+    "/tmp/cwe-doctor-native-xhvbojy0/shared/log/testdb_lgat": "a1a61d7dac747ee083c8496b7dcf3c76836466d38bbaed70766a632c6e1f96e5",
+    "/tmp/cwe-doctor-native-xhvbojy0/shared/log/testdb_lginf": "2a029853b4382e67db876fc63ee8224996520b1f4567dcb8fcc6ae85587a0547",
+    "/tmp/cwe-doctor-native-xhvbojy0/shared/log/testdb_lgat__lock": "19885b61f918a552230d8f3ab2359f67ae872208d31260c25613eb63f759a216",
+    "/tmp/cwe-doctor-native-xhvbojy0/shared/log/testdb_dwb": "c2851e469e2a13dda1f9ee51e8049e22ca60051a30f881d7e22c8933e800f567",
+    "/tmp/cwe-doctor-native-xhvbojy0/shared/log/testdb_lgar_t": "be5b547d95d2432d1050bdf283f3a27662950f2bbfc6dd093939215149f3aad5"
+  },
+  "pids": [
+    1105048,
+    1105074,
+    1105078,
+    1105386,
+    1105388
+  ]
+}

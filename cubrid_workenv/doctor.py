@@ -1,4 +1,4 @@
-"""Read-only state diagnosis; full runtime/owner inspection extends this seam."""
+"""Read-only state and runtime diagnosis; never repairs or opens databases."""
 import json
 import os
 from pathlib import Path
@@ -70,8 +70,29 @@ def diagnose(args):
             print(f'Last error: {state["error"]}')
         print(f'Inspect {root / "state.json"}, {root / "createdb-testdb.log"}, and recorded allocation before manual recovery.')
         print('Preserve DB files and settings; confirm the initializing process has stopped. No retry, deletion or rollback performed.')
-        raise ValueError('Incomplete initialization; manual recovery required')
+        # Continue inspecting the artifacts that exist; never retry a stage.
+    print(f'Selected installation: {state.get("install")} (preset {state.get("preset")})')
     problems = ready_problems(state, worktree)
+    if state.get('status') != 'ready':
+        problems.append('Incomplete initialization; manual recovery required')
+    if args.install and str(args.install.resolve()) != state.get('install'):
+        problems.append(f'Expected installation {args.install.resolve()} differs from recorded {state.get("install")}; select the recorded installation or plan a manual preset transition')
+    if args.preset and args.preset != state.get('preset'):
+        problems.append(f'Expected preset {args.preset} differs from recorded {state.get("preset")}; no automatic preset transition')
+    records, processes = [], {}
+    from .diagnostics import settings_problems, registry_problems, resource_observations
+    if isinstance(state.get('allocation'), dict):
+        try:
+            problems.extend(settings_problems(state))
+            rows, db_problems = registry_problems(worktree)
+            problems.extend(db_problems)
+            records, processes, resource_problems = resource_observations(state, rows)
+            problems.extend(resource_problems)
+        except (KeyError, TypeError) as error:
+            problems.append(f'Malformed allocation/state: {error}; inspect state.json manually')
+    if args.native_error_file:
+        from .diagnostics import explain_native_error
+        explain_native_error(args.native_error_file, records, processes)
     if problems:
         raise ValueError('\n'.join(problems) + '\nInspect and correct manually; no changes performed.')
-    print('Ready: initialization artifacts and recorded installation are present. No changes performed.')
+    print('Ready: inspected settings, registration paths, allocation and live resources. No changes performed; no database opened.')

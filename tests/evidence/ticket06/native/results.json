@@ -1,0 +1,335 @@
+{
+  "root": "/tmp/cwe-doctor-native-xhvbojy0",
+  "source": "/home/vimkim/.cub/install/develop/debug_gcc",
+  "steps": [
+    {
+      "label": "a-init",
+      "argv": [
+        "/home/vimkim/gh/cubrid-workenv-06/bin/cub-workenv",
+        "init",
+        "--worktree",
+        "/tmp/cwe-doctor-native-xhvbojy0/a-source",
+        "--install",
+        "/tmp/cwe-doctor-native-xhvbojy0/a",
+        "--preset",
+        "debug_gcc",
+        "--java-home",
+        "/home/vimkim/.local/share/mise/installs/java/temurin-8.0.462+8",
+        "--no-db",
+        "--state-home",
+        "/tmp/cwe-doctor-native-xhvbojy0/host",
+        "--port-start",
+        "47000",
+        "--port-end",
+        "47999"
+      ],
+      "returncode": 0
+    },
+    {
+      "label": "b-init",
+      "argv": [
+        "/home/vimkim/gh/cubrid-workenv-06/bin/cub-workenv",
+        "init",
+        "--worktree",
+        "/tmp/cwe-doctor-native-xhvbojy0/b-source",
+        "--install",
+        "/tmp/cwe-doctor-native-xhvbojy0/b",
+        "--preset",
+        "debug_gcc",
+        "--java-home",
+        "/home/vimkim/.local/share/mise/installs/java/temurin-8.0.462+8",
+        "--no-db",
+        "--state-home",
+        "/tmp/cwe-doctor-native-xhvbojy0/host",
+        "--port-start",
+        "47000",
+        "--port-end",
+        "47999"
+      ],
+      "returncode": 0
+    },
+    {
+      "label": "create",
+      "argv": [
+        "/home/vimkim/gh/cubrid-workenv-06/bin/cub-workenv",
+        "create-db",
+        "testdb",
+        "--worktree",
+        "/tmp/cwe-doctor-native-xhvbojy0/a-source",
+        "--path",
+        "/tmp/cwe-doctor-native-xhvbojy0/shared"
+      ],
+      "returncode": 0
+    },
+    {
+      "label": "version",
+      "argv": [
+        "/tmp/cwe-doctor-native-xhvbojy0/a/bin/cubrid",
+        "--version"
+      ],
+      "returncode": 0
+    },
+    {
+      "label": "b-version",
+      "argv": [
+        "/tmp/cwe-doctor-native-xhvbojy0/b/bin/cubrid",
+        "--version"
+      ],
+      "returncode": 0
+    },
+    {
+      "label": "start",
+      "argv": [
+        "/tmp/cwe-doctor-native-xhvbojy0/a/bin/cubrid",
+        "server",
+        "start",
+        "testdb"
+      ],
+      "returncode": 0
+    },
+    {
+      "label": "broker-start",
+      "argv": [
+        "/tmp/cwe-doctor-native-xhvbojy0/a/bin/cubrid",
+        "broker",
+        "start"
+      ],
+      "returncode": 0
+    },
+    {
+      "label": "seed",
+      "argv": [
+        "/tmp/cwe-doctor-native-xhvbojy0/a/bin/csql",
+        "-C",
+        "-u",
+        "dba",
+        "-c",
+        "create table probe (id int); insert into probe values (1); commit;",
+        "testdb"
+      ],
+      "returncode": 0
+    },
+    {
+      "label": "native-busy",
+      "argv": [
+        "/tmp/cwe-doctor-native-xhvbojy0/b/bin/csql",
+        "-S",
+        "-u",
+        "dba",
+        "-c",
+        "select 1;",
+        "testdb"
+      ],
+      "returncode": 1
+    },
+    {
+      "label": "a-doctor",
+      "argv": [
+        "strace",
+        "-f",
+        "-e",
+        "trace=openat,execve,kill,unlink,rename,bind",
+        "-o",
+        "/home/vimkim/gh/cubrid-workenv-06/tests/evidence/ticket06/native/a-syscalls.txt",
+        "/home/vimkim/gh/cubrid-workenv-06/bin/cub-workenv",
+        "doctor",
+        "--worktree",
+        "/tmp/cwe-doctor-native-xhvbojy0/a-source",
+        "--native-error-file",
+        "/home/vimkim/gh/cubrid-workenv-06/tests/evidence/ticket06/native/native-busy.txt"
+      ],
+      "returncode": 0
+    },
+    {
+      "label": "b-doctor",
+      "argv": [
+        "strace",
+        "-f",
+        "-e",
+        "trace=openat,execve,kill,unlink,rename,bind",
+        "-o",
+        "/home/vimkim/gh/cubrid-workenv-06/tests/evidence/ticket06/native/b-syscalls.txt",
+        "/home/vimkim/gh/cubrid-workenv-06/bin/cub-workenv",
+        "doctor",
+        "--worktree",
+        "/tmp/cwe-doctor-native-xhvbojy0/b-source",
+        "--native-error-file",
+        "/home/vimkim/gh/cubrid-workenv-06/tests/evidence/ticket06/native/native-busy.txt"
+      ],
+      "returncode": 1
+    },
+    {
+      "label": "health",
+      "argv": [
+        "/tmp/cwe-doctor-native-xhvbojy0/a/bin/csql",
+        "-C",
+        "-u",
+        "dba",
+        "-c",
+        "insert into probe values (2); commit; select count(*) from probe;",
+        "testdb"
+      ],
+      "returncode": 0
+    },
+    {
+      "label": "a-cleanup-broker",
+      "argv": [
+        "/tmp/cwe-doctor-native-xhvbojy0/a/bin/cubrid",
+        "broker",
+        "stop"
+      ],
+      "returncode": 0
+    },
+    {
+      "label": "a-cleanup-server",
+      "argv": [
+        "/tmp/cwe-doctor-native-xhvbojy0/a/bin/cubrid",
+        "server",
+        "stop",
+        "testdb"
+      ],
+      "returncode": 0
+    },
+    {
+      "label": "b-cleanup-broker",
+      "argv": [
+        "/tmp/cwe-doctor-native-xhvbojy0/b/bin/cubrid",
+        "broker",
+        "stop"
+      ],
+      "returncode": 1
+    },
+    {
+      "label": "b-cleanup-server",
+      "argv": [
+        "/tmp/cwe-doctor-native-xhvbojy0/b/bin/cubrid",
+        "server",
+        "stop",
+        "testdb"
+      ],
+      "returncode": 1
+    }
+  ],
+  "binary_hashes": {
+    "a": {
+      "bin/csql": "912599e87c86ac2a24ce1cd1a18278d9444196ebfe896f3f9939680e91cfa497",
+      "bin/cub_master": "a02e2c7537b834cb5d08168e3c4bdaa3aa0b65acf22d9f87141d92adf5cc71a7",
+      "bin/cub_server": "8448866034e826d054993efe632be9ee29c9209351f59946b461d6c9cf29d5a0",
+      "bin/cubrid": "059feea677443ee659f4116945abf1e8e9e86b3afff64b015be43d8a225acd51",
+      "bin/cub_commdb": "a5eb2f188106015c62dc65946573b317c2a7bb812bd46dcb3838f1a97ff55b2c",
+      "bin/cubrid_rel": "818ad6bce1067becaa05a9cd870ab3b8639b68ecac46cca556738bae355bd171",
+      "bin/cub_admin": "d81d00a29f88f3a12c32fc3bb2bdb9226f417d883fa97b3457ddf9a44beafed1",
+      "bin/broker_log_runner": "2ea657fcabfd5b60b46cfc756554f70031de9951ef194d1dd21d4d540e97a634",
+      "bin/cub_sainfo": "d844ae006c4a670ad0403a03066ab3a89c30fe261e2a00296724d8f7cf5dc2d9",
+      "bin/cci_applier": "245b66874bd3f50e471a1b0a2e63df7161a216c3261a496614dcc30784b1a7e5",
+      "bin/broker_log_converter": "4559904a3678dd2d48556d5faf848cafcd3ba0a3b2dc61b4945eb3a2670d3535",
+      "bin/cub_gateway": "96fef7073a8cb23ea0c38f967fc4e4c33cbf4b29808e6489a28e19b62583b263",
+      "bin/cubrid_replay": "87616d924a3ede0e3dd89d36937b732435a9ca682ed7db95018caba14060e25e",
+      "bin/cub_pl": "22d7aa5dd1bf3b0ca25359b09080ce7614e3a442afea2e11d147ee575979f851",
+      "bin/broker_tester": "f47da40a71a3d8c8007c5bba107009ed50e8fc806402ed29916a06c5c727e91c",
+      "bin/cub_broker": "2bf4ad55ef8fbba47f0c28f33fc8f1f536098cd881fa9b49e2e1140a2684217e",
+      "bin/broker_monitor": "abb1fca8137b3c7958a83dbda9b1cdf6153a3b4f328b99254260b8206cdb1026",
+      "bin/broker_changer": "c265427f1afd420b7f33c426c387897c6427361df29eea1d2fdd9007897cb791",
+      "bin/cubrid_broker": "4dd5042806321e559b4a323bedbcb7fa9a0927b8ae3baa17a6efe5b8e543e22b",
+      "bin/cubrid_gateway": "e42e24a23335fc8a8a51d91f9906fdcf86b38261ccf432068cfda8c87db874eb",
+      "bin/cub_cas": "4208936c5fe08113bda6eca2f860cb688a4cd5174c31f1c27d9e8a7e8657b547",
+      "bin/cub_cas_cgw": "00e4032dfd33e1b1d56c5c226d9aebf2673822c09dc232aecf219156a2befe0e",
+      "bin/cub_proxy": "b83fc56805397b5f7cc0655d13fa535d864ddca77552af528ee838d2ec4bcffc",
+      "bin/broker_log_top": "7016b25f2cc98f872d1516a4a0817b5ce8427730d11d85d5caa9c3a1daa469f6",
+      "bin/cub_jobsa": "d844ae006c4a670ad0403a03066ab3a89c30fe261e2a00296724d8f7cf5dc2d9",
+      "bin/loadjava": "5db571015902e69e19a21f399b5c2fd5eb8fb8749703436b535f57e984ca1203",
+      "bin/gateway_monitor": "c3dfc1d7bf722c88284a338a89a53bbe54ba5cad82b480ed0c51801f7f676d75",
+      "bin/make_locale.sh": "2c0f04178112a166299f6bfa430d83872967f981b32ae3241a1d7f09a110c71e",
+      "bin/make_tz.sh": "59d6105e841658c062452e77b5e0f642859fc4f83ef8402be35d806d5c2f99c1",
+      "lib/libcubridsa.so.11.5": "ec69048d0d4e996a3d4894abed2c77cca4f622339b3b9f3793645c5f7f2f4955",
+      "lib/libcmdep.so.11.5": "0b367793240405a8612f8a97663e766de87b4951eea96280d26454c19f2e8471",
+      "lib/libcubrid_timezones.so.11.5": "2c5d1ba136d92f726916e4cc59e59bcec1a3add32e0bab24901b1fa5c83efb2a",
+      "lib/libcmstat.so.11.5": "2434a08592540bcc2543fa780f84c0120f1ef755ea3af3a1639d53bcafe2d6fe",
+      "lib/libbrokeradmin.so.11.5": "c9a6ee532a3e2293cd1d42fecf3474766894fe6cbbaaea087b4d5db43e45ae53",
+      "lib/libcubridsa.so": "ec69048d0d4e996a3d4894abed2c77cca4f622339b3b9f3793645c5f7f2f4955",
+      "lib/libcubridcs.so": "562bd6656b7999645e4f62070a90b9b369109993403592da16f0949da926df2e",
+      "lib/libcubrid.so": "d0c4e00ef378516facfaca5afa9903ccd26de644cb36b82f0c09800300dd1a19",
+      "lib/libbrokeradmin.so": "c9a6ee532a3e2293cd1d42fecf3474766894fe6cbbaaea087b4d5db43e45ae53",
+      "lib/libcmstat.so": "2434a08592540bcc2543fa780f84c0120f1ef755ea3af3a1639d53bcafe2d6fe",
+      "lib/libcmdep.so": "0b367793240405a8612f8a97663e766de87b4951eea96280d26454c19f2e8471",
+      "lib/libcubrid_timezones.so": "2c5d1ba136d92f726916e4cc59e59bcec1a3add32e0bab24901b1fa5c83efb2a",
+      "lib/libcubridcs.so.11.5": "562bd6656b7999645e4f62070a90b9b369109993403592da16f0949da926df2e",
+      "lib/libcubrid.so.11.5": "d0c4e00ef378516facfaca5afa9903ccd26de644cb36b82f0c09800300dd1a19"
+    },
+    "b": {
+      "bin/csql": "912599e87c86ac2a24ce1cd1a18278d9444196ebfe896f3f9939680e91cfa497",
+      "bin/cub_master": "a02e2c7537b834cb5d08168e3c4bdaa3aa0b65acf22d9f87141d92adf5cc71a7",
+      "bin/cub_server": "8448866034e826d054993efe632be9ee29c9209351f59946b461d6c9cf29d5a0",
+      "bin/cubrid": "059feea677443ee659f4116945abf1e8e9e86b3afff64b015be43d8a225acd51",
+      "bin/cub_commdb": "a5eb2f188106015c62dc65946573b317c2a7bb812bd46dcb3838f1a97ff55b2c",
+      "bin/cubrid_rel": "818ad6bce1067becaa05a9cd870ab3b8639b68ecac46cca556738bae355bd171",
+      "bin/cub_admin": "d81d00a29f88f3a12c32fc3bb2bdb9226f417d883fa97b3457ddf9a44beafed1",
+      "bin/broker_log_runner": "2ea657fcabfd5b60b46cfc756554f70031de9951ef194d1dd21d4d540e97a634",
+      "bin/cub_sainfo": "d844ae006c4a670ad0403a03066ab3a89c30fe261e2a00296724d8f7cf5dc2d9",
+      "bin/cci_applier": "245b66874bd3f50e471a1b0a2e63df7161a216c3261a496614dcc30784b1a7e5",
+      "bin/broker_log_converter": "4559904a3678dd2d48556d5faf848cafcd3ba0a3b2dc61b4945eb3a2670d3535",
+      "bin/cub_gateway": "96fef7073a8cb23ea0c38f967fc4e4c33cbf4b29808e6489a28e19b62583b263",
+      "bin/cubrid_replay": "87616d924a3ede0e3dd89d36937b732435a9ca682ed7db95018caba14060e25e",
+      "bin/cub_pl": "22d7aa5dd1bf3b0ca25359b09080ce7614e3a442afea2e11d147ee575979f851",
+      "bin/broker_tester": "f47da40a71a3d8c8007c5bba107009ed50e8fc806402ed29916a06c5c727e91c",
+      "bin/cub_broker": "2bf4ad55ef8fbba47f0c28f33fc8f1f536098cd881fa9b49e2e1140a2684217e",
+      "bin/broker_monitor": "abb1fca8137b3c7958a83dbda9b1cdf6153a3b4f328b99254260b8206cdb1026",
+      "bin/broker_changer": "c265427f1afd420b7f33c426c387897c6427361df29eea1d2fdd9007897cb791",
+      "bin/cubrid_broker": "4dd5042806321e559b4a323bedbcb7fa9a0927b8ae3baa17a6efe5b8e543e22b",
+      "bin/cubrid_gateway": "e42e24a23335fc8a8a51d91f9906fdcf86b38261ccf432068cfda8c87db874eb",
+      "bin/cub_cas": "4208936c5fe08113bda6eca2f860cb688a4cd5174c31f1c27d9e8a7e8657b547",
+      "bin/cub_cas_cgw": "00e4032dfd33e1b1d56c5c226d9aebf2673822c09dc232aecf219156a2befe0e",
+      "bin/cub_proxy": "b83fc56805397b5f7cc0655d13fa535d864ddca77552af528ee838d2ec4bcffc",
+      "bin/broker_log_top": "7016b25f2cc98f872d1516a4a0817b5ce8427730d11d85d5caa9c3a1daa469f6",
+      "bin/cub_jobsa": "d844ae006c4a670ad0403a03066ab3a89c30fe261e2a00296724d8f7cf5dc2d9",
+      "bin/loadjava": "5db571015902e69e19a21f399b5c2fd5eb8fb8749703436b535f57e984ca1203",
+      "bin/gateway_monitor": "c3dfc1d7bf722c88284a338a89a53bbe54ba5cad82b480ed0c51801f7f676d75",
+      "bin/make_locale.sh": "2c0f04178112a166299f6bfa430d83872967f981b32ae3241a1d7f09a110c71e",
+      "bin/make_tz.sh": "59d6105e841658c062452e77b5e0f642859fc4f83ef8402be35d806d5c2f99c1",
+      "lib/libcubridsa.so.11.5": "ec69048d0d4e996a3d4894abed2c77cca4f622339b3b9f3793645c5f7f2f4955",
+      "lib/libcmdep.so.11.5": "0b367793240405a8612f8a97663e766de87b4951eea96280d26454c19f2e8471",
+      "lib/libcubrid_timezones.so.11.5": "2c5d1ba136d92f726916e4cc59e59bcec1a3add32e0bab24901b1fa5c83efb2a",
+      "lib/libcmstat.so.11.5": "2434a08592540bcc2543fa780f84c0120f1ef755ea3af3a1639d53bcafe2d6fe",
+      "lib/libbrokeradmin.so.11.5": "c9a6ee532a3e2293cd1d42fecf3474766894fe6cbbaaea087b4d5db43e45ae53",
+      "lib/libcubridsa.so": "ec69048d0d4e996a3d4894abed2c77cca4f622339b3b9f3793645c5f7f2f4955",
+      "lib/libcubridcs.so": "562bd6656b7999645e4f62070a90b9b369109993403592da16f0949da926df2e",
+      "lib/libcubrid.so": "d0c4e00ef378516facfaca5afa9903ccd26de644cb36b82f0c09800300dd1a19",
+      "lib/libbrokeradmin.so": "c9a6ee532a3e2293cd1d42fecf3474766894fe6cbbaaea087b4d5db43e45ae53",
+      "lib/libcmstat.so": "2434a08592540bcc2543fa780f84c0120f1ef755ea3af3a1639d53bcafe2d6fe",
+      "lib/libcmdep.so": "0b367793240405a8612f8a97663e766de87b4951eea96280d26454c19f2e8471",
+      "lib/libcubrid_timezones.so": "2c5d1ba136d92f726916e4cc59e59bcec1a3add32e0bab24901b1fa5c83efb2a",
+      "lib/libcubridcs.so.11.5": "562bd6656b7999645e4f62070a90b9b369109993403592da16f0949da926df2e",
+      "lib/libcubrid.so.11.5": "d0c4e00ef378516facfaca5afa9903ccd26de644cb36b82f0c09800300dd1a19"
+    }
+  },
+  "expected_stale_socket_diagnosis": true,
+  "socket_paths_unchanged": {
+    "/tmp/cwe-1000/717261d756a3/CUBRID47000": [
+      138127981,
+      49645
+    ],
+    "/tmp/cwe-1000/717261d756a3/sp_testdb.sock": [
+      138128130,
+      49590
+    ],
+    "/tmp/cwe-1000/717261d756a3/workenv.1": [
+      138128133,
+      49645
+    ],
+    "/tmp/cwe-1000/a5e19f88a881/sp_testdb.sock": [
+      71007484,
+      49590
+    ]
+  },
+  "verdict": "pass",
+  "unchanged_artifacts": 24,
+  "same_live_pids": [
+    1105048,
+    1105074,
+    1105078,
+    1105386,
+    1105388
+  ],
+  "cleanup_remaining": [],
+  "runtime_removed": true
+}

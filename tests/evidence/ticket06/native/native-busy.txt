@@ -1,0 +1,3 @@
+
+ERROR: Unable to restart/initialize the database server. Unable to mount disk volume "/tmp/cwe-doctor-native-xhvbojy0/shared/log/testdb_lgat". The database "/tmp/cwe-doctor-native-xhvbojy0/shared/data/testdb", to which the disk volume belongs, is in use by user vimkim on process 1105074 of host dev2 since Fri Oct  2 17:35:36 2026.
+
