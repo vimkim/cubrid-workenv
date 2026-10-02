@@ -1,0 +1,6 @@
+[0mdirenv: loading /tmp/cwe-entry07-hbsvk3w9/source/.envrc
+CUBRID runtime is not initialized; this worktree is build-only. Run a full build to initialize it.
+Preset Mode: debug_gcc
+Install Dir: /tmp/cwe-entry07-hbsvk3w9/home/.cub/install/source/debug_gcc
+Runtime: build-only
+Build Dir: /tmp/cwe-entry07-hbsvk3w9/source/build_preset_debug_gcc

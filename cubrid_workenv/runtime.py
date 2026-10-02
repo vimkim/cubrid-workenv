@@ -46,12 +46,23 @@ def write_settings(state):
 
 
 def write_environment(state):
+    from .loading import CLEAN_SHELL
     root = Path(state['worktree']) / '.cub-workenv'
-    # Bash is explicit: variable enumeration removes overrides unknown to this version.
     guard = shlex.quote(str(root / 'state.json'))
-    text = '# Source with bash; ready state is required. No CUBRID command runs here.\n'
-    text += f"if ! python3 -c 'import json,sys; sys.exit(json.load(open(sys.argv[1])).get(\"status\") != \"ready\")' {guard}; then\n  echo 'cub-workenv: incomplete environment; run doctor' >&2\n  return 1\nfi\n"
-    text += 'for _cwe_name in ${!CUBRID@}; do unset "$_cwe_name"; done\nunset _cwe_name LD_PRELOAD LD_LIBRARY_PATH\n'
+    # Bind the published artifact to its original ready selection. Check only a
+    # small metadata file; full integrity and live-resource inspection is doctor.
+    check = ('import json,os,sys; s=json.load(open(sys.argv[1])); '
+             'sys.exit(not (s.get("status")=="ready" and s.get("worktree")==sys.argv[2] '
+             'and s.get("install")==sys.argv[3] and s.get("preset")==sys.argv[4] '
+             'and os.environ.get("PRESET_MODE",sys.argv[4])==sys.argv[4]))')
+    text = '# Source with bash; only completed selected state is loaded.\n' + CLEAN_SHELL
+    text += f"if ! python3 -c {shlex.quote(check)} {guard} {shlex.quote(state['worktree'])} {shlex.quote(state['install'])} {shlex.quote(state['preset'])}; then\n  echo 'cub-workenv: incomplete or mismatched environment; run doctor' >&2\n  return 1\nfi\n"
     for key, value in environment(state).items():
-        text += f'export {key}={shlex.quote(value)}\n'
+        if key == 'PATH':
+            text += f'export PATH={shlex.quote(str(Path(state["install"]) / "bin"))}${{PATH:+:$PATH}}\n'
+        elif key == 'LD_LIBRARY_PATH':
+            text += f'export LD_LIBRARY_PATH={shlex.quote(value)}${{LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}}\n'
+        else:
+            text += f'export {key}={shlex.quote(value)}\n'
+    text += 'export CUBRID_RUNTIME_READY=1\n'
     (root / 'env.sh').write_text(text)

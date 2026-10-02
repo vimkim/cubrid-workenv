@@ -31,9 +31,16 @@ def main():
     create.add_argument('name')
     create.add_argument('--worktree', type=Path, default=Path.cwd())
     create.add_argument('--path', type=Path)
+    env = commands.add_parser('env', help='emit bash cleanup and load a completed environment without diagnosis')
+    env.add_argument('--worktree', type=Path, default=Path.cwd())
+    env.add_argument('--preset')
+    env.add_argument('--install', type=Path)
     args = parser.parse_args()
     try:
-        if args.command == 'doctor':
+        if args.command == 'env':
+            from .loading import emit
+            emit(args)
+        elif args.command == 'doctor':
             from .doctor import diagnose
             diagnose(args)
         elif args.command == 'create-db':

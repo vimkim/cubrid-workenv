@@ -1,0 +1,114 @@
+1077414 execve("/home/linuxbrew/.linuxbrew/bin/direnv", ["direnv", "exec", ".", "/usr/bin/true"], 0x7ffd654e7f60 /* 80 vars */) = 0
+1077421 +++ exited with 0 +++
+1077422 execve("/home/linuxbrew/.linuxbrew/opt/bash/bin/bash", ["/home/linuxbrew/.linuxbrew/opt/b"..., "-c", "eval \"$(\"/home/linuxbrew/.linuxb"...], 0xc000034848 /* 81 vars */) = 0
+1077424 execve("/home/linuxbrew/.linuxbrew/Cellar/direnv/2.37.1/bin/direnv", ["/home/linuxbrew/.linuxbrew/Cella"..., "stdlib"], 0x560ebc534410 /* 81 vars */) = 0
+1077429 +++ exited with 0 +++
+1077428 +++ exited with 0 +++
+1077427 +++ exited with 0 +++
+1077426 +++ exited with 0 +++
+1077425 +++ exited with 0 +++
+1077424 +++ exited with 0 +++
+1077422 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=1077424, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+1077430 +++ exited with 0 +++
+1077422 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=1077430, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+1077431 execve("/home/linuxbrew/.linuxbrew/Cellar/direnv/2.37.1/bin/direnv", ["/home/linuxbrew/.linuxbrew/Cella"..., "watch", "bash", "/tmp/cwe-env07-2a46ctpg/a/.envrc"], 0x560ebc535010 /* 82 vars */) = 0
+1077435 +++ exited with 0 +++
+1077436 +++ exited with 0 +++
+1077434 +++ exited with 0 +++
+1077433 +++ exited with 0 +++
+1077432 +++ exited with 0 +++
+1077431 +++ exited with 0 +++
+1077422 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=1077431, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+1077444 +++ exited with 0 +++
+1077422 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=1077444, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+1077446 +++ exited with 0 +++
+1077445 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=1077446, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+1077445 +++ exited with 0 +++
+1077422 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=1077445, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+1077447 execve("/home/linuxbrew/.linuxbrew/Cellar/direnv/2.37.1/bin/direnv", ["/home/linuxbrew/.linuxbrew/Cella"..., "log", "-status", "loading /tmp/cwe-env07-2a46ctpg/"...], 0x560ebc535010 /* 82 vars */) = 0
+1077447 --- SIGURG {si_signo=SIGURG, si_code=SI_TKILL, si_pid=1077447, si_uid=1000} ---
+1077453 +++ exited with 0 +++
+1077451 +++ exited with 0 +++
+1077452 +++ exited with 0 +++
+1077450 +++ exited with 0 +++
+1077449 +++ exited with 0 +++
+1077447 +++ exited with 0 +++
+1077422 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=1077447, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+1077454 execve("/home/vimkim/gh/cubrid-workenv-07/bin/cub-workenv", ["/home/vimkim/gh/cubrid-workenv-0"..., "env", "--worktree", "/tmp/cwe-env07-2a46ctpg/a", "--preset", "debug_gcc", "--install", "/tmp/cwe-env07-2a46ctpg/install-"...], 0x560ebc535010 /* 84 vars */) = 0
+1077454 execve("/home/vimkim/.codex/packages/standalone/releases/0.160.0-x86_64-unknown-linux-musl/codex-path/python3", ["python3", "/home/vimkim/gh/cubrid-workenv-0"..., "env", "--worktree", "/tmp/cwe-env07-2a46ctpg/a", "--preset", "debug_gcc", "--install", "/tmp/cwe-env07-2a46ctpg/install-"...], 0x7ffcc956ed30 /* 84 vars */) = -1 ENOENT (No such file or directory)
+1077454 execve("/home/vimkim/.codex/tmp/arg0/codex-arg0qhybKK/python3", ["python3", "/home/vimkim/gh/cubrid-workenv-0"..., "env", "--worktree", "/tmp/cwe-env07-2a46ctpg/a", "--preset", "debug_gcc", "--install", "/tmp/cwe-env07-2a46ctpg/install-"...], 0x7ffcc956ed30 /* 84 vars */) = -1 ENOENT (No such file or directory)
+1077454 execve("/home/vimkim/.codex/tmp/arg0/codex-arg0rkaV8A/python3", ["python3", "/home/vimkim/gh/cubrid-workenv-0"..., "env", "--worktree", "/tmp/cwe-env07-2a46ctpg/a", "--preset", "debug_gcc", "--install", "/tmp/cwe-env07-2a46ctpg/install-"...], 0x7ffcc956ed30 /* 84 vars */) = -1 ENOENT (No such file or directory)
+1077454 execve("/home/vimkim/.codex/packages/standalone/releases/0.159.3-x86_64-unknown-linux-musl/codex-path/python3", ["python3", "/home/vimkim/gh/cubrid-workenv-0"..., "env", "--worktree", "/tmp/cwe-env07-2a46ctpg/a", "--preset", "debug_gcc", "--install", "/tmp/cwe-env07-2a46ctpg/install-"...], 0x7ffcc956ed30 /* 84 vars */) = -1 ENOENT (No such file or directory)
+1077454 execve("/home/vimkim/.codex/tmp/arg0/codex-arg0Eiz5FQ/python3", ["python3", "/home/vimkim/gh/cubrid-workenv-0"..., "env", "--worktree", "/tmp/cwe-env07-2a46ctpg/a", "--preset", "debug_gcc", "--install", "/tmp/cwe-env07-2a46ctpg/install-"...], 0x7ffcc956ed30 /* 84 vars */) = -1 ENOENT (No such file or directory)
+1077454 execve("/home/vimkim/.codex/packages/standalone/releases/0.159.2-x86_64-unknown-linux-musl/codex-path/python3", ["python3", "/home/vimkim/gh/cubrid-workenv-0"..., "env", "--worktree", "/tmp/cwe-env07-2a46ctpg/a", "--preset", "debug_gcc", "--install", "/tmp/cwe-env07-2a46ctpg/install-"...], 0x7ffcc956ed30 /* 84 vars */) = -1 ENOENT (No such file or directory)
+1077454 execve("/home/vimkim/.codex/tmp/arg0/codex-arg0UZCYf0/python3", ["python3", "/home/vimkim/gh/cubrid-workenv-0"..., "env", "--worktree", "/tmp/cwe-env07-2a46ctpg/a", "--preset", "debug_gcc", "--install", "/tmp/cwe-env07-2a46ctpg/install-"...], 0x7ffcc956ed30 /* 84 vars */) = -1 ENOENT (No such file or directory)
+1077454 execve("/home/vimkim/.codex/packages/standalone/releases/0.159.1-x86_64-unknown-linux-musl/codex-path/python3", ["python3", "/home/vimkim/gh/cubrid-workenv-0"..., "env", "--worktree", "/tmp/cwe-env07-2a46ctpg/a", "--preset", "debug_gcc", "--install", "/tmp/cwe-env07-2a46ctpg/install-"...], 0x7ffcc956ed30 /* 84 vars */) = -1 ENOENT (No such file or directory)
+1077454 execve("/home/vimkim/.codex/tmp/arg0/codex-arg006SEr5/python3", ["python3", "/home/vimkim/gh/cubrid-workenv-0"..., "env", "--worktree", "/tmp/cwe-env07-2a46ctpg/a", "--preset", "debug_gcc", "--install", "/tmp/cwe-env07-2a46ctpg/install-"...], 0x7ffcc956ed30 /* 84 vars */) = -1 ENOENT (No such file or directory)
+1077454 execve("/home/vimkim/.codex/packages/standalone/releases/0.159.0-x86_64-unknown-linux-musl/codex-path/python3", ["python3", "/home/vimkim/gh/cubrid-workenv-0"..., "env", "--worktree", "/tmp/cwe-env07-2a46ctpg/a", "--preset", "debug_gcc", "--install", "/tmp/cwe-env07-2a46ctpg/install-"...], 0x7ffcc956ed30 /* 84 vars */) = -1 ENOENT (No such file or directory)
+1077454 execve("/home/vimkim/.codex/tmp/arg0/codex-arg0Sdrd24/python3", ["python3", "/home/vimkim/gh/cubrid-workenv-0"..., "env", "--worktree", "/tmp/cwe-env07-2a46ctpg/a", "--preset", "debug_gcc", "--install", "/tmp/cwe-env07-2a46ctpg/install-"...], 0x7ffcc956ed30 /* 84 vars */) = -1 ENOENT (No such file or directory)
+1077454 execve("/home/vimkim/.codex/packages/standalone/releases/0.158.0-x86_64-unknown-linux-musl/codex-path/python3", ["python3", "/home/vimkim/gh/cubrid-workenv-0"..., "env", "--worktree", "/tmp/cwe-env07-2a46ctpg/a", "--preset", "debug_gcc", "--install", "/tmp/cwe-env07-2a46ctpg/install-"...], 0x7ffcc956ed30 /* 84 vars */) = -1 ENOENT (No such file or directory)
+1077454 execve("/home/vimkim/.codex/tmp/arg0/codex-arg0mOvekQ/python3", ["python3", "/home/vimkim/gh/cubrid-workenv-0"..., "env", "--worktree", "/tmp/cwe-env07-2a46ctpg/a", "--preset", "debug_gcc", "--install", "/tmp/cwe-env07-2a46ctpg/install-"...], 0x7ffcc956ed30 /* 84 vars */) = -1 ENOENT (No such file or directory)
+1077454 execve("/home/vimkim/.codex/packages/standalone/releases/0.157.1-x86_64-unknown-linux-musl/codex-path/python3", ["python3", "/home/vimkim/gh/cubrid-workenv-0"..., "env", "--worktree", "/tmp/cwe-env07-2a46ctpg/a", "--preset", "debug_gcc", "--install", "/tmp/cwe-env07-2a46ctpg/install-"...], 0x7ffcc956ed30 /* 84 vars */) = -1 ENOENT (No such file or directory)
+1077454 execve("/home/vimkim/.codex/tmp/arg0/codex-arg0jzxIFn/python3", ["python3", "/home/vimkim/gh/cubrid-workenv-0"..., "env", "--worktree", "/tmp/cwe-env07-2a46ctpg/a", "--preset", "debug_gcc", "--install", "/tmp/cwe-env07-2a46ctpg/install-"...], 0x7ffcc956ed30 /* 84 vars */) = -1 ENOENT (No such file or directory)
+1077454 execve("/home/vimkim/.codex/packages/standalone/releases/0.157.0-x86_64-unknown-linux-musl/codex-path/python3", ["python3", "/home/vimkim/gh/cubrid-workenv-0"..., "env", "--worktree", "/tmp/cwe-env07-2a46ctpg/a", "--preset", "debug_gcc", "--install", "/tmp/cwe-env07-2a46ctpg/install-"...], 0x7ffcc956ed30 /* 84 vars */) = -1 ENOENT (No such file or directory)
+1077454 execve("/home/vimkim/.codex/tmp/arg0/codex-arg0lJR4wu/python3", ["python3", "/home/vimkim/gh/cubrid-workenv-0"..., "env", "--worktree", "/tmp/cwe-env07-2a46ctpg/a", "--preset", "debug_gcc", "--install", "/tmp/cwe-env07-2a46ctpg/install-"...], 0x7ffcc956ed30 /* 84 vars */) = -1 ENOENT (No such file or directory)
+1077454 execve("/home/vimkim/.cargo/bin/python3", ["python3", "/home/vimkim/gh/cubrid-workenv-0"..., "env", "--worktree", "/tmp/cwe-env07-2a46ctpg/a", "--preset", "debug_gcc", "--install", "/tmp/cwe-env07-2a46ctpg/install-"...], 0x7ffcc956ed30 /* 84 vars */) = -1 ENOENT (No such file or directory)
+1077454 execve("/home/vimkim/.local/share/mise/installs/bun/latest/bin/python3", ["python3", "/home/vimkim/gh/cubrid-workenv-0"..., "env", "--worktree", "/tmp/cwe-env07-2a46ctpg/a", "--preset", "debug_gcc", "--install", "/tmp/cwe-env07-2a46ctpg/install-"...], 0x7ffcc956ed30 /* 84 vars */) = -1 ENOENT (No such file or directory)
+1077454 execve("/home/vimkim/.local/share/mise/installs/go/1.27.1/bin/python3", ["python3", "/home/vimkim/gh/cubrid-workenv-0"..., "env", "--worktree", "/tmp/cwe-env07-2a46ctpg/a", "--preset", "debug_gcc", "--install", "/tmp/cwe-env07-2a46ctpg/install-"...], 0x7ffcc956ed30 /* 84 vars */) = -1 ENOENT (No such file or directory)
+1077454 execve("/home/vimkim/.local/share/mise/installs/java/temurin-8.0.462+8/bin/python3", ["python3", "/home/vimkim/gh/cubrid-workenv-0"..., "env", "--worktree", "/tmp/cwe-env07-2a46ctpg/a", "--preset", "debug_gcc", "--install", "/tmp/cwe-env07-2a46ctpg/install-"...], 0x7ffcc956ed30 /* 84 vars */) = -1 ENOENT (No such file or directory)
+1077454 execve("/home/vimkim/.local/share/mise/installs/node/latest/bin/python3", ["python3", "/home/vimkim/gh/cubrid-workenv-0"..., "env", "--worktree", "/tmp/cwe-env07-2a46ctpg/a", "--preset", "debug_gcc", "--install", "/tmp/cwe-env07-2a46ctpg/install-"...], 0x7ffcc956ed30 /* 84 vars */) = -1 ENOENT (No such file or directory)
+1077454 execve("/home/vimkim/.local/share/mise/installs/python/latest/bin/python3", ["python3", "/home/vimkim/gh/cubrid-workenv-0"..., "env", "--worktree", "/tmp/cwe-env07-2a46ctpg/a", "--preset", "debug_gcc", "--install", "/tmp/cwe-env07-2a46ctpg/install-"...], 0x7ffcc956ed30 /* 84 vars */) = 0
+1077454 +++ exited with 0 +++
+1077422 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=1077454, si_uid=1000, si_status=0, si_utime=3 /* 0.03 s */, si_stime=1 /* 0.01 s */} ---
+1077455 execve("/home/vimkim/.local/share/mise/installs/python/latest/bin/python3", ["python3", "-c", "import json,os,sys; s=json.load("..., "/tmp/cwe-env07-2a46ctpg/a/.cub-w"..., "/tmp/cwe-env07-2a46ctpg/a", "/tmp/cwe-env07-2a46ctpg/install-"..., "debug_gcc"], 0x560ebc535010 /* 85 vars */) = 0
+1077455 +++ exited with 0 +++
+1077422 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=1077455, si_uid=1000, si_status=0, si_utime=1 /* 0.01 s */, si_stime=0} ---
+1077472 +++ exited with 0 +++
+1077422 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=1077472, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+1077473 +++ exited with 0 +++
+1077422 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=1077473, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+1077488 +++ exited with 0 +++
+1077422 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=1077488, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+1077489 +++ exited with 0 +++
+1077422 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=1077489, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+1077492 execve("/home/linuxbrew/.linuxbrew/bin/brew", ["brew", "--prefix", "ncurses"], 0x560ebc535010 /* 96 vars */) = 0
+1077493 +++ exited with 0 +++
+1077492 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=1077493, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+1077501 +++ exited with 0 +++
+1077492 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=1077501, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+1077503 execve("/usr/bin/readlink", ["readlink", "/home/linuxbrew/.linuxbrew/bin/b"...], 0x5584227728a0 /* 96 vars */) = 0
+1077503 +++ exited with 0 +++
+1077502 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=1077503, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+1077502 +++ exited with 0 +++
+1077492 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=1077502, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+1077492 execve("/usr/bin/env", ["/usr/bin/env", "-i", "HOME=/tmp/cwe-env07-2a46ctpg/hom"..., "SHELL=/home/linuxbrew/.linuxbrew"..., "PATH=/usr/bin:/bin:/usr/sbin:/sb"..., "TERM=dumb", "DISPLAY=localhost:10.0", "LOGNAME=vimkim", "USER=vimkim", "HOMEBREW_BREW_FILE=/home/linuxbr"..., "HOMEBREW_BROWSER=none", "HOMEBREW_DBUS_SESSION_BUS_ADDRES"..., "HOMEBREW_DISPLAY=localhost:10.0", "HOMEBREW_EDITOR=nvim", "HOMEBREW_GOBIN=/home/vimkim/.loc"..., "HOMEBREW_LANG=C.UTF-8", "HOMEBREW_LC_ALL=C.UTF-8", "HOMEBREW_LC_CTYPE=C.UTF-8", "HOMEBREW_LIBRARY=/home/linuxbrew"..., "HOMEBREW_NO_COLOR=1", "HOMEBREW_PATH=/tmp/cwe-env07-2a4"..., "HOMEBREW_PREFIX=/home/linuxbrew/"..., "HOMEBREW_REPOSITORY=/home/linuxb"..., "HOMEBREW_SSH_TTY=/dev/pts/0", "HOMEBREW_TMPDIR=/home/vimkim/tmp", "HOMEBREW_USER_CONFIG_HOME=/tmp/c"..., "HOMEBREW_USER_SET_VARS= HOMEBREW"..., "HOMEBREW_XDG_CONFIG_HOME=/tmp/cw"..., "HOMEBREW_XDG_DATA_HOME=/tmp/cwe-"..., "HOMEBREW_XDG_RUNTIME_DIR=/tmp/cw"..., "/bin/bash", "-p", ...], 0x558422773a10 /* 116 vars */) = 0
+1077492 execve("/bin/bash", ["/bin/bash", "-p", "/home/linuxbrew/.linuxbrew/Homeb"..., "--prefix", "ncurses"], 0x56170c4b0d60 /* 28 vars */) = 0
+1077504 +++ exited with 0 +++
+1077492 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=1077504, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+1077505 execve("/usr/bin/grep", ["grep", "-Fxq", "ncurses", "/tmp/cwe-env07-2a46ctpg/home/.ca"...], 0x56434bc697d0 /* 31 vars */) = 0
+1077505 +++ exited with 0 +++
+1077492 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=1077505, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+1077492 +++ exited with 0 +++
+1077491 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=1077492, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+1077491 +++ exited with 0 +++
+1077422 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=1077491, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+1077506 execve("/home/linuxbrew/.linuxbrew/Cellar/direnv/2.37.1/bin/direnv", ["/home/linuxbrew/.linuxbrew/Cella"..., "dump", "json", ""], 0x560ebc535010 /* 99 vars */) = 0
+1077511 +++ exited with 0 +++
+1077509 +++ exited with 0 +++
+1077510 +++ exited with 0 +++
+1077508 +++ exited with 0 +++
+1077507 +++ exited with 0 +++
+1077506 +++ exited with 0 +++
+1077422 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=1077506, si_uid=1000, si_status=0, si_utime=0, si_stime=0} ---
+1077422 +++ exited with 0 +++
+1077420 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_EXITED, si_pid=1077422, si_uid=1000, si_status=0, si_utime=1 /* 0.01 s */, si_stime=3 /* 0.03 s */} ---
+1077420 execve("/usr/bin/true", ["/usr/bin/true"], 0xc0001ca388 /* 102 vars */ <unfinished ...>
+1077423 +++ exited with 0 +++
+1077419 +++ exited with 0 +++
+1077418 +++ exited with 0 +++
+1077416 +++ exited with 0 +++
+1077415 +++ exited with 0 +++
+1077417 +++ exited with 0 +++
+1077414 +++ superseded by execve in pid 1077420 +++
+1077414 <... execve resumed>)           = 0
+1077414 +++ exited with 0 +++

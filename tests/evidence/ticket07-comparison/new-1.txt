@@ -1,0 +1,6 @@
+[0mdirenv: loading /tmp/cwe-entry07-hbsvk3w9/source/.envrc
+cub-workenv: build-only; build and install, then run cub-workenv init explicitly.
+Preset Mode: debug_gcc
+Install Dir: /tmp/cwe-entry07-hbsvk3w9/home/.cub/install/source/debug_gcc
+Runtime: build-only
+Build Dir: /tmp/cwe-entry07-hbsvk3w9/source/build_preset_debug_gcc
