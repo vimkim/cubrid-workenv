@@ -1,0 +1,2 @@
+Initialized /tmp/cwe-env07-dn1iie5h/a with /tmp/cwe-env07-dn1iie5h/install-a (preset debug_gcc).
+Source /tmp/cwe-env07-dn1iie5h/a/.cub-workenv/env.sh in bash; use ordinary cubrid and csql commands.

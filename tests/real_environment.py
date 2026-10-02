@@ -103,8 +103,11 @@ try:
         run(f'{name}-seed', ['direnv', 'exec', '.', 'csql', '-C', '-u', 'dba', '-c',
             f'create table workenv_marker (id integer); insert into workenv_marker values ({value}); commit;', 'testdb'], source)
         for repetition in range(3):
-            run(f'{name}-entry-{repetition}', ['direnv', 'exec', '.', 'bash', '-c',
-                'test "$CUBRID_RUNTIME_READY" = 1; command -v cubrid; printf "%s\\n" "$CUBRID" "$CUBRID_TMP" "$CUBRID_DATABASES" "$CUBRID_CUBRID_PORT_ID"'], source)
+            entry = run(f'{name}-entry-{repetition}', ['direnv', 'exec', '.', 'bash', '-c',
+                'test "$CUBRID_RUNTIME_READY" = 1; command -v cubrid; printf "%s\\n" "$CUBRID" "$CUBRID_TMP" "$CUBRID_DATABASES" "$CUBRID_CUBRID_PORT_ID" "$CUBRID_BROKER_CONF_FILE" "${CUBRID_JAVA_HOME:-}"'], source)
+            assert str(source / '.cub-workenv/conf/cubrid_broker.conf') in entry
+            if state.get('java_home'):
+                assert state['java_home'] in entry
         run(f'{name}-trace', ['strace', '-f', '-e', 'trace=execve', '-o', args.output / f'{name}-execve.txt',
             'direnv', 'exec', '.', '/usr/bin/true'], source)
         trace = (args.output / f'{name}-execve.txt').read_text()

@@ -1,0 +1,436 @@
+{
+  "root": "/tmp/cwe-env07-dn1iie5h",
+  "source_install": "/home/vimkim/.cub/install/develop/debug_gcc",
+  "tooling": "/home/vimkim/my-cubrid-workenv-07",
+  "steps": [
+    {
+      "label": "a-allow",
+      "command": [
+        "direnv",
+        "allow"
+      ],
+      "returncode": 0,
+      "seconds": 0.008567048003897071
+    },
+    {
+      "label": "a-before-init",
+      "command": [
+        "direnv",
+        "exec",
+        ".",
+        "bash",
+        "-c",
+        "test \"$CUBRID_RUNTIME_READY\" = 0 && test -z \"${CUBRID_TMP:-}\" && printf \"build-only\\n\""
+      ],
+      "returncode": 0,
+      "seconds": 0.11507454700767994
+    },
+    {
+      "label": "shared-recipes",
+      "command": [
+        "just",
+        "--list"
+      ],
+      "returncode": 0,
+      "seconds": 0.016614990076050162
+    },
+    {
+      "label": "build-recipe",
+      "command": [
+        "just",
+        "--show",
+        "core::build"
+      ],
+      "returncode": 0,
+      "seconds": 0.008579642046242952
+    },
+    {
+      "label": "configure",
+      "command": [
+        "direnv",
+        "exec",
+        ".",
+        "just",
+        "configure"
+      ],
+      "returncode": 0,
+      "seconds": 0.7164867350365967
+    },
+    {
+      "label": "build-before-init",
+      "command": [
+        "direnv",
+        "exec",
+        ".",
+        "just",
+        "build"
+      ],
+      "returncode": 0,
+      "seconds": 0.8162149998825043
+    },
+    {
+      "label": "a-init",
+      "command": [
+        "/home/vimkim/gh/cubrid-workenv-07/bin/cub-workenv",
+        "init",
+        "--worktree",
+        "/tmp/cwe-env07-dn1iie5h/a",
+        "--install",
+        "/tmp/cwe-env07-dn1iie5h/install-a",
+        "--preset",
+        "debug_gcc",
+        "--state-home",
+        "/tmp/cwe-env07-dn1iie5h/host",
+        "--port-start",
+        "46000",
+        "--port-end",
+        "46999"
+      ],
+      "returncode": 0,
+      "seconds": 2.6194117518607527
+    },
+    {
+      "label": "ctest-after-init",
+      "command": [
+        "direnv",
+        "exec",
+        ".",
+        "just",
+        "ctest"
+      ],
+      "returncode": 0,
+      "seconds": 0.26533992192707956
+    },
+    {
+      "label": "a-version",
+      "command": [
+        "direnv",
+        "exec",
+        ".",
+        "cubrid",
+        "--version"
+      ],
+      "returncode": 0,
+      "seconds": 0.16498184390366077
+    },
+    {
+      "label": "a-start",
+      "command": [
+        "direnv",
+        "exec",
+        ".",
+        "cubrid",
+        "server",
+        "start",
+        "testdb"
+      ],
+      "returncode": 0,
+      "seconds": 3.2215729339513928
+    },
+    {
+      "label": "a-seed",
+      "command": [
+        "direnv",
+        "exec",
+        ".",
+        "csql",
+        "-C",
+        "-u",
+        "dba",
+        "-c",
+        "create table workenv_marker (id integer); insert into workenv_marker values (701); commit;",
+        "testdb"
+      ],
+      "returncode": 0,
+      "seconds": 0.21532427403144538
+    },
+    {
+      "label": "a-entry-0",
+      "command": [
+        "direnv",
+        "exec",
+        ".",
+        "bash",
+        "-c",
+        "test \"$CUBRID_RUNTIME_READY\" = 1; command -v cubrid; printf \"%s\\n\" \"$CUBRID\" \"$CUBRID_TMP\" \"$CUBRID_DATABASES\" \"$CUBRID_CUBRID_PORT_ID\" \"$CUBRID_BROKER_CONF_FILE\" \"${CUBRID_JAVA_HOME:-}\""
+      ],
+      "returncode": 0,
+      "seconds": 0.16516072093509138
+    },
+    {
+      "label": "a-entry-1",
+      "command": [
+        "direnv",
+        "exec",
+        ".",
+        "bash",
+        "-c",
+        "test \"$CUBRID_RUNTIME_READY\" = 1; command -v cubrid; printf \"%s\\n\" \"$CUBRID\" \"$CUBRID_TMP\" \"$CUBRID_DATABASES\" \"$CUBRID_CUBRID_PORT_ID\" \"$CUBRID_BROKER_CONF_FILE\" \"${CUBRID_JAVA_HOME:-}\""
+      ],
+      "returncode": 0,
+      "seconds": 0.16518341400660574
+    },
+    {
+      "label": "a-entry-2",
+      "command": [
+        "direnv",
+        "exec",
+        ".",
+        "bash",
+        "-c",
+        "test \"$CUBRID_RUNTIME_READY\" = 1; command -v cubrid; printf \"%s\\n\" \"$CUBRID\" \"$CUBRID_TMP\" \"$CUBRID_DATABASES\" \"$CUBRID_CUBRID_PORT_ID\" \"$CUBRID_BROKER_CONF_FILE\" \"${CUBRID_JAVA_HOME:-}\""
+      ],
+      "returncode": 0,
+      "seconds": 0.16495969891548157
+    },
+    {
+      "label": "a-trace",
+      "command": [
+        "strace",
+        "-f",
+        "-e",
+        "trace=execve",
+        "-o",
+        "/home/vimkim/gh/cubrid-workenv-07/tests/evidence/ticket07-integrated/a-execve.txt",
+        "direnv",
+        "exec",
+        ".",
+        "/usr/bin/true"
+      ],
+      "returncode": 0,
+      "seconds": 0.31531740888021886
+    },
+    {
+      "label": "b-allow",
+      "command": [
+        "direnv",
+        "allow"
+      ],
+      "returncode": 0,
+      "seconds": 0.008992160903289914
+    },
+    {
+      "label": "b-before-init",
+      "command": [
+        "direnv",
+        "exec",
+        ".",
+        "bash",
+        "-c",
+        "test \"$CUBRID_RUNTIME_READY\" = 0 && test -z \"${CUBRID_TMP:-}\" && printf \"build-only\\n\""
+      ],
+      "returncode": 0,
+      "seconds": 0.11479963501915336
+    },
+    {
+      "label": "b-init",
+      "command": [
+        "/home/vimkim/gh/cubrid-workenv-07/bin/cub-workenv",
+        "init",
+        "--worktree",
+        "/tmp/cwe-env07-dn1iie5h/b",
+        "--install",
+        "/tmp/cwe-env07-dn1iie5h/install-b",
+        "--preset",
+        "debug_gcc",
+        "--state-home",
+        "/tmp/cwe-env07-dn1iie5h/host",
+        "--port-start",
+        "46000",
+        "--port-end",
+        "46999"
+      ],
+      "returncode": 0,
+      "seconds": 2.869660948170349
+    },
+    {
+      "label": "b-version",
+      "command": [
+        "direnv",
+        "exec",
+        ".",
+        "cubrid",
+        "--version"
+      ],
+      "returncode": 0,
+      "seconds": 0.16570570413023233
+    },
+    {
+      "label": "b-start",
+      "command": [
+        "direnv",
+        "exec",
+        ".",
+        "cubrid",
+        "server",
+        "start",
+        "testdb"
+      ],
+      "returncode": 0,
+      "seconds": 3.271028981078416
+    },
+    {
+      "label": "b-seed",
+      "command": [
+        "direnv",
+        "exec",
+        ".",
+        "csql",
+        "-C",
+        "-u",
+        "dba",
+        "-c",
+        "create table workenv_marker (id integer); insert into workenv_marker values (702); commit;",
+        "testdb"
+      ],
+      "returncode": 0,
+      "seconds": 0.21520466799847782
+    },
+    {
+      "label": "b-entry-0",
+      "command": [
+        "direnv",
+        "exec",
+        ".",
+        "bash",
+        "-c",
+        "test \"$CUBRID_RUNTIME_READY\" = 1; command -v cubrid; printf \"%s\\n\" \"$CUBRID\" \"$CUBRID_TMP\" \"$CUBRID_DATABASES\" \"$CUBRID_CUBRID_PORT_ID\" \"$CUBRID_BROKER_CONF_FILE\" \"${CUBRID_JAVA_HOME:-}\""
+      ],
+      "returncode": 0,
+      "seconds": 0.16519096191041172
+    },
+    {
+      "label": "b-entry-1",
+      "command": [
+        "direnv",
+        "exec",
+        ".",
+        "bash",
+        "-c",
+        "test \"$CUBRID_RUNTIME_READY\" = 1; command -v cubrid; printf \"%s\\n\" \"$CUBRID\" \"$CUBRID_TMP\" \"$CUBRID_DATABASES\" \"$CUBRID_CUBRID_PORT_ID\" \"$CUBRID_BROKER_CONF_FILE\" \"${CUBRID_JAVA_HOME:-}\""
+      ],
+      "returncode": 0,
+      "seconds": 0.16493745800107718
+    },
+    {
+      "label": "b-entry-2",
+      "command": [
+        "direnv",
+        "exec",
+        ".",
+        "bash",
+        "-c",
+        "test \"$CUBRID_RUNTIME_READY\" = 1; command -v cubrid; printf \"%s\\n\" \"$CUBRID\" \"$CUBRID_TMP\" \"$CUBRID_DATABASES\" \"$CUBRID_CUBRID_PORT_ID\" \"$CUBRID_BROKER_CONF_FILE\" \"${CUBRID_JAVA_HOME:-}\""
+      ],
+      "returncode": 0,
+      "seconds": 0.1650210078805685
+    },
+    {
+      "label": "b-trace",
+      "command": [
+        "strace",
+        "-f",
+        "-e",
+        "trace=execve",
+        "-o",
+        "/home/vimkim/gh/cubrid-workenv-07/tests/evidence/ticket07-integrated/b-execve.txt",
+        "direnv",
+        "exec",
+        ".",
+        "/usr/bin/true"
+      ],
+      "returncode": 0,
+      "seconds": 0.31597112701274455
+    },
+    {
+      "label": "switch-a-to-b",
+      "command": [
+        "bash",
+        "-c",
+        "PATH_add() { export PATH=\"$1:$PATH\"; }; has() { command -v \"$1\" >/dev/null 2>&1; }; log_status() { :; };\ncd /tmp/cwe-env07-dn1iie5h/a; export CUB_WORKENV_INSTALL=/tmp/cwe-env07-dn1iie5h/install-a; source /home/vimkim/my-cubrid-workenv-07/stow/cubrid/.envrc >/dev/null || exit;\ncsql -C -u dba -c \"select id from workenv_marker\" testdb || exit;\ncd /tmp/cwe-env07-dn1iie5h/b; export CUB_WORKENV_INSTALL=/tmp/cwe-env07-dn1iie5h/install-b; source /home/vimkim/my-cubrid-workenv-07/stow/cubrid/.envrc >/dev/null || exit;\ncsql -C -u dba -c \"select id from workenv_marker\" testdb || exit;\nprintf \"SELECTED=%s|%s|%s|%s\\n\" \"$CUBRID\" \"$CUBRID_TMP\" \"$CUBRID_DATABASES\" \"$CUBRID_CUBRID_PORT_ID\""
+      ],
+      "returncode": 0,
+      "seconds": 0.26534857996739447
+    },
+    {
+      "label": "a-stop",
+      "command": [
+        "direnv",
+        "exec",
+        ".",
+        "cubrid",
+        "server",
+        "stop",
+        "testdb"
+      ],
+      "returncode": 0,
+      "seconds": 1.217240630183369
+    },
+    {
+      "label": "b-stop",
+      "command": [
+        "direnv",
+        "exec",
+        ".",
+        "cubrid",
+        "server",
+        "stop",
+        "testdb"
+      ],
+      "returncode": 0,
+      "seconds": 1.217924189986661
+    }
+  ],
+  "binary_sha256": {
+    "a": {
+      "cubrid": "059feea677443ee659f4116945abf1e8e9e86b3afff64b015be43d8a225acd51",
+      "csql": "912599e87c86ac2a24ce1cd1a18278d9444196ebfe896f3f9939680e91cfa497"
+    },
+    "b": {
+      "cubrid": "059feea677443ee659f4116945abf1e8e9e86b3afff64b015be43d8a225acd51",
+      "csql": "912599e87c86ac2a24ce1cd1a18278d9444196ebfe896f3f9939680e91cfa497"
+    }
+  },
+  "states": [
+    {
+      "schema": 1,
+      "status": "ready",
+      "worktree": "/tmp/cwe-env07-dn1iie5h/a",
+      "install": "/tmp/cwe-env07-dn1iie5h/install-a",
+      "preset": "debug_gcc",
+      "state_home": "/tmp/cwe-env07-dn1iie5h/host",
+      "java_home": "/home/vimkim/.local/share/mise/installs/java/temurin-8.0.462+8",
+      "stage": "complete",
+      "allocation": {
+        "worktree": "/tmp/cwe-env07-dn1iie5h/a",
+        "master_port": 46000,
+        "broker_port": 46001,
+        "broker_master_shm_id": 1644167168,
+        "broker_appl_server_shm_id": 1644167169,
+        "install": "/tmp/cwe-env07-dn1iie5h/install-a",
+        "tmp": "/tmp/cwe-1000/1a66a216ade1"
+      }
+    },
+    {
+      "schema": 1,
+      "status": "ready",
+      "worktree": "/tmp/cwe-env07-dn1iie5h/b",
+      "install": "/tmp/cwe-env07-dn1iie5h/install-b",
+      "preset": "debug_gcc",
+      "state_home": "/tmp/cwe-env07-dn1iie5h/host",
+      "java_home": "/home/vimkim/.local/share/mise/installs/java/temurin-8.0.462+8",
+      "stage": "complete",
+      "allocation": {
+        "worktree": "/tmp/cwe-env07-dn1iie5h/b",
+        "master_port": 46002,
+        "broker_port": 46003,
+        "broker_master_shm_id": 1644167170,
+        "broker_appl_server_shm_id": 1644167171,
+        "install": "/tmp/cwe-env07-dn1iie5h/install-b",
+        "tmp": "/tmp/cwe-1000/a20f5774ca8f"
+      }
+    }
+  ],
+  "verdict": "pass",
+  "cleanup_remaining": []
+}

@@ -88,3 +88,29 @@ attempts' logs remain in `/tmp/cwe-ticket07-*-evidence` for inspection; final ev
 contains the successful versioned run. Existing source/user installations were
 read only and generated databases, copies, TMP directories, and owned processes
 were removed after verification.
+
+## Integrated verification after tickets 03–06 and 08
+
+Rebased onto the integrated prerequisites through `1e0cea3`. Full public test
+discovery passes **34/34**. The environment-loading assertion now reads the
+selected installation from published state, reflecting ticket05's dedicated
+installation fixture; it verifies broker configuration and selected Java fields
+as well as nonduplicated PATH/library entries.
+
+[Integrated native results](../../tests/evidence/ticket07-integrated/results.json)
+retain a separate run with `JAVA_HOME` selecting Temurin 8, unchanged HOME, two
+separate installation copies, actual shared build before init, shared ctest,
+ordinary native DB commands and A→B switching. Entry logs now explicitly include
+and assert `CUBRID_BROKER_CONF_FILE` and `CUBRID_JAVA_HOME`. The copied binary
+versions and hashes are recorded afresh. All steps pass and owned-process cleanup
+is empty. Generic environment emission in `runtime.py` retains both ticket05 fields.
+
+Personal tooling commit `aea80789165951be4602d042476c88bd5105e049` additionally fixes
+configuration recipes to use `${CUBRID_CONF_FILE:-$CUBRID/conf/cubrid.conf}`. A public
+`just` recipe regression first reproduced modification of the installation's
+original config, then passed for `db::set-unfill-factor`/`get-unfill-factor` and
+`dwb-off`/`dwb-get`, proving selected-config writes/reads and byte-for-byte original
+preservation. It uses real `crudini` and a thin external `ini.sh` argument adapter
+(the host has no `ini.sh`). The cross-repository fixture uses explicit `--no-db`
+rather than pretending its fake native utility creates/registers a real database.
+The cross-repository integration test and all 14 recipe regressions pass.

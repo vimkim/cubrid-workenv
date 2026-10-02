@@ -31,10 +31,14 @@ class EnvironmentTest(unittest.TestCase):
         self.assertIn('/tools/bin', values['PATH'])
         self.assertNotIn('/old/install/bin', values['PATH'])
         self.assertIn('/tools/lib', values['LD_LIBRARY_PATH'])
-        self.assertEqual(values['PATH'].split(':').count(str(self.install / 'bin')), 1)
-        self.assertEqual(values['LD_LIBRARY_PATH'].split(':').count(str(self.install / 'lib')), 1)
         state_path = worktree / '.cub-workenv/state.json'
         state = json.loads(state_path.read_text())
+        selected_install = Path(state['install'])
+        self.assertEqual(values['PATH'].split(':').count(str(selected_install / 'bin')), 1)
+        self.assertEqual(values['LD_LIBRARY_PATH'].split(':').count(str(selected_install / 'lib')), 1)
+        self.assertEqual(values['CUBRID_BROKER_CONF_FILE'], str(worktree / '.cub-workenv/conf/cubrid_broker.conf'))
+        if state.get('java_home'):
+            self.assertEqual(values['CUBRID_JAVA_HOME'], state['java_home'])
         state['status'] = 'preparing'
         state_path.write_text(json.dumps(state))
         partial = load()
