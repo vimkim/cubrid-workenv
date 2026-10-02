@@ -57,3 +57,19 @@ experiment; binary hashes and command results remain in `results.json`.
 Before removing a source worktree, follow the [database lifetime procedure](database-lifetime.md).
 It requires explicit artifact ownership, physical storage inspection, normal
 shutdown and non-force Git removal, and preserves external/symlink-target DBs.
+
+## Creation provenance for personal lifecycle tooling
+
+Successful new creation now publishes `.cub-workenv/created-NAME.json` with its
+exact registration, storage root and primary-volume device/inode. Default init
+and additional `create-db` use the same path. Reuse never publishes provenance
+for preexisting storage. A retained receipt blocks later reuse of that name
+until the old physical storage and metadata have been explicitly inspected.
+The CLI still offers creation only; a receipt is not permission to delete an
+external DB, a runtime lease or an additional environment-selection authority.
+
+The companion personal helper accepts automatic deletion only with matching
+provenance and wholly internal physical storage. Older, reused, external, mixed
+or uncertain DBs need manual review. After manual native deletion, preserve the
+old receipt with the reviewed evidence before creating new storage under that
+name; do not remove it merely to bypass a preservation error.

@@ -20,6 +20,9 @@ class DatabaseTest(unittest.TestCase):
             '--path', str(self.root / 'external')], capture_output=True, text=True)
         self.assertEqual(result.returncode, 0, result.stderr)
         self.assertTrue((self.root / 'external/data').is_dir())
+        receipt = json.loads((target / '.cub-workenv/created-later.json').read_text())
+        self.assertEqual(receipt['base'], str(self.root / 'external'))
+        self.assertEqual(receipt['primary_inode'], (self.root / 'external/data/later').stat().st_ino)
 
     def test_existing_registry_and_storage_are_preserved_and_duplicate_refused(self):
         target = self.root / 'reuse'
@@ -43,6 +46,22 @@ class DatabaseTest(unittest.TestCase):
         self.assertFalse((self.root / 'new').exists())
         self.assertEqual(prepared.read_bytes(), original)
         self.assertEqual((storage / 'data/testdb').read_text(), 'sentinel')
+        self.assertFalse((target / '.cub-workenv/created-testdb.json').exists())
+
+    def test_retained_provenance_blocks_name_reuse_before_creating_storage(self):
+        target = self.root / 'provenance'
+        self.assertEqual(self.init(target).returncode, 0)
+        receipt = target / '.cub-workenv/created-testdb.json'
+        before = receipt.read_bytes()
+        registry = target / '.cub-workenv/databases/databases.txt'
+        registry.write_bytes(b'')  # Model a manual registration removal.
+        new_location = self.root / 'replacement'
+        result = subprocess.run([str(CLI), 'create-db', 'testdb', '--worktree', str(target),
+                                 '--path', str(new_location)], text=True, capture_output=True)
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn('provenance', result.stderr)
+        self.assertEqual(receipt.read_bytes(), before)
+        self.assertFalse(new_location.exists())
 
     def test_no_db_preserves_registry_bytes_even_without_storage(self):
         target = self.root / 'only-environment'

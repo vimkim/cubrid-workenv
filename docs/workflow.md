@@ -113,3 +113,10 @@ release. Host initialization does not become a prerequisite for `cubrid-box`.
 
 For provenance, commands, acceptance coverage and observed limits, consult the
 [complete workflow verification](evidence/ticket09-workflow.md).
+
+The complete companion-tooling migration retires the legacy runtime engine while
+retaining narrow build/install/container coordination. Apply its reviewed commit
+and this CLI's creation-provenance revision together. New creation records are
+consumed by the personal internal-DB lifecycle recipes; older/reused DBs remain
+preserved for manual review. See `my-cubrid/docs/host-workenv.md` for those recipes
+and `my-cubrid/docs/complete-workenv-migration.md` for the caller inventory.

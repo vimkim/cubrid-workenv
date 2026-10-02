@@ -23,6 +23,7 @@ REGISTER_DB = r'''while [ "$#" -gt 0 ]; do
     esac
 done
 printf '%s %s localhost %s file:%s\n' "$previous" "$data" "$log" "$lob" >> "$CUBRID_DATABASES/databases.txt"
+touch "$data/$previous"
 '''
 
 

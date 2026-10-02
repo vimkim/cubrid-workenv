@@ -32,6 +32,7 @@ if len(sys.argv) > 1 and sys.argv[1] == 'createdb':
     args = sys.argv
     path = Path(os.environ['CUBRID_DATABASES']) / 'databases.txt'
     path.write_text(f'{args[-2]} {args[args.index("-F")+1]} localhost {args[args.index("-L")+1]} file:{args[args.index("-B")+1]}\\n')
+    (Path(args[args.index('-F')+1]) / args[-2]).touch()
 """)
             executable.chmod(0o755)
 

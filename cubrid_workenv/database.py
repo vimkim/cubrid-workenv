@@ -19,6 +19,9 @@ def create_database(state, name='testdb', location=None):
     registry = root / 'databases/databases.txt'
     if name in registrations(registry.read_bytes()):
         raise ValueError(f'Database {name} is already registered; existing storage preserved')
+    receipt_path = root / f'created-{name}.json'
+    if receipt_path.exists() or receipt_path.is_symlink():
+        raise ValueError(f'Creation provenance already exists for {name}; inspect retained storage before reuse')
     base = location.resolve() if location else root / 'db' / name
     if any(c.isspace() for c in str(base)):
         raise ValueError('Database storage path must not contain whitespace')
@@ -48,12 +51,22 @@ def create_database(state, name='testdb', location=None):
                 if line.split() and line.split()[0] == name.encode()]
         if len(rows) != 1:
             raise ValueError(f'createdb did not register {name}; see {log_path}; storage retained')
+        primary = paths[0] / name
+        metadata = primary.stat()
         if registry.read_bytes() != before:
             raise ValueError(f'Registry changed during createdb; new storage retained at {base}; inspect manually')
         with registry.open('ab') as stream:
             stream.write((b'\n' if before and not before.endswith(b'\n') else b'') + rows[0])
             stream.flush()
             os.fsync(stream.fileno())
+        # Provenance for optional personal lifecycle tooling. Existing/reused
+        # DBs never acquire a receipt; location alone does not establish ownership.
+        receipt = {'name': name, 'base': str(base),
+                   'registration': rows[0].decode().split(),
+                   'primary_device': metadata.st_dev, 'primary_inode': metadata.st_ino}
+        with (root / f'created-{name}.json').open('x') as stream:
+            json.dump(receipt, stream, indent=2)
+            stream.write('\n')
 
 
 def create_in_environment(args):

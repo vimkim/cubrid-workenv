@@ -84,6 +84,7 @@ try:
             run('build-before-init', ['direnv', 'exec', '.', 'just', 'build'], source)
             assert (install / 'bin/probe').is_file()
             assert not (source / '.cub-workenv').exists()
+            run('ctest-before-init', ['direnv', 'exec', '.', 'just', 'ctest'], source)
         install.mkdir(exist_ok=True)
         for part in ('bin', 'lib', 'conf', 'msg', 'locales', 'timezones', 'vm'):
             if (args.install / part).exists():
