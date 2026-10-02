@@ -1,0 +1,22 @@
+test_broker_and_pl_settings_are_isolated (test_cli.AllocationAndPreservationTest.test_broker_and_pl_settings_are_isolated) ... ok
+test_exhaustion_retains_incomplete_state_without_environment (test_cli.AllocationAndPreservationTest.test_exhaustion_retains_incomplete_state_without_environment) ... ok
+test_existing_short_digest_directory_is_preserved_and_extended (test_cli.AllocationAndPreservationTest.test_existing_short_digest_directory_is_preserved_and_extended) ... ok
+test_existing_unregistered_default_db_is_not_ignored (test_cli.AllocationAndPreservationTest.test_existing_unregistered_default_db_is_not_ignored) ... ok
+test_live_shared_memory_is_skipped (test_cli.AllocationAndPreservationTest.test_live_shared_memory_is_skipped) ... ok
+test_repeat_preserves_artifacts_and_unknown_settings_are_rejected (test_cli.AllocationAndPreservationTest.test_repeat_preserves_artifacts_and_unknown_settings_are_rejected) ... ok
+test_same_basename_avoids_active_and_recorded_ports (test_cli.AllocationAndPreservationTest.test_same_basename_avoids_active_and_recorded_ports) ... ok
+test_shared_installation_is_rejected_for_pl_safety (test_cli.AllocationAndPreservationTest.test_shared_installation_is_rejected_for_pl_safety) ... ok
+test_missing_install_guides_build_without_initializing (test_cli.InitializeTest.test_missing_install_guides_build_without_initializing) ... ok
+test_reclamation_public_cli_cases (test_reclamation.ReclamationNamespaceTest.test_reclamation_public_cli_cases) ... ok
+test_corrupt_state_diagnosis_and_uninitialized_diagnosis_are_read_only (test_state.StateTest.test_corrupt_state_diagnosis_and_uninitialized_diagnosis_are_read_only) ... ok
+test_failure_after_allocation_preserves_work_clues (test_state.StateTest.test_failure_after_allocation_preserves_work_clues) ... ok
+test_failure_after_database_does_not_publish_environment (test_state.StateTest.test_failure_after_database_does_not_publish_environment) ... ok
+test_native_failure_retains_stage_and_doctor_explains_without_changes (test_state.StateTest.test_native_failure_retains_stage_and_doctor_explains_without_changes) ... ok
+test_repeat_ignores_changed_options_but_detects_missing_artifacts (test_state.StateTest.test_repeat_ignores_changed_options_but_detects_missing_artifacts) ... ok
+test_same_worktree_serializes_but_other_worktree_can_finish (test_state.StateTest.test_same_worktree_serializes_but_other_worktree_can_finish) ... ok
+test_terminated_initializer_leaves_incomplete_state (test_state.StateTest.test_terminated_initializer_leaves_incomplete_state) ... ok
+
+----------------------------------------------------------------------
+Ran 17 tests in 5.649s
+
+OK

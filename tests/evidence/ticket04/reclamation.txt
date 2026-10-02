@@ -1,0 +1,14 @@
+test_concurrent_reclamation_allocates_slot_once (__main__.ReclamationTest.test_concurrent_reclamation_allocates_slot_once) ... ok
+test_deleted_inactive_allocation_is_reclaimed_only_at_exhaustion (__main__.ReclamationTest.test_deleted_inactive_allocation_is_reclaimed_only_at_exhaustion) ... ok
+test_deleted_worktree_with_ipc_or_socket_is_retained (__main__.ReclamationTest.test_deleted_worktree_with_ipc_or_socket_is_retained) ... ok
+test_deleted_worktree_with_ipv6_port_is_retained (__main__.ReclamationTest.test_deleted_worktree_with_ipv6_port_is_retained) ... ok
+test_deleted_worktree_with_living_owner_is_retained (__main__.ReclamationTest.test_deleted_worktree_with_living_owner_is_retained) ... ok
+test_inaccessible_path_and_broken_symlink_are_uncertain (__main__.ReclamationTest.test_inaccessible_path_and_broken_symlink_are_uncertain) ... ok
+test_inaccessible_process_environment_is_uncertain (__main__.ReclamationTest.test_inaccessible_process_environment_is_uncertain) ... ok
+test_shared_memory_exhaustion_also_reclaims_deleted_records (__main__.ReclamationTest.test_shared_memory_exhaustion_also_reclaims_deleted_records) ... ok
+test_stopped_existing_worktree_and_full_pool_report_owner (__main__.ReclamationTest.test_stopped_existing_worktree_and_full_pool_report_owner) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 3.306s
+
+OK

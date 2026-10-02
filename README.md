@@ -59,7 +59,7 @@ A ready environment's repeated `init` is a no-op. Unknown local artifacts and
 existing local DB registries are preserved and refused; compatibility-based
 reuse is ticket 03. Failure preserves preparation state and allocation evidence;
 never delete database files to retry blindly. The `doctor` guidance points to
-ticket 02/06's forthcoming diagnosis command. Automatic recovery, reclamation,
+ticket 02/06's forthcoming diagnosis command. Automatic recovery,
 direnv/build integration and cross-version DB compatibility are not provided by
 this first slice.
 
@@ -87,3 +87,7 @@ processes or IPC remain. [Ticket 05 evidence](tests/evidence/ticket05/results.js
 records the tested build and resource identities. This verifies that build's
 normal host execution; it does not reserve resources against later external
 users or establish container, HA, Manager, or cross-version compatibility.
+
+On pool exhaustion, [allocation reclamation](docs/allocation-reclamation.md)
+releases only deleted worktrees with no observed activity and reports uncertain
+owners without removing processes, files or IPC.

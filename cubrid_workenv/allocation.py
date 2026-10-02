@@ -1,12 +1,15 @@
 """Short, serialized host allocation transactions (not OS reservations)."""
 from contextlib import contextmanager
 import fcntl
+import errno
 import hashlib
 import json
 import os
 from pathlib import Path
 import socket
 import tempfile
+import sys
+from .reclamation import inactive_reason
 
 
 @contextmanager
@@ -34,6 +37,13 @@ def available(port):
     try:
         with socket.socket() as sock:
             sock.bind(('0.0.0.0', port))
+        try:
+            with socket.socket(socket.AF_INET6) as sock:
+                sock.setsockopt(socket.IPPROTO_IPV6, socket.IPV6_V6ONLY, 1)
+                sock.bind(('::', port))
+        except OSError as error:
+            if error.errno not in (errno.EAFNOSUPPORT, errno.EPROTONOSUPPORT):
+                return False
         return True
     except OSError:
         return False
@@ -59,25 +69,47 @@ def allocate(worktree, home, start, end, *, install=None,
             raise ValueError('Worktree already has an allocation; inspect with doctor before manual recovery')
         if install and any(item.get('install') == str(install) for item in records):
             raise ValueError('Selected installation is already allocated to another worktree; select a dedicated installation (PL info files are installation-local)')
-        used = {item[key] for item in records for key in ('master_port', 'broker_port') if key in item}
-        ports = []
-        for port in range(start, end + 1):
-            if port not in used and available(port):
-                ports.append(port)
-                if len(ports) == 2:
-                    break
-        if len(ports) != 2:
-            raise ValueError(f'Port pool {start}-{end} exhausted; two ports required; inspect owners in {path} or explicitly adjust the pool')
-        used_keys = occupied_shm_keys() | {item[key] for item in records
-            for key in ('broker_master_shm_id', 'broker_appl_server_shm_id') if key in item}
-        keys = []
-        for key in range(shm_start, shm_end + 1):
-            if key not in used_keys:
-                keys.append(key)
-                if len(keys) == 2:
-                    break
-        if len(keys) != 2:
-            raise ValueError(f'Shared-memory pool {shm_start:#x}-{shm_end:#x} exhausted; inspect owners in {path} or explicitly adjust the pool')
+        def select(records, occupied):
+            used = {item[key] for item in records
+                    for key in ('master_port', 'broker_port') if key in item}
+            ports = []
+            for port in range(start, end + 1):
+                if port not in used and available(port):
+                    ports.append(port)
+                    if len(ports) == 2:
+                        break
+            used_keys = occupied | {item[key] for item in records
+                for key in ('broker_master_shm_id', 'broker_appl_server_shm_id') if key in item}
+            keys = []
+            for key in range(shm_start, shm_end + 1):
+                if key not in used_keys:
+                    keys.append(key)
+                    if len(keys) == 2:
+                        break
+            return ports, keys
+
+        occupied = occupied_shm_keys()
+        ports, keys = select(records, occupied)
+        if len(ports) != 2 or len(keys) != 2:
+            retained, report = [], []
+            for record in records:
+                reason = inactive_reason(record, available, occupied)
+                report.append({'allocation': record, 'action': 'kept' if reason else 'reclaimed',
+                               'reason': reason or 'deleted worktree; no process, port, socket or shared-memory activity found'})
+                if reason:
+                    retained.append(record)
+            atomic_json(home / 'allocations-reclamation.json', report)
+            for item in report:
+                print(f"Allocation {item['allocation']['worktree']}: {item['action']}: {item['reason']}", file=sys.stderr)
+            if len(retained) != len(records):
+                records = retained
+                atomic_json(path, records)
+            ports, keys = select(records, occupied_shm_keys())
+        if len(ports) != 2 or len(keys) != 2:
+            raise ValueError(f'Pool exhausted: ports {start}-{end} ({len(ports)}/2 free), '
+                             f'shared memory {shm_start:#x}-{shm_end:#x} ({len(keys)}/2 free); '
+                             f'inspect owners in {path} and allocations-reclamation.json; '
+                             'explicitly adjust --port-start/--port-end or --shm-start/--shm-end')
         base = Path('/tmp') / f'cwe-{os.getuid()}'
         base.mkdir(mode=0o700, exist_ok=True)
         if base.is_symlink() or base.stat().st_uid != os.getuid() or base.stat().st_mode & 0o077:
