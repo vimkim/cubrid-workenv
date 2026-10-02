@@ -1,12 +1,19 @@
 # cubrid-workenv
 
 Explicit host work environment preparation for CUBRID source worktrees.
-Requires Linux, Python 3.10+ and bash. Run directly from this checkout (no
-installation or dependencies required), or add this checkout's `bin` directory
-to PATH:
+Requires Linux, Python 3.10+ and bash. From a stable checkout, run `just install`
+to link `~/.local/bin/cub-workenv` to this checkout. The recipe is safe to repeat
+and refuses to replace a different existing file or link. Keep the checkout in
+place: the launcher imports its adjacent Python package. Set
+`CUB_WORKENV_BIN_DIR=/your/bin` to select another installation directory.
+
+If needed, add that directory to your shell PATH (`export PATH="$HOME/.local/bin:$PATH"`
+in Bash, or `path add ~/.local/bin` in Nushell). The installer prints guidance;
+it does not edit shell startup files. Without just, run `bin/cub-workenv` directly
+or add this checkout's `bin` directory to PATH.
 
 ```sh
-export PATH="/path/to/cubrid-workenv/bin:$PATH"
+just install
 cub-workenv --help
 cub-workenv init --worktree /path/to/source --install /path/to/installed/cubrid --preset debug_gcc
 source /path/to/source/.cub-workenv/env.sh
