@@ -130,3 +130,12 @@ The retained [initial failed attempt](../tests/evidence/ticket08-registry-format
 failed in the proof script's registry parser before starting any DB server: native
 registry fields use tabs. Parsing fields by whitespace fixed the harness; it did
 not require a production change. The final recorded run uses that corrected parser.
+
+After review, the creator removed all three recorded fixture roots and their five
+short TMP directories. [Cleanup evidence](../tests/evidence/ticket08-cleanup.json)
+records no owned processes, no matching IPC or registered Unix sockets, and free
+ports 48000–48003 before removal. Remaining linked fixture worktrees were removed
+without force after exact owned-file cleanup. The earlier successful run's
+[extra evidence](../tests/evidence/ticket08-first-pass/results.json) was preserved
+first. This later disposal concerns only the test harness's own external DBs; the
+recorded preservation and sentinel checks occurred before that separate cleanup.

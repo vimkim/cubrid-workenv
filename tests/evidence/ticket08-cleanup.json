@@ -1,0 +1,34 @@
+{
+  "purpose": "Creator cleanup of three disposable ticket08 test harnesses after evidence review; not production DB disposal",
+  "roots": [
+    "/tmp/cwe-life-hgz8th1l",
+    "/tmp/cwe-life-7vqaln38",
+    "/tmp/cwe-life-i2tuu7le"
+  ],
+  "checks": {
+    "owned_processes": [],
+    "matching_ipc": [],
+    "registered_unix_sockets": [],
+    "inactive_ports": [
+      48000,
+      48001,
+      48002,
+      48003
+    ]
+  },
+  "removed": [
+    "/tmp/cwe-life-hgz8th1l/b-source",
+    "/tmp/cwe-life-7vqaln38/b-source",
+    "/tmp/cwe-life-i2tuu7le/a-source",
+    "/tmp/cwe-1000/4dca2e3cd97b",
+    "/tmp/cwe-1000/b16884ead4d4",
+    "/tmp/cwe-1000/84e474f3f541",
+    "/tmp/cwe-1000/e96dc0a84616",
+    "/tmp/cwe-1000/3b01025e5e63",
+    "/tmp/cwe-life-hgz8th1l",
+    "/tmp/cwe-life-7vqaln38",
+    "/tmp/cwe-life-i2tuu7le"
+  ],
+  "preserved_extra_evidence": "tests/evidence/ticket08-first-pass",
+  "verdict": "pass"
+}

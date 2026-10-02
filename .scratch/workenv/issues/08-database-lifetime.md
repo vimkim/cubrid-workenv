@@ -49,6 +49,8 @@ User stories: 23, 26
   failure; field-based parsing fixed it without a production change.
 - No public CLI or core DB implementation changes. The fixture cleanup helper
   is not a general user remover or ownership inference mechanism. Runtime copies
-  and disposable external storage remain under the recorded unique `/tmp` roots
-  for review; no generated DB or binary is committed. Unknown/mixed production
+  and disposable external storage were initially retained for review, then removed
+  by their creator after the inactive-resource checks recorded in
+  [cleanup evidence](../../../tests/evidence/ticket08-cleanup.json). No generated
+  DB or binary is committed. Unknown/mixed production
   layouts require manual review. This ticket does not claim integration.

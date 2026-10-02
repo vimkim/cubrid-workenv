@@ -1,0 +1,3 @@
+Execute OK. (0.015507 sec) Committed. (0.002445 sec) 
+1 row affected. (0.002350 sec) Committed. (0.005595 sec) 
+Execute OK. (0.000090 sec) 
