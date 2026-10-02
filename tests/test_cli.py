@@ -25,7 +25,14 @@ class AllocationAndPreservationTest(unittest.TestCase):
         (self.install / 'bin').mkdir(parents=True)
         for name in ('cubrid', 'csql'):
             executable = self.install / 'bin' / name
-            executable.write_text('#!/bin/sh\nexit 0\n')
+            executable.write_text("""#!/usr/bin/env python3
+import os, sys
+from pathlib import Path
+if len(sys.argv) > 1 and sys.argv[1] == 'createdb':
+    args = sys.argv
+    path = Path(os.environ['CUBRID_DATABASES']) / 'databases.txt'
+    path.write_text(f'{args[-2]} {args[args.index("-F")+1]} localhost {args[args.index("-L")+1]} file:{args[args.index("-B")+1]}\\n')
+""")
             executable.chmod(0o755)
 
     def tearDown(self):

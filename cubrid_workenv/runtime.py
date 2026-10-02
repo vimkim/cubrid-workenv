@@ -45,21 +45,6 @@ def write_settings(state):
         'SQL_LOG=ON\nKEEP_CONNECTION=AUTO\nCCI_DEFAULT_AUTOCOMMIT=ON\n')
 
 
-def create_database(state, name='testdb'):
-    root = Path(state['worktree']) / '.cub-workenv'
-    paths = [root / 'db' / name / part for part in ('data', 'log', 'lob')]
-    for path in paths:
-        path.mkdir(parents=True, exist_ok=False)
-    command = [str(Path(state['install']) / 'bin/cubrid'), 'createdb',
-               '--db-volume-size=64M', '--log-volume-size=32M',
-               '-F', str(paths[0]), '-L', str(paths[1]), '-B', str(paths[2]),
-               '--server-name=localhost', name, 'en_US.utf8']
-    with (root / 'createdb.log').open('w') as log:
-        result = subprocess.run(command, env=process_environment(state), cwd=root, stdout=log, stderr=subprocess.STDOUT)
-    if result.returncode:
-        raise ValueError(f'createdb failed ({result.returncode}); see {root / "createdb.log"}; incomplete environment retained; run doctor')
-
-
 def write_environment(state):
     root = Path(state['worktree']) / '.cub-workenv'
     # Bash is explicit: variable enumeration removes overrides unknown to this version.

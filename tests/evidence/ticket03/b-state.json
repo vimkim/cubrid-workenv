@@ -1,0 +1,13 @@
+{
+  "schema": 1,
+  "status": "ready",
+  "worktree": "/tmp/cwe-lock-fvu0ivc3/b-source",
+  "install": "/tmp/cwe-lock-fvu0ivc3/b",
+  "preset": "debug_gcc",
+  "state_home": "/tmp/cwe-lock-fvu0ivc3/host",
+  "allocation": {
+    "worktree": "/tmp/cwe-lock-fvu0ivc3/b-source",
+    "master_port": 44001,
+    "tmp": "/tmp/cwe-1000/16e11925234d"
+  }
+}

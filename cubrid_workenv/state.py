@@ -2,7 +2,8 @@
 import os
 from .allocation import allocate, atomic_json, locked
 from .doctor import read_state, ready_problems
-from .runtime import create_database, write_environment, write_settings
+from .runtime import write_environment, write_settings
+from .database import prepare_databases, existing_registry
 
 
 def initialize(args):
@@ -26,9 +27,7 @@ def initialize(args):
             raise ValueError('Incomplete initialization retained; run doctor and inspect before manual recovery')
         if any(p.name != 'init.lock' for p in root.iterdir()):
             raise ValueError('Unknown existing settings or database artifacts preserved; inspect before initialization')
-        for existing in (worktree / 'databases.txt', worktree / 'databases/databases.txt'):
-            if existing.exists() and existing.read_text().strip():
-                raise ValueError(f'Existing DB registry preserved at {existing}; reuse requires explicit compatibility checks')
+        registry = existing_registry(worktree, args.database_registry)
         validate_install(args.install)
         state = {'schema': 1, 'status': 'preparing', 'worktree': str(worktree),
                  'install': str(args.install.resolve()), 'preset': args.preset,
@@ -45,7 +44,7 @@ def initialize(args):
             write_settings(state)
             state['stage'] = 'database'
             atomic_json(marker, state)
-            create_database(state)
+            prepare_databases(state, registry, args.no_db, args.db_path)
             state['stage'] = 'environment publication'
             atomic_json(marker, state)
             write_environment(state)

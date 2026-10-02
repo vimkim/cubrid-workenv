@@ -21,11 +21,21 @@ def main():
     init.add_argument('--shm-end', type=lambda value: int(value, 0), default=0x6200ffff)
     init.add_argument('--java-home', type=Path, default=Path(os.environ['JAVA_HOME']) if os.environ.get('JAVA_HOME') else None,
                       help='JDK for PL (defaults to JAVA_HOME; otherwise uses CUBRID build default)')
+    init.add_argument('--database-registry', type=Path, help='copy existing local DB registrations; never copy another instance settings')
+    init.add_argument('--no-db', action='store_true')
+    init.add_argument('--db-path', type=Path)
+    create = commands.add_parser('create-db', help='create an additional database without replacing existing storage')
+    create.add_argument('name')
+    create.add_argument('--worktree', type=Path, default=Path.cwd())
+    create.add_argument('--path', type=Path)
     args = parser.parse_args()
     try:
         if args.command == 'doctor':
             from .doctor import diagnose
             diagnose(args)
+        elif args.command == 'create-db':
+            from .database import create_in_environment
+            create_in_environment(args)
         else:
             from .state import initialize
             initialize(args)

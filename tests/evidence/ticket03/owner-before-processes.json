@@ -1,0 +1,12 @@
+[
+  {
+    "pid": 885813,
+    "instance": "a",
+    "cmdline": "cub_master "
+  },
+  {
+    "pid": 885911,
+    "instance": "a",
+    "cmdline": "cub_server testdb "
+  }
+]
