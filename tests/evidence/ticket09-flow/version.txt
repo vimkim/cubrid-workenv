@@ -1,0 +1,9 @@
+[0mdirenv: loading ~/gh/cb/workenv09-source/.envrc
+Preset Mode: debug_gcc
+Install Dir: /tmp/cwe-workflow09-install
+DB Dir: /home/vimkim/gh/cb/workenv09-source/.cub-workenv/databases
+Build Dir: /home/vimkim/gh/cb/workenv09-source/build_preset_debug_gcc
+cubrid (CUBRID utilities)
+CUBRID 11.5.0 (11.5.0.2635-30043f4) (64bit debug build for Linux) (Oct  2 2026 17:49:59)
+Copyright (C) 2008 Search Solution Corporation.
+Copyright (C) 2016 CUBRID Corporation.

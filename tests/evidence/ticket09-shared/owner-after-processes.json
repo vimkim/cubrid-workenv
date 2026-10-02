@@ -1,0 +1,27 @@
+[
+  {
+    "pid": 1304571,
+    "instance": "a",
+    "cmdline": "cub_master "
+  },
+  {
+    "pid": 1304698,
+    "instance": "a",
+    "cmdline": "cub_server testdb "
+  },
+  {
+    "pid": 1304708,
+    "instance": "a",
+    "cmdline": "cub_pl testdb "
+  },
+  {
+    "pid": 1305468,
+    "instance": "b",
+    "cmdline": "cub_master "
+  },
+  {
+    "pid": 1306487,
+    "instance": "b",
+    "cmdline": "cub_pl testdb "
+  }
+]

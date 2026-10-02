@@ -1,0 +1,13 @@
+cub-workenv: Missing or unreadable artifact: /tmp/cwe-recovery09-tvcos_qh/victim/.cub-workenv/conf/cubrid.conf
+Missing or unreadable artifact: /tmp/cwe-recovery09-tvcos_qh/victim/.cub-workenv/databases/databases.txt
+Missing or unreadable artifact: /tmp/cwe-recovery09-tvcos_qh/victim/.cub-workenv/env.sh
+Missing allocation in initialization state
+Incomplete initialization; manual recovery required
+Inspect and correct manually; no changes performed.
+Worktree: /tmp/cwe-recovery09-tvcos_qh/victim
+State: preparing
+Last stage: allocation
+Last error: Pool exhausted: ports 49800-49801 (0/2 free), shared memory 0x62000000-0x6200ffff (2/2 free); inspect owners in /tmp/cwe-recovery09-tvcos_qh/host/allocations.json and allocations-reclamation.json; explicitly adjust --port-start/--port-end or --shm-start/--shm-end
+Inspect /tmp/cwe-recovery09-tvcos_qh/victim/.cub-workenv/state.json, /tmp/cwe-recovery09-tvcos_qh/victim/.cub-workenv/createdb-testdb.log, and recorded allocation before manual recovery.
+Preserve DB files and settings; confirm the initializing process has stopped. No retry, deletion or rollback performed.
+Selected installation: /tmp/cwe-recovery09-tvcos_qh/victim-install (preset debug_gcc)

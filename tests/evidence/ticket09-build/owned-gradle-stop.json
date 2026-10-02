@@ -1,0 +1,6 @@
+{
+  "pid": 1206129,
+  "command": "/home/vimkim/.local/share/mise/installs/java/temurin-8.0.462+8/bin/java -XX:MaxMetaspaceSize=384m -XX:+HeapDumpOnOutOfMemoryError -Xms256m -Xmx512m -Dfile.encoding=UTF-8 -Duser.country -Duser.language=en -Duser.variant -cp /home/vimkim/.gradle/wrapper/dists/gradle-8.1.1-bin/9wiye5v2saajue4irfo8ybqfp/gradle-8.1.1/lib/gradle-launcher-8.1.1.jar -javaagent:/home/vimkim/.gradle/wrapper/dists/gradle-8.1.1-bin/9wiye5v2saajue4irfo8ybqfp/gradle-8.1.1/lib/agents/gradle-instrumentation-agent-8.1.1.jar org.gradle.launcher.daemon.bootstrap.GradleDaemon 8.1.1 ",
+  "ownership": "exact CUBRID=/tmp/cwe-workflow09-install created by this source build",
+  "signal": "SIGTERM"
+}

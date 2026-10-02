@@ -1,0 +1,163 @@
+{
+  "fixture": "/tmp/cwe-recovery09-tvcos_qh",
+  "steps": [
+    {
+      "label": "owner-init",
+      "argv": [
+        "/home/vimkim/gh/cubrid-workenv-09/bin/cub-workenv",
+        "init",
+        "--worktree",
+        "/tmp/cwe-recovery09-tvcos_qh/owner",
+        "--install",
+        "/tmp/cwe-recovery09-tvcos_qh/owner-install",
+        "--preset",
+        "debug_gcc",
+        "--no-db",
+        "--state-home",
+        "/tmp/cwe-recovery09-tvcos_qh/host",
+        "--port-start",
+        "49800",
+        "--port-end",
+        "49801"
+      ],
+      "returncode": 0
+    },
+    {
+      "label": "pool-exhausted",
+      "argv": [
+        "/home/vimkim/gh/cubrid-workenv-09/bin/cub-workenv",
+        "init",
+        "--worktree",
+        "/tmp/cwe-recovery09-tvcos_qh/victim",
+        "--install",
+        "/tmp/cwe-recovery09-tvcos_qh/victim-install",
+        "--preset",
+        "debug_gcc",
+        "--no-db",
+        "--state-home",
+        "/tmp/cwe-recovery09-tvcos_qh/host",
+        "--port-start",
+        "49800",
+        "--port-end",
+        "49801"
+      ],
+      "returncode": 1
+    },
+    {
+      "label": "incomplete-doctor",
+      "argv": [
+        "/home/vimkim/gh/cubrid-workenv-09/bin/cub-workenv",
+        "doctor",
+        "--worktree",
+        "/tmp/cwe-recovery09-tvcos_qh/victim"
+      ],
+      "returncode": 1
+    },
+    {
+      "label": "wider-pool-still-incomplete",
+      "argv": [
+        "/home/vimkim/gh/cubrid-workenv-09/bin/cub-workenv",
+        "init",
+        "--worktree",
+        "/tmp/cwe-recovery09-tvcos_qh/victim",
+        "--install",
+        "/tmp/cwe-recovery09-tvcos_qh/victim-install",
+        "--preset",
+        "debug_gcc",
+        "--no-db",
+        "--state-home",
+        "/tmp/cwe-recovery09-tvcos_qh/host",
+        "--port-start",
+        "49800",
+        "--port-end",
+        "49809"
+      ],
+      "returncode": 1
+    },
+    {
+      "label": "explicit-retry-after-archive",
+      "argv": [
+        "/home/vimkim/gh/cubrid-workenv-09/bin/cub-workenv",
+        "init",
+        "--worktree",
+        "/tmp/cwe-recovery09-tvcos_qh/victim",
+        "--install",
+        "/tmp/cwe-recovery09-tvcos_qh/victim-install",
+        "--preset",
+        "debug_gcc",
+        "--no-db",
+        "--state-home",
+        "/tmp/cwe-recovery09-tvcos_qh/host",
+        "--port-start",
+        "49800",
+        "--port-end",
+        "49809"
+      ],
+      "returncode": 0
+    },
+    {
+      "label": "recovered-doctor",
+      "argv": [
+        "/home/vimkim/gh/cubrid-workenv-09/bin/cub-workenv",
+        "doctor",
+        "--worktree",
+        "/tmp/cwe-recovery09-tvcos_qh/victim"
+      ],
+      "returncode": 0
+    }
+  ],
+  "states": [
+    {
+      "schema": 1,
+      "status": "ready",
+      "worktree": "/tmp/cwe-recovery09-tvcos_qh/owner",
+      "install": "/tmp/cwe-recovery09-tvcos_qh/owner-install",
+      "preset": "debug_gcc",
+      "state_home": "/tmp/cwe-recovery09-tvcos_qh/host",
+      "java_home": "/home/vimkim/.local/share/mise/installs/java/temurin-8.0.462+8",
+      "stage": "complete",
+      "allocation": {
+        "worktree": "/tmp/cwe-recovery09-tvcos_qh/owner",
+        "master_port": 49800,
+        "broker_port": 49801,
+        "broker_master_shm_id": 1644167168,
+        "broker_appl_server_shm_id": 1644167169,
+        "install": "/tmp/cwe-recovery09-tvcos_qh/owner-install",
+        "tmp": "/tmp/cwe-1000/a43a1434b1d5"
+      }
+    },
+    {
+      "schema": 1,
+      "status": "ready",
+      "worktree": "/tmp/cwe-recovery09-tvcos_qh/victim",
+      "install": "/tmp/cwe-recovery09-tvcos_qh/victim-install",
+      "preset": "debug_gcc",
+      "state_home": "/tmp/cwe-recovery09-tvcos_qh/host",
+      "java_home": "/home/vimkim/.local/share/mise/installs/java/temurin-8.0.462+8",
+      "stage": "complete",
+      "allocation": {
+        "worktree": "/tmp/cwe-recovery09-tvcos_qh/victim",
+        "master_port": 49802,
+        "broker_port": 49803,
+        "broker_master_shm_id": 1644167170,
+        "broker_appl_server_shm_id": 1644167171,
+        "install": "/tmp/cwe-recovery09-tvcos_qh/victim-install",
+        "tmp": "/tmp/cwe-1000/922cc8db2fe3"
+      }
+    }
+  ],
+  "archived_state": {
+    "schema": 1,
+    "status": "preparing",
+    "worktree": "/tmp/cwe-recovery09-tvcos_qh/victim",
+    "install": "/tmp/cwe-recovery09-tvcos_qh/victim-install",
+    "preset": "debug_gcc",
+    "state_home": "/tmp/cwe-recovery09-tvcos_qh/host",
+    "java_home": "/home/vimkim/.local/share/mise/installs/java/temurin-8.0.462+8",
+    "stage": "allocation",
+    "error": "Pool exhausted: ports 49800-49801 (0/2 free), shared memory 0x62000000-0x6200ffff (2/2 free); inspect owners in /tmp/cwe-recovery09-tvcos_qh/host/allocations.json and allocations-reclamation.json; explicitly adjust --port-start/--port-end or --shm-start/--shm-end"
+  },
+  "allocation_unchanged_by_archive": true,
+  "verdict": "pass",
+  "cleanup": "retained for creator inspection; no CUBRID processes started"
+}

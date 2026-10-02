@@ -1,0 +1,3 @@
+@ cubrid server stop: shareprobe
+++ cubrid server 'shareprobe' is not running.
+Could not connect to master server on localhost

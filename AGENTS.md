@@ -19,4 +19,8 @@ See `docs/agents/domain.md`.
 
 Use the intended worktree's prepared environment for host-side CUBRID tests. Ordinary `cubrid` and `csql` commands may run directly; `cub-workenv run` is not mandatory for all tests. Read `docs/agents/test-execution.md` for the distinction between separate databases and shared physical database storage.
 
-The CLI is currently planned, not implemented. Normal-path native shared-database exclusion has been verified for one installed build; see the linked execution guidance for evidence and limits. Additional `run` protection or worktree-level owner diagnostics remain design questions.
+The CLI provides explicit init/create-db, cheap env loading and read-only doctor.
+For build-through-removal operation or recovery after failed initialization, read
+`docs/workflow.md`. For proven behavior and unverified limits, read
+`docs/evidence/ticket09-workflow.md`. Personal shared-tooling application is a
+separate decision because existing source worktrees may link to it.

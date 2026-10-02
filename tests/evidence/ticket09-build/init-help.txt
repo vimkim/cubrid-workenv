@@ -1,0 +1,26 @@
+usage: cub-workenv init [-h] [--worktree WORKTREE] --install INSTALL
+                        --preset PRESET [--state-home STATE_HOME]
+                        [--port-start PORT_START] [--port-end PORT_END]
+                        [--shm-start SHM_START] [--shm-end SHM_END]
+                        [--java-home JAVA_HOME]
+                        [--database-registry DATABASE_REGISTRY] [--no-db]
+                        [--db-path DB_PATH]
+
+options:
+  -h, --help            show this help message and exit
+  --worktree WORKTREE
+  --install INSTALL
+  --preset PRESET
+  --state-home STATE_HOME
+  --port-start PORT_START
+  --port-end PORT_END
+  --shm-start SHM_START
+  --shm-end SHM_END
+  --java-home JAVA_HOME
+                        JDK for PL (defaults to JAVA_HOME; otherwise uses
+                        CUBRID build default)
+  --database-registry DATABASE_REGISTRY
+                        copy existing local DB registrations; never copy
+                        another instance settings
+  --no-db               prepare only; create a database later with create-db
+  --db-path DB_PATH

@@ -1,0 +1,2 @@
+Initialized /tmp/cwe-doctor-native-tc23j_k3/b-source with /tmp/cwe-doctor-native-tc23j_k3/b (preset debug_gcc).
+Source /tmp/cwe-doctor-native-tc23j_k3/b-source/.cub-workenv/env.sh in bash; use ordinary cubrid and csql commands.

@@ -1,0 +1,2 @@
+Allocation /tmp/cwe-recovery09-tvcos_qh/owner: kept: worktree still exists (stopped allocations are retained)
+cub-workenv: Initialization incomplete at allocation: Pool exhausted: ports 49800-49801 (0/2 free), shared memory 0x62000000-0x6200ffff (2/2 free); inspect owners in /tmp/cwe-recovery09-tvcos_qh/host/allocations.json and allocations-reclamation.json; explicitly adjust --port-start/--port-end or --shm-start/--shm-end; run doctor before manual recovery

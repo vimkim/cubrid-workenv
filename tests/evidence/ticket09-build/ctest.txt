@@ -1,0 +1,17 @@
+[0mdirenv: loading ~/gh/cb/workenv09-source/.envrc
+Preset Mode: debug_gcc
+Install Dir: /tmp/cwe-workflow09-install
+DB Dir: /home/vimkim/gh/cb/workenv09-source/.cub-workenv/databases
+Build Dir: /home/vimkim/gh/cb/workenv09-source/build_preset_debug_gcc
+bash "${MY_CUBRID:-$HOME/my-cubrid}/bin/cubrid-test-socket-preflight.sh"
+"${MY_CUBRID:-$HOME/my-cubrid}/bin/cubrid-build-coordinator.sh" runtime 300 -- ctest --test-dir "$CUBRID_BUILD_DIR" --output-on-failure --verbose
+Internal ctest changing into directory: /home/vimkim/gh/cb/workenv09-source/build_preset_debug_gcc
+UpdateCTestConfiguration  from :/home/vimkim/gh/cb/workenv09-source/build_preset_debug_gcc/DartConfiguration.tcl
+UpdateCTestConfiguration  from :/home/vimkim/gh/cb/workenv09-source/build_preset_debug_gcc/DartConfiguration.tcl
+Test project /home/vimkim/gh/cb/workenv09-source/build_preset_debug_gcc
+Constructing a list of tests
+Updating test list for fixtures
+Added 0 tests to meet fixture requirements
+Checking test dependency graph...
+Checking test dependency graph end
+No tests were found!!!

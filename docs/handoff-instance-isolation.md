@@ -1,3 +1,5 @@
+> This is historical source investigation. Current implementation and runtime verification: [workflow acceptance map](evidence/ticket09-workflow.md).
+
 # CUBRID 인스턴스 격리 인계: 충돌 자원과 탐색 경로
 
 ## 이 문서를 읽을 때

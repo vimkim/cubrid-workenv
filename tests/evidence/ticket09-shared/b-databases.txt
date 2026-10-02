@@ -1,0 +1,3 @@
+testdb		/tmp/cwe-lock-o6hfuip1/shared/data	localhost	/tmp/cwe-lock-o6hfuip1/shared/log	file:/tmp/cwe-lock-o6hfuip1/shared/lob
+# retained extra registration
+extra /unrelated localhost /unrelated/log file:/unrelated/lob

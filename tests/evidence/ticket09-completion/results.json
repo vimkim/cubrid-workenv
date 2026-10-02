@@ -1,0 +1,39 @@
+{
+  "verdict": "partial supplementary probe; normal-stop continuation blocked by missing master",
+  "observations": [
+    "source sentinel901 survived JDBC rebuild",
+    "initial stale source socket manually removed after empty owned PID set and unbound socket check; source doctor then0",
+    "busy standalone rejected1, immediate doctor0 with still-exiting B PL, later doctor1 stale, exact stale socket unlink then doctor0",
+    "master disappeared before later source stop; source servers retried master; cause unresolved; retained native server logs"
+  ],
+  "scoped_SIGTERM": [
+    {
+      "pid": 1354067,
+      "command": "cub_server testdb ",
+      "install": "CUBRID=/tmp/cwe-workflow09-install"
+    },
+    {
+      "pid": 1354070,
+      "command": "cub_pl testdb ",
+      "install": "CUBRID=/tmp/cwe-workflow09-install"
+    },
+    {
+      "pid": 1355206,
+      "command": "cub_server shareprobe ",
+      "install": "CUBRID=/tmp/cwe-workflow09-install"
+    },
+    {
+      "pid": 1355213,
+      "command": "cub_pl shareprobe ",
+      "install": "CUBRID=/tmp/cwe-workflow09-install"
+    }
+  ],
+  "remaining_owned": [],
+  "binary_sha256": {
+    "cubrid": "cbdb1638a64f577f26c82c02aed57e4a0aa623dccb7e55078ec21ccd5c2b9248",
+    "csql": "78c9a66d72942e27d907a1743b4d499966d551976adeeedd09e7130e9e9c63b5",
+    "cub_server": "2fde242c05a9fbe3344c24472ef4f73a16fc90db395129290f9d9edf0c7031d4"
+  },
+  "jdbc_sha256": "afe041d38b6797c2c3fe7fe0b57ac418ee6abe19748368d8af8e2268d1dcd99e",
+  "binaries_unchanged_after_jdbc": true
+}

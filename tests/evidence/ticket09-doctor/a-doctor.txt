@@ -1,0 +1,22 @@
+Worktree: /tmp/cwe-doctor-native-tc23j_k3/a-source
+State: ready
+Selected installation: /tmp/cwe-doctor-native-tc23j_k3/a (preset debug_gcc)
+DB testdb: data=/tmp/cwe-doctor-native-tc23j_k3/shared/data log=/tmp/cwe-doctor-native-tc23j_k3/shared/log LOB=/tmp/cwe-doctor-native-tc23j_k3/shared/lob (registration inspection only)
+Process inspection: 2280 inaccessible PIDs; absent owner evidence is not proof of inactivity
+TCP 47000: occupied; PID 1305476 worktree=/tmp/cwe-doctor-native-tc23j_k3/a-source
+TCP 47001: occupied; PID 1306320 worktree=/tmp/cwe-doctor-native-tc23j_k3/a-source
+Unix socket /tmp/cwe-1000/51b04d3b64b8/sp_testdb.sock: occupied; PID 1305850 worktree=/tmp/cwe-doctor-native-tc23j_k3/a-source
+Unix socket /tmp/cwe-1000/51b04d3b64b8/workenv.1: occupied; PID 1306324 worktree=/tmp/cwe-doctor-native-tc23j_k3/a-source
+Unix socket /tmp/cwe-1000/51b04d3b64b8/CUBRID47000: occupied; PID 1305476 worktree=/tmp/cwe-doctor-native-tc23j_k3/a-source
+Unix socket /tmp/cwe-1000/51b04d3b64b8/cubrid_tcp_setup_server1305845: occupied; PID 1305845 worktree=/tmp/cwe-doctor-native-tc23j_k3/a-source
+Unix socket /tmp/cwe-1000/51b04d3b64b8/sp_testdb.sock: occupied; PID 1305850 worktree=/tmp/cwe-doctor-native-tc23j_k3/a-source
+Unix socket /tmp/cwe-1000/51b04d3b64b8/sp_testdb.sock: occupied; PID 1305850 worktree=/tmp/cwe-doctor-native-tc23j_k3/a-source
+SysV shared memory 0x62000004: occupied; PID 1306320 worktree=/tmp/cwe-doctor-native-tc23j_k3/a-source
+SysV shared memory 0x62000005: occupied; PID 1306320 worktree=/tmp/cwe-doctor-native-tc23j_k3/a-source, PID 1306324 worktree=/tmp/cwe-doctor-native-tc23j_k3/a-source
+DB testdb: native active-log lock PID 1305845, worktree=/tmp/cwe-doctor-native-tc23j_k3/a-source, path=/tmp/cwe-doctor-native-tc23j_k3/shared/log/testdb_lgat; another independent opener must wait for normal release
+Native error from /home/vimkim/gh/cubrid-workenv-09/tests/evidence/ticket09-doctor/native-busy.txt (preserved):
+
+ERROR: Unable to restart/initialize the database server. Unable to mount disk volume "/tmp/cwe-doctor-native-tc23j_k3/shared/log/testdb_lgat". The database "/tmp/cwe-doctor-native-tc23j_k3/shared/data/testdb", to which the disk volume belongs, is in use by user vimkim on process 1305845 of host dev2 since Fri Oct  2 17:54:51 2026.
+
+Native owner confirmed now: PID 1305845, worktree=/tmp/cwe-doctor-native-tc23j_k3/a-source, active log=/tmp/cwe-doctor-native-tc23j_k3/shared/log/testdb_lgat
+Ready: inspected settings, registration paths, allocation and live resources. No changes performed; no database opened.

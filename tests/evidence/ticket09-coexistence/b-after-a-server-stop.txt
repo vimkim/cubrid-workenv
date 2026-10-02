@@ -1,0 +1,18 @@
+1 row affected. (0.001940 sec) Committed. (0.178973 sec)
+Execute OK. (0.000253 sec)
+
+=== <Result of SELECT Command in Line 1> ===
+
+           id
+=============
+          222
+
+1 row selected. (0.001340 sec) Committed. (0.000081 sec)
+
+=== <Result of SELECT Command in Line 1> ===
+
+  cwe_abs(-17)
+==============
+            17
+
+1 row selected. (0.005516 sec) Committed. (0.000153 sec)

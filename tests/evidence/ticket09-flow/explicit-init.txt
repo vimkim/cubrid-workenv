@@ -1,0 +1,2 @@
+Initialized /home/vimkim/gh/cb/workenv09-source with /tmp/cwe-workflow09-install (preset debug_gcc).
+Source /home/vimkim/gh/cb/workenv09-source/.cub-workenv/env.sh in bash; use ordinary cubrid and csql commands.

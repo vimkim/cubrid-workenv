@@ -1,0 +1,1 @@
+fatal: working trees containing submodules cannot be moved or removed

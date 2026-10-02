@@ -1,0 +1,5 @@
+Worktree: /tmp/cwe-recovery09-tvcos_qh/victim
+State: ready
+Selected installation: /tmp/cwe-recovery09-tvcos_qh/victim-install (preset debug_gcc)
+Process inspection: 2256 inaccessible PIDs; absent owner evidence is not proof of inactivity
+Ready: inspected settings, registration paths, allocation and live resources. No changes performed; no database opened.

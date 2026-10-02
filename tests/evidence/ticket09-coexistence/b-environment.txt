@@ -1,0 +1,13 @@
+{
+  "CUBRID_JAVA_HOME": "/home/vimkim/.local/share/mise/installs/java/temurin-8.0.462+8",
+  "CUBRID_DATABASES": "/home/vimkim/tmp/cwe-coexist-6fifu21r/b/source/.cub-workenv/databases",
+  "CUBRID_BUILD_DIR": "/home/vimkim/gh/cb/feature-oos-merge/build_preset_debug_gcc",
+  "CUBRID_CONF_FILE": "/home/vimkim/tmp/cwe-coexist-6fifu21r/b/source/.cub-workenv/conf/cubrid.conf",
+  "CUBRID_CUBRID_PORT_ID": "45002",
+  "CUBRID_TMP": "/tmp/cwe-1000/e7d938c60115",
+  "CUBRID": "/home/vimkim/tmp/cwe-coexist-6fifu21r/b/install",
+  "CUBRID_RUNTIME_READY": "1",
+  "CUBRID_BROKER_CONF_FILE": "/home/vimkim/tmp/cwe-coexist-6fifu21r/b/source/.cub-workenv/conf/cubrid_broker.conf",
+  "LD_LIBRARY_PATH": "/home/vimkim/tmp/cwe-coexist-6fifu21r/b/install/lib",
+  "PATH": "/home/vimkim/tmp/cwe-coexist-6fifu21r/b/install/bin:/home/vimkim/.codex/packages/standalone/releases/0.160.0-x86_64-unknown-linux-musl/codex-path:/home/vimkim/.codex/tmp/arg0/codex-arg0qhybKK:/home/vimkim/.codex/tmp/arg0/codex-arg0rkaV8A:/home/vimkim/.codex/packages/standalone/releases/0.159.3-x86_64-unknown-linux-musl/codex-path:/home/vimkim/.codex/tmp/arg0/codex-arg0Eiz5FQ:/home/vimkim/.codex/packages/standalone/releases/0.159.2-x86_64-unknown-linux-musl/codex-path:/home/vimkim/.codex/tmp/arg0/codex-arg0UZCYf0:/home/vimkim/.codex/packages/standalone/releases/0.159.1-x86_64-unknown-linux-musl/codex-path:/home/vimkim/.codex/tmp/arg0/codex-arg006SEr5:/home/vimkim/.codex/packages/standalone/releases/0.159.0-x86_64-unknown-linux-musl/codex-path:/home/vimkim/.codex/tmp/arg0/codex-arg0Sdrd24:/home/vimkim/.codex/packages/standalone/releases/0.158.0-x86_64-unknown-linux-musl/codex-path:/home/vimkim/.codex/tmp/arg0/codex-arg0mOvekQ:/home/vimkim/.codex/packages/standalone/releases/0.157.1-x86_64-unknown-linux-musl/codex-path:/home/vimkim/.codex/tmp/arg0/codex-arg0jzxIFn:/home/vimkim/.codex/packages/standalone/releases/0.157.0-x86_64-unknown-linux-musl/codex-path:/home/vimkim/.codex/tmp/arg0/codex-arg0lJR4wu:/home/vimkim/.cargo/bin:/home/vimkim/.local/share/mise/installs/bun/latest/bin:/home/vimkim/.local/share/mise/installs/go/1.27.1/bin:/home/vimkim/.local/share/mise/installs/java/temurin-8.0.462+8/bin:/home/vimkim/.local/share/mise/installs/node/latest/bin:/home/vimkim/.local/share/mise/installs/python/latest/bin:/home/vimkim/.local/share/mise/shims:/opt/bison-3.0.5/bin/:/home/vimkim/.local/bin/:/home/vimkim/mybin/:/home/vimkim/my-cubrid/bin/:/home/vimkim/.config/my-scripts/bin/:/home/linuxbrew/.linuxbrew/bin:/home/vimkim/.nix-profile/bin/:/nix/var/nix/profiles/default/bin/:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin"
+}

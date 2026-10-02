@@ -1,0 +1,13 @@
+[0mdirenv: loading ~/gh/cb/workenv09-source/.envrc
+Preset Mode: debug_gcc
+Install Dir: /tmp/cwe-workflow09-install
+DB Dir: /home/vimkim/gh/cb/workenv09-source/.cub-workenv/databases
+Build Dir: /home/vimkim/gh/cb/workenv09-source/build_preset_debug_gcc
+
+=== <Result of SELECT Command in Line 1> ===
+
+           id
+=============
+          901
+
+1 row selected. (0.001895 sec) Committed. (0.000006 sec)

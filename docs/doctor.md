@@ -84,6 +84,10 @@ filesystems or every possible way to bypass native locking.
   on the reported host. Stop only an instance you have positively identified and
   are authorized to stop. Doctor performs no takeover or automatic repair.
 
+For bounded recovery before any allocation and for stopping to preserve later-stage
+failures, follow [manual recovery](workflow.md#diagnose-and-recover-deliberately).
+A wider pool alone does not resume an incomplete initializer.
+
 ## Evidence
 
 [Native run](../tests/evidence/ticket06/native/results.json) uses two independent

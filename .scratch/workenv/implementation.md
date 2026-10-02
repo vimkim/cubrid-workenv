@@ -17,7 +17,7 @@ The approved [specification](spec.md) and [tickets](tickets.md) govern implement
 | 06 | 02, 03, 05 | Verified and integrated | `c7776ac` | [Ticket06](issues/06-doctor.md), 31 tests plus native read-only/PID/syscall proof |
 | 07 | 02 | Verified and integrated; tooling topic retained | `29555b7`; tooling `aea8078` | [Ticket07](issues/07-environment-integration.md), 34 integrated tests and native/cross-repository flow |
 | 08 | 03 | Verified and integrated | `68060e0` | [Ticket08](issues/08-database-lifetime.md), real non-force Git removal and external SQL/BLOB preservation |
-| 09 | 04, 06, 07, 08 | In progress | — | — |
+| 09 | 04, 06, 07, 08 | Verified; awaiting parent integration/review | — | [Full source workflow and acceptance map](../../docs/evidence/ticket09-workflow.md), rebuilt native checks and bounded cleanup |
 
 Ticket triage remains `ready-for-human` after implementation and verification; this table records actual integration separately. Acceptance evidence belongs in each ticket and its linked artifacts. Only verified integrated tickets unblock successors.
 

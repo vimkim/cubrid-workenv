@@ -1,0 +1,464 @@
+{
+  "source": "/home/vimkim/gh/cb/workenv09-source",
+  "install": "/tmp/cwe-workflow09-install",
+  "fixture": "/home/vimkim/tmp/cwe-flow09-insuwk4h",
+  "steps": [
+    {
+      "label": "source-commit",
+      "command": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/home/vimkim/gh/cb/workenv09-source",
+      "returncode": 0,
+      "seconds": 0.0047
+    },
+    {
+      "label": "tooling-commit",
+      "command": [
+        "git",
+        "-C",
+        "/home/vimkim/my-cubrid-workenv-07",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "/home/vimkim/gh/cb/workenv09-source",
+      "returncode": 0,
+      "seconds": 0.0045
+    },
+    {
+      "label": "build-only",
+      "command": [
+        "direnv",
+        "exec",
+        ".",
+        "bash",
+        "-c",
+        "test \"$CUBRID_RUNTIME_READY\" = 0 && test -z \"${CUBRID_TMP:-}\" && test -z \"${CUBRID_DATABASES:-}\" && printf \"build-only %s\\n\" \"$CUBRID\""
+      ],
+      "cwd": "/home/vimkim/gh/cb/workenv09-source",
+      "returncode": 0,
+      "seconds": 0.165
+    },
+    {
+      "label": "explicit-init",
+      "command": [
+        "/home/vimkim/gh/cubrid-workenv-09/bin/cub-workenv",
+        "init",
+        "--worktree",
+        "/home/vimkim/gh/cb/workenv09-source",
+        "--install",
+        "/tmp/cwe-workflow09-install",
+        "--preset",
+        "debug_gcc",
+        "--java-home",
+        "/home/vimkim/.local/share/mise/installs/java/temurin-8.0.462+8",
+        "--state-home",
+        "/home/vimkim/tmp/cwe-flow09-insuwk4h/host",
+        "--port-start",
+        "49000",
+        "--port-end",
+        "49999"
+      ],
+      "cwd": "/home/vimkim/gh/cb/workenv09-source",
+      "returncode": 0,
+      "seconds": 3.0193
+    },
+    {
+      "label": "version",
+      "command": [
+        "direnv",
+        "exec",
+        ".",
+        "cubrid",
+        "--version"
+      ],
+      "cwd": "/home/vimkim/gh/cb/workenv09-source",
+      "returncode": 0,
+      "seconds": 0.1652
+    },
+    {
+      "label": "source-start",
+      "command": [
+        "direnv",
+        "exec",
+        ".",
+        "cubrid",
+        "server",
+        "start",
+        "testdb"
+      ],
+      "cwd": "/home/vimkim/gh/cb/workenv09-source",
+      "returncode": 0,
+      "seconds": 3.2707
+    },
+    {
+      "label": "source-seed",
+      "command": [
+        "direnv",
+        "exec",
+        ".",
+        "csql",
+        "-C",
+        "-u",
+        "dba",
+        "-c",
+        "create table workflow_marker (id integer); insert into workflow_marker values (901); commit;",
+        "testdb"
+      ],
+      "cwd": "/home/vimkim/gh/cb/workenv09-source",
+      "returncode": 0,
+      "seconds": 0.2153
+    },
+    {
+      "label": "repeated-init",
+      "command": [
+        "/home/vimkim/gh/cubrid-workenv-09/bin/cub-workenv",
+        "init",
+        "--worktree",
+        "/home/vimkim/gh/cb/workenv09-source",
+        "--install",
+        "/tmp/cwe-workflow09-install",
+        "--preset",
+        "debug_gcc",
+        "--java-home",
+        "/home/vimkim/.local/share/mise/installs/java/temurin-8.0.462+8",
+        "--state-home",
+        "/home/vimkim/tmp/cwe-flow09-insuwk4h/host",
+        "--port-start",
+        "49000",
+        "--port-end",
+        "49999",
+        "--no-db"
+      ],
+      "cwd": "/home/vimkim/gh/cb/workenv09-source",
+      "returncode": 0,
+      "seconds": 0.1142
+    },
+    {
+      "label": "reentry-0",
+      "command": [
+        "direnv",
+        "exec",
+        ".",
+        "csql",
+        "-C",
+        "-u",
+        "dba",
+        "-c",
+        "select id from workflow_marker;",
+        "testdb"
+      ],
+      "cwd": "/home/vimkim/gh/cb/workenv09-source",
+      "returncode": 0,
+      "seconds": 0.2153
+    },
+    {
+      "label": "reentry-1",
+      "command": [
+        "direnv",
+        "exec",
+        ".",
+        "csql",
+        "-C",
+        "-u",
+        "dba",
+        "-c",
+        "select id from workflow_marker;",
+        "testdb"
+      ],
+      "cwd": "/home/vimkim/gh/cb/workenv09-source",
+      "returncode": 0,
+      "seconds": 0.2155
+    },
+    {
+      "label": "reentry-2",
+      "command": [
+        "direnv",
+        "exec",
+        ".",
+        "csql",
+        "-C",
+        "-u",
+        "dba",
+        "-c",
+        "select id from workflow_marker;",
+        "testdb"
+      ],
+      "cwd": "/home/vimkim/gh/cb/workenv09-source",
+      "returncode": 0,
+      "seconds": 0.2152
+    },
+    {
+      "label": "entry-trace",
+      "command": [
+        "strace",
+        "-f",
+        "-e",
+        "trace=execve",
+        "-o",
+        "/home/vimkim/gh/cubrid-workenv-09/tests/evidence/ticket09-flow/entry-execve.txt",
+        "direnv",
+        "exec",
+        ".",
+        "/usr/bin/true"
+      ],
+      "cwd": "/home/vimkim/gh/cb/workenv09-source",
+      "returncode": 0,
+      "seconds": 0.3656
+    },
+    {
+      "label": "doctor-source",
+      "command": [
+        "/home/vimkim/gh/cubrid-workenv-09/bin/cub-workenv",
+        "doctor",
+        "--worktree",
+        "/home/vimkim/gh/cb/workenv09-source"
+      ],
+      "cwd": "/home/vimkim/gh/cb/workenv09-source",
+      "returncode": 0,
+      "seconds": 0.1642
+    },
+    {
+      "label": "doctor-mismatch",
+      "command": [
+        "/home/vimkim/gh/cubrid-workenv-09/bin/cub-workenv",
+        "doctor",
+        "--worktree",
+        "/home/vimkim/gh/cb/workenv09-source",
+        "--preset",
+        "release_gcc"
+      ],
+      "cwd": "/home/vimkim/gh/cb/workenv09-source",
+      "returncode": 1,
+      "seconds": 0.1643
+    },
+    {
+      "label": "doctor-correct-selection",
+      "command": [
+        "/home/vimkim/gh/cubrid-workenv-09/bin/cub-workenv",
+        "doctor",
+        "--worktree",
+        "/home/vimkim/gh/cb/workenv09-source",
+        "--preset",
+        "debug_gcc"
+      ],
+      "cwd": "/home/vimkim/gh/cb/workenv09-source",
+      "returncode": 0,
+      "seconds": 0.1644
+    },
+    {
+      "label": "b-allow",
+      "command": [
+        "direnv",
+        "allow"
+      ],
+      "cwd": "/home/vimkim/tmp/cwe-flow09-insuwk4h/b",
+      "returncode": 0,
+      "seconds": 0.0088
+    },
+    {
+      "label": "b-no-db",
+      "command": [
+        "/home/vimkim/gh/cubrid-workenv-09/bin/cub-workenv",
+        "init",
+        "--worktree",
+        "/home/vimkim/tmp/cwe-flow09-insuwk4h/b",
+        "--install",
+        "/home/vimkim/tmp/cwe-flow09-insuwk4h/install-b",
+        "--preset",
+        "debug_gcc",
+        "--java-home",
+        "/home/vimkim/.local/share/mise/installs/java/temurin-8.0.462+8",
+        "--state-home",
+        "/home/vimkim/tmp/cwe-flow09-insuwk4h/host",
+        "--port-start",
+        "49000",
+        "--port-end",
+        "49999",
+        "--no-db"
+      ],
+      "cwd": "/home/vimkim/gh/cb/workenv09-source",
+      "returncode": 0,
+      "seconds": 0.1142
+    },
+    {
+      "label": "b-create-db",
+      "command": [
+        "/home/vimkim/gh/cubrid-workenv-09/bin/cub-workenv",
+        "create-db",
+        "testdb",
+        "--worktree",
+        "/home/vimkim/tmp/cwe-flow09-insuwk4h/b"
+      ],
+      "cwd": "/home/vimkim/gh/cb/workenv09-source",
+      "returncode": 0,
+      "seconds": 2.9694
+    },
+    {
+      "label": "b-start",
+      "command": [
+        "direnv",
+        "exec",
+        ".",
+        "cubrid",
+        "server",
+        "start",
+        "testdb"
+      ],
+      "cwd": "/home/vimkim/tmp/cwe-flow09-insuwk4h/b",
+      "returncode": 0,
+      "seconds": 3.2709
+    },
+    {
+      "label": "b-seed",
+      "command": [
+        "direnv",
+        "exec",
+        ".",
+        "csql",
+        "-C",
+        "-u",
+        "dba",
+        "-c",
+        "create table workflow_marker (id integer); insert into workflow_marker values (902); commit;",
+        "testdb"
+      ],
+      "cwd": "/home/vimkim/tmp/cwe-flow09-insuwk4h/b",
+      "returncode": 0,
+      "seconds": 0.2153
+    },
+    {
+      "label": "switch-a-to-b",
+      "command": [
+        "direnv",
+        "exec",
+        ".",
+        "bash",
+        "-c",
+        "csql -C -u dba -c \"select id from workflow_marker;\" testdb && cd \"$1\" && direnv exec . csql -C -u dba -c \"select id from workflow_marker;\" testdb",
+        "bash",
+        "/home/vimkim/tmp/cwe-flow09-insuwk4h/b"
+      ],
+      "cwd": "/home/vimkim/gh/cb/workenv09-source",
+      "returncode": 0,
+      "seconds": 0.3655
+    },
+    {
+      "label": "a-stop",
+      "command": [
+        "direnv",
+        "exec",
+        ".",
+        "cubrid",
+        "server",
+        "stop",
+        "testdb"
+      ],
+      "cwd": "/home/vimkim/gh/cb/workenv09-source",
+      "returncode": 0,
+      "seconds": 1.2176
+    },
+    {
+      "label": "a-master-stop",
+      "command": [
+        "direnv",
+        "exec",
+        ".",
+        "cubrid",
+        "service",
+        "stop"
+      ],
+      "cwd": "/home/vimkim/gh/cb/workenv09-source",
+      "returncode": 0,
+      "seconds": 0.2653
+    },
+    {
+      "label": "b-stop",
+      "command": [
+        "direnv",
+        "exec",
+        ".",
+        "cubrid",
+        "server",
+        "stop",
+        "testdb"
+      ],
+      "cwd": "/home/vimkim/tmp/cwe-flow09-insuwk4h/b",
+      "returncode": 0,
+      "seconds": 1.217
+    },
+    {
+      "label": "b-master-stop",
+      "command": [
+        "direnv",
+        "exec",
+        ".",
+        "cubrid",
+        "service",
+        "stop"
+      ],
+      "cwd": "/home/vimkim/tmp/cwe-flow09-insuwk4h/b",
+      "returncode": 0,
+      "seconds": 0.2153
+    }
+  ],
+  "source_commit": "30043f492225c8350aa15455dc329c87227b5fdf",
+  "tooling_commit": "aea80789165951be4602d042476c88bd5105e049",
+  "links": {
+    "justfile": "/home/vimkim/my-cubrid-workenv-07/stow/cubrid/justfile",
+    ".just": "/home/vimkim/my-cubrid-workenv-07/stow/cubrid/.just",
+    ".envrc": "/home/vimkim/my-cubrid-workenv-07/stow/cubrid/.envrc",
+    "CMakeUserPresets.json": "/home/vimkim/my-cubrid-workenv-07/stow/cubrid/CMakeUserPresets.json"
+  },
+  "binary_sha256": {
+    "cubrid": "cbdb1638a64f577f26c82c02aed57e4a0aa623dccb7e55078ec21ccd5c2b9248",
+    "csql": "78c9a66d72942e27d907a1743b4d499966d551976adeeedd09e7130e9e9c63b5",
+    "cub_server": "2fde242c05a9fbe3344c24472ef4f73a16fc90db395129290f9d9edf0c7031d4"
+  },
+  "states": [
+    {
+      "schema": 1,
+      "status": "ready",
+      "worktree": "/home/vimkim/gh/cb/workenv09-source",
+      "install": "/tmp/cwe-workflow09-install",
+      "preset": "debug_gcc",
+      "state_home": "/home/vimkim/tmp/cwe-flow09-insuwk4h/host",
+      "java_home": "/home/vimkim/.local/share/mise/installs/java/temurin-8.0.462+8",
+      "stage": "complete",
+      "allocation": {
+        "worktree": "/home/vimkim/gh/cb/workenv09-source",
+        "master_port": 49000,
+        "broker_port": 49001,
+        "broker_master_shm_id": 1644167168,
+        "broker_appl_server_shm_id": 1644167169,
+        "install": "/tmp/cwe-workflow09-install",
+        "tmp": "/tmp/cwe-1000/cac84ce4fd87"
+      }
+    },
+    {
+      "schema": 1,
+      "status": "ready",
+      "worktree": "/home/vimkim/tmp/cwe-flow09-insuwk4h/b",
+      "install": "/home/vimkim/tmp/cwe-flow09-insuwk4h/install-b",
+      "preset": "debug_gcc",
+      "state_home": "/home/vimkim/tmp/cwe-flow09-insuwk4h/host",
+      "java_home": "/home/vimkim/.local/share/mise/installs/java/temurin-8.0.462+8",
+      "stage": "complete",
+      "allocation": {
+        "worktree": "/home/vimkim/tmp/cwe-flow09-insuwk4h/b",
+        "master_port": 49002,
+        "broker_port": 49003,
+        "broker_master_shm_id": 1644167170,
+        "broker_appl_server_shm_id": 1644167171,
+        "install": "/home/vimkim/tmp/cwe-flow09-insuwk4h/install-b",
+        "tmp": "/tmp/cwe-1000/4b73eb4c131f"
+      }
+    }
+  ],
+  "remaining_owned_pids": [
+    1206129
+  ],
+  "cleanup": "retained for exact-file inventory and non-force source worktree removal"
+}

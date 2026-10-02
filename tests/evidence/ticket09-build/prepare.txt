@@ -1,0 +1,15 @@
+"/home/vimkim/my-cubrid/cubrid-justfiles/global/../../stow-create.sh"
+local.just -> /tmp/cwe-workflow09-tools/_unticketed/workenv09-source
+just --justfile ./justfile --working-directory . prepare-debug-gcc
+Selected preset: debug_gcc
+stow --dir="$MY_CUBRID/stow" --target=. cubrid
+stow --dir="$MY_CUBRID/stow" --target=. gdb
+CUBRID_SKIP_SHARED_STOW=1 "${MY_CUBRID:-$HOME/my-cubrid}/stow-create.sh"
+local.just -> /tmp/cwe-workflow09-tools/_unticketed/workenv09-source
+git submodule update --init cubrid-cci
+Submodule 'cubrid-cci' (https://github.com/CUBRID/cubrid-cci.git) registered for path 'cubrid-cci'
+Cloning into '/home/vimkim/gh/cb/workenv09-source/cubrid-cci'...
+Submodule path 'cubrid-cci': checked out '79d0888c26a2543d31f53eb7b6c9738db110fff4'
+direnv allow
+lefthook install
+sync hooks: ✔️(pre-push, pre-commit)

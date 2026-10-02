@@ -1,0 +1,14 @@
+Worktree: /home/vimkim/tmp/cwe-flow09-insuwk4h/b
+State: ready
+Selected installation: /home/vimkim/tmp/cwe-flow09-insuwk4h/install-b (preset debug_gcc)
+DB testdb: data=/home/vimkim/tmp/cwe-flow09-insuwk4h/b/.cub-workenv/db/testdb/data log=/home/vimkim/tmp/cwe-flow09-insuwk4h/b/.cub-workenv/db/testdb/log LOB=/home/vimkim/tmp/cwe-flow09-insuwk4h/b/.cub-workenv/db/testdb/lob (registration inspection only)
+DB shareprobe: data=/home/vimkim/tmp/cwe-flow09-insuwk4h/shared09/data log=/home/vimkim/tmp/cwe-flow09-insuwk4h/shared09/log LOB=/home/vimkim/tmp/cwe-flow09-insuwk4h/shared09/lob (registration inspection only)
+Process inspection: 2249 inaccessible PIDs; absent owner evidence is not proof of inactivity
+Unix socket /tmp/cwe-1000/4b73eb4c131f/sp_shareprobe.sock: occupied; PID 1355503 worktree=/home/vimkim/tmp/cwe-flow09-insuwk4h/b
+DB shareprobe: native active-log lock PID 1355206, worktree=/home/vimkim/gh/cb/workenv09-source, path=/home/vimkim/tmp/cwe-flow09-insuwk4h/shared09/log/shareprobe_lgat; another independent opener must wait for normal release
+Native error from /home/vimkim/gh/cubrid-workenv-09/tests/evidence/ticket09-completion/shared-b-rejected.txt (preserved):
+
+ERROR: Unable to restart/initialize the database server. Unable to mount disk volume "/home/vimkim/tmp/cwe-flow09-insuwk4h/shared09/log/shareprobe_lgat". The database "/home/vimkim/tmp/cwe-flow09-insuwk4h/shared09/data/shareprobe", to which the disk volume belongs, is in use by user vimkim on process 1355206 of host dev2 since Fri Oct  2 18:00:10 2026.
+
+Native owner confirmed now: PID 1355206, worktree=/home/vimkim/gh/cb/workenv09-source, active log=/home/vimkim/tmp/cwe-flow09-insuwk4h/shared09/log/shareprobe_lgat
+Ready: inspected settings, registration paths, allocation and live resources. No changes performed; no database opened.

@@ -1,0 +1,8 @@
+
+=== <Result of SELECT Command in Line 1> ===
+
+           id   blob_to_bit(payload)
+===================================
+         8042  X'080042'
+
+1 row selected. (0.002962 sec) Committed. (0.000009 sec)

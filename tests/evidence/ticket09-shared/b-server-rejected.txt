@@ -1,0 +1,7 @@
+@ cubrid master start
+++ cubrid master start: success
+@ cubrid server start: testdb
+
+This may take a long time depending on the amount of recovery works to do.
+Unable to restart/initialize the database server. Unable to mount disk volume "/tmp/cwe-lock-o6hfuip1/shared/log/testdb_lgat". The database "/tmp/cwe-lock-o6hfuip1/shared/data/testdb", to which the disk volume belongs, is in use by user vimkim on process 1304698 of host dev2 since Fri Oct  2 17:54:47 2026.
+++ cubrid server start: fail

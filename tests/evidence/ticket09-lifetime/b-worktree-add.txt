@@ -1,0 +1,2 @@
+Preparing worktree (detached HEAD 36624a7)
+HEAD is now at 36624a7 Disposable fixture

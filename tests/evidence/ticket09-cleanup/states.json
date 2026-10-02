@@ -1,0 +1,135 @@
+[
+  {
+    "schema": 1,
+    "status": "ready",
+    "worktree": "/home/vimkim/gh/cb/workenv09-source",
+    "install": "/tmp/cwe-workflow09-install",
+    "preset": "debug_gcc",
+    "state_home": "/home/vimkim/tmp/cwe-flow09-insuwk4h/host",
+    "java_home": "/home/vimkim/.local/share/mise/installs/java/temurin-8.0.462+8",
+    "stage": "complete",
+    "allocation": {
+      "worktree": "/home/vimkim/gh/cb/workenv09-source",
+      "master_port": 49000,
+      "broker_port": 49001,
+      "broker_master_shm_id": 1644167168,
+      "broker_appl_server_shm_id": 1644167169,
+      "install": "/tmp/cwe-workflow09-install",
+      "tmp": "/tmp/cwe-1000/cac84ce4fd87"
+    }
+  },
+  {
+    "schema": 1,
+    "status": "ready",
+    "worktree": "/home/vimkim/tmp/cwe-flow09-insuwk4h/b",
+    "install": "/home/vimkim/tmp/cwe-flow09-insuwk4h/install-b",
+    "preset": "debug_gcc",
+    "state_home": "/home/vimkim/tmp/cwe-flow09-insuwk4h/host",
+    "java_home": "/home/vimkim/.local/share/mise/installs/java/temurin-8.0.462+8",
+    "stage": "complete",
+    "allocation": {
+      "worktree": "/home/vimkim/tmp/cwe-flow09-insuwk4h/b",
+      "master_port": 49002,
+      "broker_port": 49003,
+      "broker_master_shm_id": 1644167170,
+      "broker_appl_server_shm_id": 1644167171,
+      "install": "/home/vimkim/tmp/cwe-flow09-insuwk4h/install-b",
+      "tmp": "/tmp/cwe-1000/4b73eb4c131f"
+    }
+  },
+  {
+    "schema": 1,
+    "status": "ready",
+    "worktree": "/tmp/cwe-recovery09-tvcos_qh/owner",
+    "install": "/tmp/cwe-recovery09-tvcos_qh/owner-install",
+    "preset": "debug_gcc",
+    "state_home": "/tmp/cwe-recovery09-tvcos_qh/host",
+    "java_home": "/home/vimkim/.local/share/mise/installs/java/temurin-8.0.462+8",
+    "stage": "complete",
+    "allocation": {
+      "worktree": "/tmp/cwe-recovery09-tvcos_qh/owner",
+      "master_port": 49800,
+      "broker_port": 49801,
+      "broker_master_shm_id": 1644167168,
+      "broker_appl_server_shm_id": 1644167169,
+      "install": "/tmp/cwe-recovery09-tvcos_qh/owner-install",
+      "tmp": "/tmp/cwe-1000/a43a1434b1d5"
+    }
+  },
+  {
+    "schema": 1,
+    "status": "ready",
+    "worktree": "/tmp/cwe-recovery09-tvcos_qh/victim",
+    "install": "/tmp/cwe-recovery09-tvcos_qh/victim-install",
+    "preset": "debug_gcc",
+    "state_home": "/tmp/cwe-recovery09-tvcos_qh/host",
+    "java_home": "/home/vimkim/.local/share/mise/installs/java/temurin-8.0.462+8",
+    "stage": "complete",
+    "allocation": {
+      "worktree": "/tmp/cwe-recovery09-tvcos_qh/victim",
+      "master_port": 49802,
+      "broker_port": 49803,
+      "broker_master_shm_id": 1644167170,
+      "broker_appl_server_shm_id": 1644167171,
+      "install": "/tmp/cwe-recovery09-tvcos_qh/victim-install",
+      "tmp": "/tmp/cwe-1000/922cc8db2fe3"
+    }
+  },
+  {
+    "schema": 1,
+    "status": "ready",
+    "worktree": "/tmp/cwe-life-1r2uz062/b-source",
+    "install": "/tmp/cwe-life-1r2uz062/b",
+    "preset": "debug_gcc",
+    "state_home": "/tmp/cwe-life-1r2uz062/host",
+    "java_home": "/home/vimkim/.local/share/mise/installs/java/temurin-8.0.462+8",
+    "stage": "complete",
+    "allocation": {
+      "worktree": "/tmp/cwe-life-1r2uz062/b-source",
+      "master_port": 48002,
+      "broker_port": 48003,
+      "broker_master_shm_id": 1644167170,
+      "broker_appl_server_shm_id": 1644167171,
+      "install": "/tmp/cwe-life-1r2uz062/b",
+      "tmp": "/tmp/cwe-1000/f77d4557fd36"
+    }
+  },
+  {
+    "schema": 1,
+    "status": "ready",
+    "worktree": "/tmp/cwe-life-1r2uz062/a-source",
+    "install": "/tmp/cwe-life-1r2uz062/a",
+    "preset": "debug_gcc",
+    "state_home": "/tmp/cwe-life-1r2uz062/host",
+    "java_home": "/home/vimkim/.local/share/mise/installs/java/temurin-8.0.462+8",
+    "stage": "complete",
+    "allocation": {
+      "worktree": "/tmp/cwe-life-1r2uz062/a-source",
+      "master_port": 48000,
+      "broker_port": 48001,
+      "broker_master_shm_id": 1644167168,
+      "broker_appl_server_shm_id": 1644167169,
+      "install": "/tmp/cwe-life-1r2uz062/a",
+      "tmp": "/tmp/cwe-1000/9d99e6c0f712"
+    }
+  },
+  {
+    "schema": 1,
+    "status": "ready",
+    "worktree": "/tmp/cwe-life-1r2uz062/b-source",
+    "install": "/tmp/cwe-life-1r2uz062/b",
+    "preset": "debug_gcc",
+    "state_home": "/tmp/cwe-life-1r2uz062/host",
+    "java_home": "/home/vimkim/.local/share/mise/installs/java/temurin-8.0.462+8",
+    "stage": "complete",
+    "allocation": {
+      "worktree": "/tmp/cwe-life-1r2uz062/b-source",
+      "master_port": 48002,
+      "broker_port": 48003,
+      "broker_master_shm_id": 1644167170,
+      "broker_appl_server_shm_id": 1644167171,
+      "install": "/tmp/cwe-life-1r2uz062/b",
+      "tmp": "/tmp/cwe-1000/f77d4557fd36"
+    }
+  }
+]

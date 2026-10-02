@@ -30,7 +30,7 @@ The initial internal `testdb` uses 64M data and 32M log volumes, locale
 bash environment artifact also live under `.cub-workenv`. Native utilities use
 the selected installation directly, without a `run` wrapper. Loading `env.sh`
 checks only the ready marker, clears inherited CUBRID overrides and selects the
-installation's bin/lib directories. Its baseline PATH is `/usr/local/bin:/usr/bin:/bin`.
+installation's bin/lib directories. It retains development-tool paths while replacing inherited CUBRID installation paths.
 
 Host allocations default to `${XDG_STATE_HOME:-$HOME/.local/state}/cub-workenv`;
 `--state-home` selects another cooperating allocation namespace for disposable
@@ -55,13 +55,17 @@ recorded experiment. Each generated configuration has a single broker, so there
 are no unallocated default query-editor/broker sections. Broker connections use
 the recorded `broker_port` and the environment's own database registry.
 
-A ready environment's repeated `init` is a no-op. Unknown local artifacts and
-existing local DB registries are preserved and refused; compatibility-based
-reuse is ticket 03. Failure preserves preparation state and allocation evidence;
-never delete database files to retry blindly. The `doctor` guidance points to
-ticket 02/06's forthcoming diagnosis command. Automatic recovery,
-direnv/build integration and cross-version DB compatibility are not provided by
-this first slice.
+A ready environment's repeated `init` is a no-op. `init --no-db`, `create-db`,
+compatible existing registrations, fast `env` loading and read-only `doctor` are
+implemented. Failures preserve stage, allocation and DB evidence; automatic
+repair and cross-version conversion are outside scope.
+
+Follow the [complete workflow](docs/workflow.md) for deferred DB creation,
+external storage, companion direnv/build integration and bounded manual recovery.
+The companion personal-tooling change must be reviewed and applied separately;
+installing this CLI does not silently restow existing source trees. See
+[verification and acceptance coverage](docs/evidence/ticket09-workflow.md) for the
+fresh CUBRID source build and integrated native checks.
 
 Checks:
 

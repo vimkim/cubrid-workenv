@@ -1,0 +1,2 @@
+@ cubrid broker stop
+++ cubrid broker is not running.

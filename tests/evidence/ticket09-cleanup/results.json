@@ -1,0 +1,23 @@
+{
+  "remaining_owned_pids": [],
+  "remaining_ipc": [],
+  "source_worktree_removal_rc": 128,
+  "source_worktree_retained": true,
+  "source_branch": "verify/workenv09-source",
+  "fixture_roots_removed": {
+    "/tmp/cwe-workflow09-install": true,
+    "/home/vimkim/tmp/cwe-flow09-insuwk4h": true,
+    "/tmp/cwe-recovery09-tvcos_qh": true,
+    "/tmp/cwe-life-1r2uz062": true,
+    "/tmp/cwe-workflow09-tools": true
+  },
+  "removed_file_count": 17754,
+  "socket_dirs_removed": [
+    "/tmp/cwe-1000/4b73eb4c131f",
+    "/tmp/cwe-1000/922cc8db2fe3",
+    "/tmp/cwe-1000/9d99e6c0f712",
+    "/tmp/cwe-1000/a43a1434b1d5",
+    "/tmp/cwe-1000/cac84ce4fd87",
+    "/tmp/cwe-1000/f77d4557fd36"
+  ]
+}

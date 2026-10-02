@@ -1,0 +1,7 @@
+cub-workenv: Unix socket path /tmp/cwe-1000/cac84ce4fd87/sp_testdb.sock: stale or unconfirmed filesystem entry; inspect its owner manually before any removal
+Inspect and correct manually; no changes performed.
+Worktree: /home/vimkim/gh/cb/workenv09-source
+State: ready
+Selected installation: /tmp/cwe-workflow09-install (preset debug_gcc)
+DB testdb: data=/home/vimkim/gh/cb/workenv09-source/.cub-workenv/db/testdb/data log=/home/vimkim/gh/cb/workenv09-source/.cub-workenv/db/testdb/log LOB=/home/vimkim/gh/cb/workenv09-source/.cub-workenv/db/testdb/lob (registration inspection only)
+Process inspection: 2236 inaccessible PIDs; absent owner evidence is not proof of inactivity

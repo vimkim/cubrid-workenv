@@ -1,0 +1,6 @@
+{
+  "inventory": "removed-inventory.json.gz",
+  "uncompressed_sha256": "982da6ceb560a031a22428a516db2ac3683c56c5ed0e584ef11b1806102540c0",
+  "entries": 17754,
+  "scope": "Exact owned files and links only; symlinks unlinked without traversing targets"
+}

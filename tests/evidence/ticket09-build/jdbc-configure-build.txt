@@ -1,0 +1,415 @@
+[0mdirenv: loading ~/gh/cb/workenv09-source/.envrc
+Preset Mode: debug_gcc
+Install Dir: /tmp/cwe-workflow09-install
+DB Dir: /home/vimkim/gh/cb/workenv09-source/.cub-workenv/databases
+Build Dir: /home/vimkim/gh/cb/workenv09-source/build_preset_debug_gcc
+[0mdirenv: loading ~/gh/cb/workenv09-source/.envrc
+Preset Mode: debug_gcc
+Install Dir: /tmp/cwe-workflow09-install
+DB Dir: /home/vimkim/gh/cb/workenv09-source/.cub-workenv/databases
+Build Dir: /home/vimkim/gh/cb/workenv09-source/build_preset_debug_gcc
+[0mdirenv: loading ~/gh/cb/workenv09-source/.envrc
+Preset Mode: debug_gcc
+Install Dir: /tmp/cwe-workflow09-install
+DB Dir: /home/vimkim/gh/cb/workenv09-source/.cub-workenv/databases
+Build Dir: /home/vimkim/gh/cb/workenv09-source/build_preset_debug_gcc
+Using JAVA_HOME JDK: /home/vimkim/.local/share/mise/installs/java/temurin-8.0.462+8
+[0mdirenv: loading ~/gh/cb/workenv09-source/.envrc
+Preset Mode: debug_gcc
+Install Dir: /tmp/cwe-workflow09-install
+DB Dir: /home/vimkim/gh/cb/workenv09-source/.cub-workenv/databases
+Build Dir: /home/vimkim/gh/cb/workenv09-source/build_preset_debug_gcc
+Preset CMake variables:
+
+  CMAKE_BUILD_TYPE="Debug"
+  CMAKE_COLOR_DIAGNOSTICS="ON"
+  CMAKE_CXX_COMPILER="g++"
+  CMAKE_CXX_COMPILER_LAUNCHER="ccache"
+  CMAKE_CXX_FLAGS="-fdiagnostics-color=always -Wno-template-body -isystem /home/vimkim/gh/cb/workenv09-source/.just/include"
+  CMAKE_CXX_FLAGS_DEBUG="-O0 -ggdb3 -fno-omit-frame-pointer -Wno-error=format -Wno-error -Wno-error=maybe-uninitialized -Wno-error=parentheses"
+  CMAKE_CXX_STANDARD="17"
+  CMAKE_CXX_STANDARD_REQUIRED="ON"
+  CMAKE_C_COMPILER="gcc"
+  CMAKE_C_COMPILER_LAUNCHER="ccache"
+  CMAKE_C_FLAGS="-fdiagnostics-color=always"
+  CMAKE_C_FLAGS_DEBUG="-O0 -ggdb3 -Wno-int-conversion -Wno-incompatible-pointer-types -Wno-implicit-function-declaration -fno-omit-frame-pointer -Wno-error=format -Wno-error -Wno-error=maybe-uninitialized -Wno-error=parentheses"
+  CMAKE_EXPORT_COMPILE_COMMANDS="ON"
+  CMAKE_INSTALL_PREFIX="/tmp/cwe-workflow09-install"
+  CUBVEC_TEAM_BUILD="ON"
+  ENABLE_CUBVEC_LOG="ON"
+  UNIT_TEST_OOS="ON"
+  UNIT_TEST_PAGE_BUFFER="ON"
+  UNIT_TEST_SPAGE="ON"
+  VIMKIM_BUILD="ON"
+  WITH_CCI="true"
+
+Preset environment variables:
+
+  CC="gcc -std=gnu17"
+  CXX="g++ -Wno-error=stringop-overflow"
+
+-- ======== CMakeLists.txt
+    ==== with_unit_tests() = 1
+--   OS = UNIX
+--   CMAKE_RUNTIME_OUTPUT_DIRECTORY=/home/vimkim/gh/cb/workenv09-source/build_preset_debug_gcc/bin
+-- Get version information from VERSION
+-- Build CUBRID 11.5.0.2635-30043f4 64bit Debug on Linux x86_64
+Including Third Party Libraries
+-- Build with flex and bison library: SYSTEM
+-- Build with expat library: EXTERNAL
+-- Build with editline library: EXTERNAL
+-- Build with openssl library: EXTERNAL
+-- Build with unixODBC library: EXTERNAL
+-- Build with RE2 library: EXTERNAL
+-- Build with LZ4 library: EXTERNAL
+-- Build with TBB library: EXTERNAL
+-- Build 3rdparty libraries with make -j16
+-- Default install prefix: /tmp/cwe-workflow09-install
+Build JDBC Driver from cubird-jdbc submodule
+-- =========== JDBC ===========
+-- Found Java: /home/vimkim/gh/cb/workenv09-source/build_preset_debug_gcc/vm/jdk8/bin/java (found suitable version "1.8.0.462", minimum required is "1.8") found components: Development
+-- [INFO] CUBRID_JDBC_SOURCE_DIR = /home/vimkim/gh/cb/workenv09-source/cubrid-jdbc
+-- [INFO] CUBRID_JDBC_OUTPUT_DIR = /home/vimkim/gh/cb/workenv09-source/cubrid-jdbc/output
+Add cubrid jdbc dependency from cubrid-jdbc submodule path: -PcubridJdbcPath=/home/vimkim/gh/cb/workenv09-source/build_preset_debug_gcc/pl_engine/lib
+-- JAVA_HOME: /home/vimkim/gh/cb/workenv09-source/build_preset_debug_gcc/vm/jdk8
+-- Found Java: /home/vimkim/gh/cb/workenv09-source/build_preset_debug_gcc/vm/jdk8/bin/java (found version "1.8.0.462")
+-- Found Java: /home/vimkim/gh/cb/workenv09-source/build_preset_debug_gcc/vm/jdk8/bin/java
+-- Found JNI: /home/vimkim/gh/cb/workenv09-source/build_preset_debug_gcc/vm/jdk8/include;/home/vimkim/gh/cb/workenv09-source/build_preset_debug_gcc/vm/jdk8/include/linux;/home/vimkim/gh/cb/workenv09-source/build_preset_debug_gcc/vm/jdk8/include
+-- ======== WITH_CCI ==========
+-- Get version information from /home/vimkim/gh/cb/workenv09-source/cubrid-cci/BUILD_NUMBER
+-- CCI_BUILD_NUMBER:[11.3.0.0049-79d0888]
+-- CCI component install dirs: cci/bin, cci/lib, cci/include
+-- Building CGW libraries.
+CMake Warning (dev) at cm_common/CMakeLists.txt:104 (install):
+  Target cmstat has PUBLIC_HEADER files but no PUBLIC_HEADER DESTINATION.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at cm_common/CMakeLists.txt:104 (install):
+  Target cmdep has PUBLIC_HEADER files but no PUBLIC_HEADER DESTINATION.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+-- .. timezone shared library
+-- .... gen_timezone executable
+-- ...... source files: /home/vimkim/gh/cb/workenv09-source/src/executables/generate_timezone.cpp
+-- .... generate timezone command
+-- .... cubrid_timezones lib
+  unit_tests/...
+   common
+-- Get version information CCI_VERSION: 11.3.0.0049-79d0888
+-- Configuring done (0.7s)
+-- Generating done (0.1s)
+-- Build files have been written to: /home/vimkim/gh/cb/workenv09-source/build_preset_debug_gcc
+[0mdirenv: loading ~/gh/cb/workenv09-source/.envrc
+Preset Mode: debug_gcc
+Install Dir: /tmp/cwe-workflow09-install
+DB Dir: /home/vimkim/gh/cb/workenv09-source/.cub-workenv/databases
+Build Dir: /home/vimkim/gh/cb/workenv09-source/build_preset_debug_gcc
+Logging build output to: /home/vimkim/gh/cb/workenv09-source/build_preset_debug_gcc/build.log
+[0mdirenv: loading ~/gh/cb/workenv09-source/.envrc
+Preset Mode: debug_gcc
+Install Dir: /tmp/cwe-workflow09-install
+DB Dir: /home/vimkim/gh/cb/workenv09-source/.cub-workenv/databases
+Build Dir: /home/vimkim/gh/cb/workenv09-source/build_preset_debug_gcc
+[0/2] Re-checking globbed directories...
+[1/10] Running utility command for pl_install_jdk
+[INFO] Install JDK 8
+[2/10] Performing update step for 'catch2'
+[3/10] No patch step for 'catch2'
+[4/10] Performing configure step for 'catch2'
+loading initial cache file /home/vimkim/gh/cb/workenv09-source/build_preset_debug_gcc/unit_tests/catch2-prefix/tmp/catch2-cache-Debug.cmake
+-- Configuring done (0.0s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/vimkim/gh/cb/workenv09-source/build_preset_debug_gcc/unit_tests/catch2-prefix/src/catch2-build
+[5/10] Performing build step for 'catch2'
+ninja: no work to do.
+[6/10] No install step for 'catch2'
+[7/10] Completed 'catch2'
+[8/10] Linking CXX executable bin/cub_cas_cgw
+[9/10] Running utility command for jdbc_build
+-- Found Git: /usr/bin/git (found version "2.47.3")
+[INFO] JDBC VERSION = 11.4.0.0081
+Buildfile: /home/vimkim/gh/cb/workenv09-source/cubrid-jdbc/build.xml
+
+clean:
+
+src-jar-cubrid:
+    [mkdir] Created dir: /home/vimkim/gh/cb/workenv09-source/cubrid-jdbc/output/bin-cubrid
+    [mkdir] Created dir: /home/vimkim/gh/cb/workenv09-source/cubrid-jdbc/output/src-cubrid
+     [copy] Copying 1 file to /home/vimkim/gh/cb/workenv09-source/cubrid-jdbc/output/src-cubrid
+     [copy] Copying 98 files to /home/vimkim/gh/cb/workenv09-source/cubrid-jdbc/output/src-cubrid
+      [jar] Building jar: /home/vimkim/gh/cb/workenv09-source/cubrid-jdbc/cubrid-jdbc-11.4.0.0081-sources.jar
+
+compile-cubrid:
+    [javac] Compiling 98 source files to /home/vimkim/gh/cb/workenv09-source/cubrid-jdbc/output/bin-cubrid
+
+doc-jar-cubrid:
+    [mkdir] Created dir: /home/vimkim/gh/cb/workenv09-source/cubrid-jdbc/output/doc-cubrid
+  [javadoc] Generating Javadoc
+  [javadoc] Javadoc execution
+  [javadoc] Loading source files for package cubrid.jdbc.driver...
+  [javadoc] Loading source files for package cubrid.jdbc.jci...
+  [javadoc] Loading source files for package cubrid.jdbc.net...
+  [javadoc] Loading source files for package cubrid.jdbc.util...
+  [javadoc] Loading source files for package cubrid.sql...
+  [javadoc] Constructing Javadoc information...
+  [javadoc] Standard Doclet version 1.8.0_462
+  [javadoc] Building tree for all the packages and classes...
+  [javadoc] Building index for all the packages and classes...
+  [javadoc] Building index for all classes...
+      [jar] Building jar: /home/vimkim/gh/cb/workenv09-source/cubrid-jdbc/cubrid-jdbc-11.4.0.0081-javadoc.jar
+
+dist-cubrid:
+      [jar] Building jar: /home/vimkim/gh/cb/workenv09-source/cubrid-jdbc/cubrid-jdbc-11.4.0.0081.jar
+
+BUILD SUCCESSFUL
+Total time: 4 seconds
+[INFO] Generating cubrid_jdbc.jar finished
+[10/10] Running utility command for pl_build
+[INFO] JDBC Driver built at cubrid-jdbc submodule
+Starting a Gradle Daemon, 2 incompatible Daemons could not be reused, use --status for details
+> Task :pl_server:generateGrammarSource UP-TO-DATE
+
+> Task :pl_server:compileJava
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+Note: Some input files use unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+
+> Task :pl_server:processResources UP-TO-DATE
+> Task :pl_server:classes
+> Task :pl_server:jar
+> Task :pl_server:startScripts
+> Task :pl_server:distTar
+> Task :pl_server:distZip
+> Task :pl_server:assemble
+> Task :pl_server:check
+> Task :pl_server:build
+
+BUILD SUCCESSFUL in 18s
+7 actionable tasks: 5 executed, 2 up-to-date
+-- Install configuration: "Debug"
+-- Installing: /tmp/cwe-workflow09-install/jdbc
+-- Installing: /tmp/cwe-workflow09-install/jdbc/cubrid-jdbc-11.4.0.0081-sources.jar
+-- Installing: /tmp/cwe-workflow09-install/jdbc/cubrid-jdbc-11.4.0.0081-javadoc.jar
+-- Installing: /tmp/cwe-workflow09-install/jdbc/cubrid-jdbc-11.4.0.0081.jar
+-- Installing: /tmp/cwe-workflow09-install/jdbc/cubrid_jdbc.jar
+-- Installing: /tmp/cwe-workflow09-install/vm/pl_server.jar
+-- Up-to-date: /tmp/cwe-workflow09-install/vm/logging.properties
+-- Up-to-date: /tmp/cwe-workflow09-install/lib/libcubridsa.so.11.5
+-- Up-to-date: /tmp/cwe-workflow09-install/lib/libcubridsa.so
+-- Up-to-date: /tmp/cwe-workflow09-install/lib/libcubridcs.so.11.5
+-- Up-to-date: /tmp/cwe-workflow09-install/lib/libcubridcs.so
+-- Up-to-date: /tmp/cwe-workflow09-install/lib/libcubrid.so.11.5
+-- Up-to-date: /tmp/cwe-workflow09-install/lib/libcubrid.so
+-- Up-to-date: /tmp/cwe-workflow09-install/include/dbi.h
+-- Up-to-date: /tmp/cwe-workflow09-install/include/dbtran_def.h
+-- Up-to-date: /tmp/cwe-workflow09-install/include/dbtype_def.h
+-- Up-to-date: /tmp/cwe-workflow09-install/include/db_set_function.h
+-- Up-to-date: /tmp/cwe-workflow09-install/include/dbtype_function.h
+-- Up-to-date: /tmp/cwe-workflow09-install/include/db_date.h
+-- Up-to-date: /tmp/cwe-workflow09-install/include/db_elo.h
+-- Up-to-date: /tmp/cwe-workflow09-install/include/cache_time.h
+-- Up-to-date: /tmp/cwe-workflow09-install/include/error_code.h
+-- Up-to-date: /tmp/cwe-workflow09-install/include/cubrid_log.h
+-- Up-to-date: /tmp/cwe-workflow09-install/include/cm_stat.h
+-- Up-to-date: /tmp/cwe-workflow09-install/bin/csql
+-- Up-to-date: /tmp/cwe-workflow09-install/bin/cub_master
+-- Up-to-date: /tmp/cwe-workflow09-install/bin/cub_server
+-- Up-to-date: /tmp/cwe-workflow09-install/bin/cubrid
+-- Up-to-date: /tmp/cwe-workflow09-install/bin/cub_commdb
+-- Up-to-date: /tmp/cwe-workflow09-install/bin/cubrid_rel
+-- Up-to-date: /tmp/cwe-workflow09-install/bin/loadjava
+-- Up-to-date: /tmp/cwe-workflow09-install/bin/cub_pl
+-- Up-to-date: /tmp/cwe-workflow09-install/bin/cub_admin
+-- Up-to-date: /tmp/cwe-workflow09-install/cci/lib/libcascci.so.11.3
+-- Up-to-date: /tmp/cwe-workflow09-install/cci/lib/libcascci.so
+-- Up-to-date: /tmp/cwe-workflow09-install/cci/include/cas_cci.h
+-- Up-to-date: /tmp/cwe-workflow09-install/cci/include/compat_dbtran_def.h
+-- Up-to-date: /tmp/cwe-workflow09-install/cci/include/broker_cas_error.h
+-- Up-to-date: /tmp/cwe-workflow09-install/include/cas_cci.h
+-- Up-to-date: /tmp/cwe-workflow09-install/include/broker_cas_error.h
+-- Up-to-date: /tmp/cwe-workflow09-install/include/compat_dbtran_def.h
+-- Up-to-date: /tmp/cwe-workflow09-install/lib/libcascci.so
+-- Up-to-date: /tmp/cwe-workflow09-install/lib/libcascci.so.11.3
+-- Up-to-date: /tmp/cwe-workflow09-install/bin/cci_applier
+-- Up-to-date: /tmp/cwe-workflow09-install/bin/broker_log_converter
+-- Up-to-date: /tmp/cwe-workflow09-install/bin/broker_log_runner
+-- Up-to-date: /tmp/cwe-workflow09-install/bin/broker_tester
+-- Up-to-date: /tmp/cwe-workflow09-install/bin/cubrid_replay
+-- Up-to-date: /tmp/cwe-workflow09-install/bin/cub_broker
+-- Up-to-date: /tmp/cwe-workflow09-install/bin/cub_gateway
+-- Up-to-date: /tmp/cwe-workflow09-install/bin/broker_monitor
+-- Up-to-date: /tmp/cwe-workflow09-install/bin/gateway_monitor
+-- Up-to-date: /tmp/cwe-workflow09-install/bin/broker_changer
+-- Up-to-date: /tmp/cwe-workflow09-install/bin/cubrid_broker
+-- Up-to-date: /tmp/cwe-workflow09-install/bin/cubrid_gateway
+-- Up-to-date: /tmp/cwe-workflow09-install/bin/cub_cas
+-- Installing: /tmp/cwe-workflow09-install/bin/cub_cas_cgw
+-- Set runtime path of "/tmp/cwe-workflow09-install/bin/cub_cas_cgw" to "/tmp/cwe-workflow09-install/lib"
+-- Up-to-date: /tmp/cwe-workflow09-install/bin/cub_proxy
+-- Up-to-date: /tmp/cwe-workflow09-install/include/shard_key.h
+-- Up-to-date: /tmp/cwe-workflow09-install/bin/broker_log_top
+-- Up-to-date: /tmp/cwe-workflow09-install/lib/libbrokeradmin.so.11.5
+-- Up-to-date: /tmp/cwe-workflow09-install/lib/libbrokeradmin.so
+-- Up-to-date: /tmp/cwe-workflow09-install/lib/libcmstat.so.11.5
+-- Up-to-date: /tmp/cwe-workflow09-install/lib/libcmstat.so
+-- Up-to-date: /tmp/cwe-workflow09-install/lib/libcmdep.so.11.5
+-- Up-to-date: /tmp/cwe-workflow09-install/lib/libcmdep.so
+-- Up-to-date: /tmp/cwe-workflow09-install/bin/cub_jobsa
+-- Up-to-date: /tmp/cwe-workflow09-install/bin/cub_sainfo
+-- Up-to-date: /tmp/cwe-workflow09-install/conf/cubrid.conf
+-- Up-to-date: /tmp/cwe-workflow09-install/conf/cubrid.conf.large
+-- Up-to-date: /tmp/cwe-workflow09-install/conf/cubrid.conf.small
+-- Up-to-date: /tmp/cwe-workflow09-install/conf/cubrid_broker.conf
+-- Up-to-date: /tmp/cwe-workflow09-install/conf/cubrid_broker.conf.shard
+-- Up-to-date: /tmp/cwe-workflow09-install/conf/cubrid_gateway.conf
+-- Up-to-date: /tmp/cwe-workflow09-install/conf/cubrid_ha.conf
+-- Up-to-date: /tmp/cwe-workflow09-install/conf/cubrid_hosts.conf
+-- Up-to-date: /tmp/cwe-workflow09-install/conf/shard_connection.txt
+-- Up-to-date: /tmp/cwe-workflow09-install/conf/shard_key.txt
+-- Up-to-date: /tmp/cwe-workflow09-install/conf/cubrid_locales.all.txt
+-- Up-to-date: /tmp/cwe-workflow09-install/conf/cubrid_locales.txt
+-- Up-to-date: /tmp/cwe-workflow09-install/conf/cas_ssl_cert.crt
+-- Up-to-date: /tmp/cwe-workflow09-install/conf/cas_ssl_cert.key
+-- Up-to-date: /tmp/cwe-workflow09-install/msg/en_US.utf8
+-- Up-to-date: /tmp/cwe-workflow09-install/msg/en_US.utf8/csql.msg
+-- Up-to-date: /tmp/cwe-workflow09-install/msg/en_US.utf8/utils.msg
+-- Up-to-date: /tmp/cwe-workflow09-install/msg/en_US.utf8/cubrid.msg
+-- Up-to-date: /tmp/cwe-workflow09-install/msg/en_US.utf8
+-- Up-to-date: /tmp/cwe-workflow09-install/msg/en_US.utf8/csql.cat
+-- Up-to-date: /tmp/cwe-workflow09-install/msg/en_US.utf8/utils.cat
+-- Up-to-date: /tmp/cwe-workflow09-install/msg/en_US.utf8/cubrid.cat
+-- Up-to-date: /tmp/cwe-workflow09-install/msg/en_US
+-- Up-to-date: /tmp/cwe-workflow09-install/msg/en_US/utils.msg
+-- Up-to-date: /tmp/cwe-workflow09-install/msg/en_US/cubrid.msg
+-- Up-to-date: /tmp/cwe-workflow09-install/msg/en_US/csql.msg
+-- Up-to-date: /tmp/cwe-workflow09-install/msg/en_US
+-- Up-to-date: /tmp/cwe-workflow09-install/msg/en_US/utils.cat
+-- Up-to-date: /tmp/cwe-workflow09-install/msg/en_US/csql.cat
+-- Up-to-date: /tmp/cwe-workflow09-install/msg/en_US/cubrid.cat
+-- Up-to-date: /tmp/cwe-workflow09-install/msg/ko_KR.utf8
+-- Up-to-date: /tmp/cwe-workflow09-install/msg/ko_KR.utf8/csql.msg
+-- Up-to-date: /tmp/cwe-workflow09-install/msg/ko_KR.utf8/cubrid.msg
+-- Up-to-date: /tmp/cwe-workflow09-install/msg/ko_KR.utf8/utils.msg
+-- Up-to-date: /tmp/cwe-workflow09-install/msg/ko_KR.utf8
+-- Up-to-date: /tmp/cwe-workflow09-install/msg/ko_KR.utf8/csql.cat
+-- Up-to-date: /tmp/cwe-workflow09-install/msg/ko_KR.utf8/utils.cat
+-- Up-to-date: /tmp/cwe-workflow09-install/msg/ko_KR.utf8/cubrid.cat
+-- Up-to-date: /tmp/cwe-workflow09-install/msg/ko_KR.euckr
+-- Up-to-date: /tmp/cwe-workflow09-install/msg/ko_KR.euckr/csql.msg
+-- Up-to-date: /tmp/cwe-workflow09-install/msg/ko_KR.euckr/utils.msg
+-- Up-to-date: /tmp/cwe-workflow09-install/msg/ko_KR.euckr/cubrid.msg
+-- Up-to-date: /tmp/cwe-workflow09-install/msg/ko_KR.euckr
+-- Up-to-date: /tmp/cwe-workflow09-install/msg/ko_KR.euckr/utils.cat
+-- Up-to-date: /tmp/cwe-workflow09-install/msg/ko_KR.euckr/csql.cat
+-- Up-to-date: /tmp/cwe-workflow09-install/msg/ko_KR.euckr/cubrid.cat
+-- Up-to-date: /tmp/cwe-workflow09-install/demo/demodb_objects
+-- Up-to-date: /tmp/cwe-workflow09-install/demo/demodb_schema
+-- Up-to-date: /tmp/cwe-workflow09-install/demo/make_cubrid_demo.sh
+-- Up-to-date: /tmp/cwe-workflow09-install/share/init.d/cubrid-ha
+-- Up-to-date: /tmp/cwe-workflow09-install/share/init.d/cubrid
+-- Up-to-date: /tmp/cwe-workflow09-install/share/scripts/check_reserved.sql
+-- Up-to-date: /tmp/cwe-workflow09-install/share/scripts/broker_log_top.py
+-- Up-to-date: /tmp/cwe-workflow09-install/share/scripts/brokerstatus_to_csv.py
+-- Up-to-date: /tmp/cwe-workflow09-install/share/scripts/statdump_to_csv.py
+-- Up-to-date: /tmp/cwe-workflow09-install/share/scripts/ha/ha_make_slavedb.sh
+-- Up-to-date: /tmp/cwe-workflow09-install/share/scripts/ha/VERSION
+-- Up-to-date: /tmp/cwe-workflow09-install/share/scripts/ha/README
+-- Up-to-date: /tmp/cwe-workflow09-install/share/scripts/ha/functions/ha_check_environment.sh
+-- Up-to-date: /tmp/cwe-workflow09-install/share/scripts/ha/functions/ha_check_script.sh
+-- Up-to-date: /tmp/cwe-workflow09-install/share/scripts/ha/expect/scp_from.exp
+-- Up-to-date: /tmp/cwe-workflow09-install/share/scripts/ha/expect/scp_to.exp
+-- Up-to-date: /tmp/cwe-workflow09-install/share/scripts/ha/expect/ssh.exp
+-- Up-to-date: /tmp/cwe-workflow09-install/share/scripts/ha/common/common.sh
+-- Up-to-date: /tmp/cwe-workflow09-install/share/systemtap/tapset/cubrid_func.stp
+-- Up-to-date: /tmp/cwe-workflow09-install/share/systemtap/tapset/scripts/buffer_access.stp
+-- Up-to-date: /tmp/cwe-workflow09-install/share/systemtap/tapset/scripts/global_time.stp
+-- Up-to-date: /tmp/cwe-workflow09-install/share/systemtap/tapset/scripts/io_stat.stp
+-- Up-to-date: /tmp/cwe-workflow09-install/share/systemtap/tapset/scripts/lock_time.stp
+-- Up-to-date: /tmp/cwe-workflow09-install/share/systemtap/tapset/scripts/obj_access.stp
+-- Up-to-date: /tmp/cwe-workflow09-install/share/systemtap/tapset/scripts/query_time.stp
+-- Up-to-date: /tmp/cwe-workflow09-install/share/systemtap/tapset/scripts/transaction.stp
+-- Up-to-date: /tmp/cwe-workflow09-install/share/systemtap/tapset/scripts/topcallstack_helper.stp
+-- Up-to-date: /tmp/cwe-workflow09-install/share/systemtap/tapset/scripts/get_file_line.sh
+-- Up-to-date: /tmp/cwe-workflow09-install/share/systemtap/tapset/scripts/topcallstack
+-- Up-to-date: /tmp/cwe-workflow09-install/share/scripts/setup.sh
+-- Up-to-date: /tmp/cwe-workflow09-install/share/scripts/cubrid.sh
+-- Up-to-date: /tmp/cwe-workflow09-install/share/scripts/cubrid.csh
+-- Up-to-date: /tmp/cwe-workflow09-install/share/scripts/unloaddb.sh
+-- Up-to-date: /tmp/cwe-workflow09-install/share/scripts/restore_to_newdb.sh
+-- Up-to-date: /tmp/cwe-workflow09-install/share/scripts/check_index_ovfps.sh
+-- Up-to-date: /tmp/cwe-workflow09-install/bin/make_locale.sh
+-- Up-to-date: /tmp/cwe-workflow09-install/locales/loclib/build_locale.sh
+-- Up-to-date: /tmp/cwe-workflow09-install/locales/data
+-- Up-to-date: /tmp/cwe-workflow09-install/locales/data/codepages
+-- Up-to-date: /tmp/cwe-workflow09-install/locales/data/codepages/8859-1.TXT
+-- Up-to-date: /tmp/cwe-workflow09-install/locales/data/codepages/8859-15.TXT
+-- Up-to-date: /tmp/cwe-workflow09-install/locales/data/codepages/8859-9.TXT
+-- Up-to-date: /tmp/cwe-workflow09-install/locales/data/codepages/CP1250.TXT
+-- Up-to-date: /tmp/cwe-workflow09-install/locales/data/codepages/CP1258.TXT
+-- Up-to-date: /tmp/cwe-workflow09-install/locales/data/codepages/CP932.TXT
+-- Up-to-date: /tmp/cwe-workflow09-install/locales/data/codepages/CP936.TXT
+-- Up-to-date: /tmp/cwe-workflow09-install/locales/data/codepages/CP949.TXT
+-- Up-to-date: /tmp/cwe-workflow09-install/locales/data/ducet.txt
+-- Up-to-date: /tmp/cwe-workflow09-install/locales/data/ldml
+-- Up-to-date: /tmp/cwe-workflow09-install/locales/data/ldml/common_collations.xml
+-- Up-to-date: /tmp/cwe-workflow09-install/locales/data/ldml/cubrid_de_DE.xml
+-- Up-to-date: /tmp/cwe-workflow09-install/locales/data/ldml/cubrid_es_ES.xml
+-- Up-to-date: /tmp/cwe-workflow09-install/locales/data/ldml/cubrid_fr_FR.xml
+-- Up-to-date: /tmp/cwe-workflow09-install/locales/data/ldml/cubrid_it_IT.xml
+-- Up-to-date: /tmp/cwe-workflow09-install/locales/data/ldml/cubrid_ja_JP.xml
+-- Up-to-date: /tmp/cwe-workflow09-install/locales/data/ldml/cubrid_km_KH.xml
+-- Up-to-date: /tmp/cwe-workflow09-install/locales/data/ldml/cubrid_ko_KR.xml
+-- Up-to-date: /tmp/cwe-workflow09-install/locales/data/ldml/cubrid_ro_RO.xml
+-- Up-to-date: /tmp/cwe-workflow09-install/locales/data/ldml/cubrid_tr_TR.xml
+-- Up-to-date: /tmp/cwe-workflow09-install/locales/data/ldml/cubrid_vi_VN.xml
+-- Up-to-date: /tmp/cwe-workflow09-install/locales/data/ldml/cubrid_zh_CN.xml
+-- Up-to-date: /tmp/cwe-workflow09-install/locales/data/unicodedata.txt
+-- Up-to-date: /tmp/cwe-workflow09-install/locales/loclib/locale_lib_common.h
+-- Up-to-date: /tmp/cwe-workflow09-install/lib/libcubrid_timezones.so.11.5
+-- Up-to-date: /tmp/cwe-workflow09-install/lib/libcubrid_timezones.so
+-- Up-to-date: /tmp/cwe-workflow09-install/bin/make_tz.sh
+-- Up-to-date: /tmp/cwe-workflow09-install/timezones/tzlib/build_tz.sh
+-- Up-to-date: /tmp/cwe-workflow09-install/timezones/tzdata
+-- Up-to-date: /tmp/cwe-workflow09-install/timezones/tzdata/africa
+-- Up-to-date: /tmp/cwe-workflow09-install/timezones/tzdata/antarctica
+-- Up-to-date: /tmp/cwe-workflow09-install/timezones/tzdata/asia
+-- Up-to-date: /tmp/cwe-workflow09-install/timezones/tzdata/australasia
+-- Up-to-date: /tmp/cwe-workflow09-install/timezones/tzdata/backward
+-- Up-to-date: /tmp/cwe-workflow09-install/timezones/tzdata/etcetera
+-- Up-to-date: /tmp/cwe-workflow09-install/timezones/tzdata/europe
+-- Up-to-date: /tmp/cwe-workflow09-install/timezones/tzdata/iso3166.tab
+-- Up-to-date: /tmp/cwe-workflow09-install/timezones/tzdata/leapseconds
+-- Up-to-date: /tmp/cwe-workflow09-install/timezones/tzdata/northamerica
+-- Up-to-date: /tmp/cwe-workflow09-install/timezones/tzdata/pacificnew
+-- Up-to-date: /tmp/cwe-workflow09-install/timezones/tzdata/southamerica
+-- Up-to-date: /tmp/cwe-workflow09-install/timezones/tzdata/windowsZones.xml
+-- Up-to-date: /tmp/cwe-workflow09-install/timezones/tzdata/zone.tab
+-- Up-to-date: /tmp/cwe-workflow09-install/timezones/tzlib/timezone_lib_common.h
+-- Up-to-date: /tmp/cwe-workflow09-install/log
+-- Up-to-date: /tmp/cwe-workflow09-install/var
+-- Up-to-date: /tmp/cwe-workflow09-install/tmp
+-- Up-to-date: /tmp/cwe-workflow09-install/databases
+-- Up-to-date: /tmp/cwe-workflow09-install/var/CUBRID_SOCK
+-- Up-to-date: /tmp/cwe-workflow09-install/3rdparty
+-- Up-to-date: /tmp/cwe-workflow09-install/3rdparty/adoptium.temurin_license.txt
+-- Up-to-date: /tmp/cwe-workflow09-install/3rdparty/adoptium.temurin_license_assembly_exception.txt
+-- Up-to-date: /tmp/cwe-workflow09-install/3rdparty/libedit_license.txt
+-- Up-to-date: /tmp/cwe-workflow09-install/3rdparty/libexpat_license.txt
+-- Up-to-date: /tmp/cwe-workflow09-install/3rdparty/libodbc_license.txt
+-- Up-to-date: /tmp/cwe-workflow09-install/3rdparty/libopenssl_license.txt
+-- Up-to-date: /tmp/cwe-workflow09-install/3rdparty/libtbb_license.txt
+-- Up-to-date: /tmp/cwe-workflow09-install/3rdparty/lz4_license.txt
+-- Up-to-date: /tmp/cwe-workflow09-install/3rdparty/rapidjson_license.txt
+-- Up-to-date: /tmp/cwe-workflow09-install/3rdparty/re2_license.txt
+-- Up-to-date: /tmp/cwe-workflow09-install/./COPYING
+-- Up-to-date: /tmp/cwe-workflow09-install/./CREDITS
+-- Up-to-date: /tmp/cwe-workflow09-install/./README.md
+-- Up-to-date: /tmp/cwe-workflow09-install/./README_TAR_INSTALL
+-- Up-to-date: /tmp/cwe-workflow09-install/databases/databases.txt.sample
+-- Up-to-date: /tmp/cwe-workflow09-install/var/CUBRID_SOCK/README.txt
+-- Up-to-date: /tmp/cwe-workflow09-install/tmp/README.txt
+Build and install completed successfully!
+Build-only installation is ready. Initialize explicitly when needed:
+  cub-workenv init --worktree /home/vimkim/gh/cb/workenv09-source --install /tmp/cwe-workflow09-install --preset debug_gcc
+Existing work environments are preserved; use cub-workenv doctor after rebuilding.

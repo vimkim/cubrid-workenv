@@ -1,0 +1,53 @@
+{
+  "source_commit": "30043f492225c8350aa15455dc329c87227b5fdf",
+  "tooling_commit": "aea80789165951be4602d042476c88bd5105e049",
+  "preset": "debug_gcc",
+  "build": "/home/vimkim/gh/cb/workenv09-source/build_preset_debug_gcc",
+  "install": "/tmp/cwe-workflow09-install",
+  "JAVA_HOME": "/home/vimkim/.local/share/mise/installs/java/temurin-8.0.462+8",
+  "commands": [
+    {
+      "command": "just -f /home/vimkim/my-cubrid/cubrid-justfiles/justfile -d . prepare-build",
+      "rc": 0,
+      "log": "prepare.txt"
+    },
+    {
+      "command": "direnv exec . just configure",
+      "rc": 0,
+      "log": "configure.txt"
+    },
+    {
+      "command": "direnv exec . just build",
+      "rc": 0,
+      "log": "build.txt"
+    },
+    {
+      "command": "git submodule update --init cubrid-jdbc",
+      "rc": 0,
+      "log": "jdbc-prepare.txt"
+    },
+    {
+      "command": "direnv exec . just configure-build",
+      "rc": 0,
+      "log": "jdbc-configure-build.txt"
+    },
+    {
+      "command": "direnv exec . just ctest",
+      "rc": 0,
+      "log": "ctest.txt",
+      "limitation": "No tests were found; no engine ctest coverage claimed"
+    }
+  ],
+  "links": {
+    "justfile": "/home/vimkim/my-cubrid-workenv-07/stow/cubrid/justfile",
+    ".just": "/home/vimkim/my-cubrid-workenv-07/stow/cubrid/.just",
+    ".envrc": "/home/vimkim/my-cubrid-workenv-07/stow/cubrid/.envrc",
+    "CMakeUserPresets.json": "/home/vimkim/my-cubrid-workenv-07/stow/cubrid/CMakeUserPresets.json"
+  },
+  "binary_sha256": {
+    "bin/cubrid": "cbdb1638a64f577f26c82c02aed57e4a0aa623dccb7e55078ec21ccd5c2b9248",
+    "bin/csql": "78c9a66d72942e27d907a1743b4d499966d551976adeeedd09e7130e9e9c63b5",
+    "bin/cub_server": "2fde242c05a9fbe3344c24472ef4f73a16fc90db395129290f9d9edf0c7031d4",
+    "jdbc/cubrid_jdbc.jar": "afe041d38b6797c2c3fe7fe0b57ac418ee6abe19748368d8af8e2268d1dcd99e"
+  }
+}

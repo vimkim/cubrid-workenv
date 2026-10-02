@@ -2,23 +2,21 @@
 
 ## Status and scope
 
-The `cub-workenv` CLI is planned, not implemented. These instructions describe the agreed execution model; they do not claim that initialization or runtime protection has already been verified. Container tests follow the separate `cubrid-box` workflow.
+The CLI implements explicit preparation, environment loading and read-only diagnosis. Use [the workflow](../workflow.md) for preparation, failed-init recovery and removal; use [acceptance evidence](../evidence/ticket09-workflow.md) for tested builds and limits. Container tests follow the separate `cubrid-box` workflow.
 
 ## Separate physical databases
 
 After initialization assigns nonconflicting resources and direnv loads the intended worktree environment, ordinary `cubrid` and `csql` commands may run directly. Agents do not have to prefix every host database test with `cub-workenv run`.
 
-Use the selected worktree's binaries, configuration, database registry, and resource assignments. Test runners must preserve that selection in child processes. Initialization avoids known resource conflicts at that time; it does not continuously defend against later interference by external tools. Diagnose suspected problems explicitly, using `cub-workenv doctor` once available.
+Use the selected worktree's binaries, configuration, database registry, and resource assignments. Test runners must preserve that selection in child processes. Initialization avoids known resource conflicts at that time; it does not continuously defend against later interference by external tools. Diagnose suspected problems explicitly, using `cub-workenv doctor`.
 
 ## Shared physical database storage
 
 Different worktrees may intentionally reuse one physical database, but concurrent independent opening must be prevented. This concerns both a second server and standalone access such as `csql -S`. An ordinary `csql` client connecting to an existing server is allowed and does not need another exclusive database lock.
 
-A disposable-database experiment on Linux debug build 11.5.0.2602-a0026f9 verified rejection of a competing server and standalone access while the first server remained healthy, followed by successful use after normal shutdown. See [results and limits](../../experiments/native-db-exclusion/README.md). Abnormal termination, altered locking settings, and other builds remain unverified.
+Native normal-path rejection of a competing server and standalone opener, existing-server health and sequential reuse have been checked on the builds identified in the [acceptance map](../evidence/ticket09-workflow.md). The original [experiment](../../experiments/native-db-exclusion/README.md) remains a separate historical evidence set. Abnormal termination, changed locking settings, network filesystems and cross-version compatibility remain unverified.
 
-The tested normal path does not establish a need for additional workenv locking. Native errors already identify the owner PID, user, host, and database path; mapping that information to a worktree may still be useful. Use further requirements and evidence to decide whether `cub-workenv run` is needed for additional exclusion, useful owner diagnostics, or both. It is a candidate interface, not an established requirement for all tests or all database launches. If provided, it should be explicit rather than transparently replacing `cubrid` or `csql` through PATH wrappers.
-
-Report the owning worktree and process when possible. Any additional protection must last for database use, not merely the launch command. Manual recovery after abnormal termination is acceptable; database format compatibility between versions remains the user's responsibility.
+Preserve native owner PID, user, host and physical-path errors. `doctor --native-error-file PATH` can supplement them with a worktree only when current process, native lock and registration evidence agree. The CLI does not add a DB lease or `run` wrapper. Manual recovery needs explicit ownership checks; version compatibility remains the user's responsibility.
 
 ## Protect other instances
 
@@ -28,4 +26,4 @@ Neither initialization nor a command wrapper is a container or sandbox. Inspect 
 
 ## Discovery by agents in CUBRID worktrees
 
-This repository's AGENTS.md applies only within this repository. When this workflow is implemented, link the verified execution guidance from the instructions applicable to CUBRID source worktrees. No external repository guidance has been changed by this document.
+This repository's AGENTS.md applies only within this repository. The companion personal-tooling topic includes source-worktree guidance. Selecting or applying that topic remains separate from this CLI's local integration; existing source trees have not been globally migrated. Confirm which guidance and shared symlinks a source tree actually uses.

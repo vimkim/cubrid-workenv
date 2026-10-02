@@ -1,0 +1,242 @@
+[0mdirenv: loading ~/gh/cb/workenv09-source/.envrc
+cub-workenv: build-only; build and install, then run cub-workenv init explicitly.
+Preset Mode: debug_gcc
+Install Dir: /tmp/cwe-workflow09-install
+Runtime: build-only
+Build Dir: /home/vimkim/gh/cb/workenv09-source/build_preset_debug_gcc
+[0mdirenv: loading ~/gh/cb/workenv09-source/.envrc
+cub-workenv: build-only; build and install, then run cub-workenv init explicitly.
+Preset Mode: debug_gcc
+Install Dir: /tmp/cwe-workflow09-install
+Runtime: build-only
+Build Dir: /home/vimkim/gh/cb/workenv09-source/build_preset_debug_gcc
+[0mdirenv: loading ~/gh/cb/workenv09-source/.envrc
+cub-workenv: build-only; build and install, then run cub-workenv init explicitly.
+Preset Mode: debug_gcc
+Install Dir: /tmp/cwe-workflow09-install
+Runtime: build-only
+Build Dir: /home/vimkim/gh/cb/workenv09-source/build_preset_debug_gcc
+Using JAVA_HOME JDK: /home/vimkim/.local/share/mise/installs/java/temurin-8.0.462+8
+[0mdirenv: loading ~/gh/cb/workenv09-source/.envrc
+cub-workenv: build-only; build and install, then run cub-workenv init explicitly.
+Preset Mode: debug_gcc
+Install Dir: /tmp/cwe-workflow09-install
+Runtime: build-only
+Build Dir: /home/vimkim/gh/cb/workenv09-source/build_preset_debug_gcc
+Preset CMake variables:
+
+  CMAKE_BUILD_TYPE="Debug"
+  CMAKE_COLOR_DIAGNOSTICS="ON"
+  CMAKE_CXX_COMPILER="g++"
+  CMAKE_CXX_COMPILER_LAUNCHER="ccache"
+  CMAKE_CXX_FLAGS="-fdiagnostics-color=always -Wno-template-body -isystem /home/vimkim/gh/cb/workenv09-source/.just/include"
+  CMAKE_CXX_FLAGS_DEBUG="-O0 -ggdb3 -fno-omit-frame-pointer -Wno-error=format -Wno-error -Wno-error=maybe-uninitialized -Wno-error=parentheses"
+  CMAKE_CXX_STANDARD="17"
+  CMAKE_CXX_STANDARD_REQUIRED="ON"
+  CMAKE_C_COMPILER="gcc"
+  CMAKE_C_COMPILER_LAUNCHER="ccache"
+  CMAKE_C_FLAGS="-fdiagnostics-color=always"
+  CMAKE_C_FLAGS_DEBUG="-O0 -ggdb3 -Wno-int-conversion -Wno-incompatible-pointer-types -Wno-implicit-function-declaration -fno-omit-frame-pointer -Wno-error=format -Wno-error -Wno-error=maybe-uninitialized -Wno-error=parentheses"
+  CMAKE_EXPORT_COMPILE_COMMANDS="ON"
+  CMAKE_INSTALL_PREFIX="/tmp/cwe-workflow09-install"
+  CUBVEC_TEAM_BUILD="ON"
+  ENABLE_CUBVEC_LOG="ON"
+  UNIT_TEST_OOS="ON"
+  UNIT_TEST_PAGE_BUFFER="ON"
+  UNIT_TEST_SPAGE="ON"
+  VIMKIM_BUILD="ON"
+  WITH_CCI="true"
+
+Preset environment variables:
+
+  CC="gcc -std=gnu17"
+  CXX="g++ -Wno-error=stringop-overflow"
+
+-- ======== CMakeLists.txt
+    ==== with_unit_tests() = 1
+-- The C compiler identification is GNU 11.5.0
+-- The CXX compiler identification is GNU 11.5.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/gcc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/g++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+--   OS = UNIX
+--   CMAKE_RUNTIME_OUTPUT_DIRECTORY=/home/vimkim/gh/cb/workenv09-source/build_preset_debug_gcc/bin
+-- Get version information from VERSION
+-- Found Git: /usr/bin/git (found version "2.47.3")
+-- Build CUBRID 11.5.0.2635-30043f4 64bit Debug on Linux x86_64
+Including Third Party Libraries
+-- Build with flex and bison library: SYSTEM
+-- Build with expat library: EXTERNAL
+-- Build with editline library: EXTERNAL
+-- Build with openssl library: EXTERNAL
+-- Build with unixODBC library: EXTERNAL
+-- Build with RE2 library: EXTERNAL
+-- Build with LZ4 library: EXTERNAL
+-- Build with TBB library: EXTERNAL
+-- Build 3rdparty libraries with make -j16
+-- Found FLEX: /usr/bin/flex (found suitable version "2.6.4", minimum required is "2.5.34")
+-- Found BISON: /home/vimkim/.local/opt/bison-3.0.5/bin/bison (found suitable version "3.0.5", minimum required is "3.0.0")
+-- Looking for asprintf
+-- Looking for asprintf - found
+-- Looking for vasprintf
+-- Looking for vasprintf - found
+-- Looking for basename
+-- Looking for basename - found
+-- Looking for dirname
+-- Looking for dirname - found
+-- Looking for ctime_r
+-- Looking for ctime_r - found
+-- Looking for localtime_r
+-- Looking for localtime_r - found
+-- Looking for drand48_r
+-- Looking for drand48_r - found
+-- Looking for gethostbyname_r
+-- Looking for gethostbyname_r - found
+-- Looking for getopt_long
+-- Looking for getopt_long - found
+-- Looking for open_memstream
+-- Looking for open_memstream - found
+-- Looking for strdup
+-- Looking for strdup - found
+-- Looking for strlcpy
+-- Looking for strlcpy - not found
+-- Looking for err.h
+-- Looking for err.h - found
+-- Looking for getopt.h
+-- Looking for getopt.h - found
+-- Looking for inttypes.h
+-- Looking for inttypes.h - found
+-- Looking for libgen.h
+-- Looking for libgen.h - found
+-- Looking for limits.h
+-- Looking for limits.h - found
+-- Looking for memory.h
+-- Looking for memory.h - found
+-- Looking for nl_types.h
+-- Looking for nl_types.h - found
+-- Looking for regex.h
+-- Looking for regex.h - found
+-- Looking for rpc/des_crypt.h
+-- Looking for rpc/des_crypt.h - not found
+-- Looking for stdbool.h
+-- Looking for stdbool.h - found
+-- Looking for stdint.h
+-- Looking for stdint.h - found
+-- Looking for stdlib.h
+-- Looking for stdlib.h - found
+-- Looking for stddef.h
+-- Looking for stddef.h - found
+-- Looking for string.h
+-- Looking for string.h - found
+-- Looking for strings.h
+-- Looking for strings.h - found
+-- Looking for sys/param.h
+-- Looking for sys/param.h - found
+-- Looking for sys/stat.h
+-- Looking for sys/stat.h - found
+-- Looking for sys/types.h
+-- Looking for sys/types.h - found
+-- Looking for unistd.h
+-- Looking for unistd.h - found
+-- Check size of char
+-- Check size of char - done
+-- Check size of short
+-- Check size of short - done
+-- Check size of int
+-- Check size of int - done
+-- Check size of long
+-- Check size of long - done
+-- Check size of long long
+-- Check size of long long - done
+-- Check size of void *
+-- Check size of void * - done
+-- Check size of byte_t
+-- Check size of byte_t - failed
+-- Check size of int8_t
+-- Check size of int8_t - done
+-- Check size of int16_t
+-- Check size of int16_t - done
+-- Check size of int32_t
+-- Check size of int32_t - done
+-- Check size of int64_t
+-- Check size of int64_t - done
+-- Check size of intptr_t
+-- Check size of intptr_t - done
+-- Check size of uint8_t
+-- Check size of uint8_t - done
+-- Check size of uint16_t
+-- Check size of uint16_t - done
+-- Check size of uint32_t
+-- Check size of uint32_t - done
+-- Check size of uint64_t
+-- Check size of uint64_t - done
+-- Check size of uintptr_t
+-- Check size of uintptr_t - done
+-- Check size of off_t
+-- Check size of off_t - done
+-- Check size of size_t
+-- Check size of size_t - done
+-- Check size of pid_t
+-- Check size of pid_t - done
+-- Check size of off64_t
+-- Check size of off64_t - done
+-- Checking prototype gethostbyname_r for HAVE_GETHOSTBYNAME_R_GLIBC
+-- Checking prototype gethostbyname_r for HAVE_GETHOSTBYNAME_R_GLIBC - True
+-- Checking prototype gethostbyname_r for HAVE_GETHOSTBYNAME_R_SOLARIS
+-- Checking prototype gethostbyname_r for HAVE_GETHOSTBYNAME_R_SOLARIS - False
+-- Checking prototype gethostbyname_r for HAVE_GETHOSTBYNAME_R_HOSTENT_DATA
+-- Checking prototype gethostbyname_r for HAVE_GETHOSTBYNAME_R_HOSTENT_DATA - False
+-- Performing Test TIME_WITH_SYS_TIME
+-- Performing Test TIME_WITH_SYS_TIME - Success
+-- Performing Test HAVE_GCC_ATOMIC_BUILTINS
+-- Performing Test HAVE_GCC_ATOMIC_BUILTINS - Success
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE
+-- Looking for sys/sdt.h
+-- Looking for sys/sdt.h - found
+-- Default install prefix: /tmp/cwe-workflow09-install
+-- JAVA_HOME: /home/vimkim/gh/cb/workenv09-source/build_preset_debug_gcc/vm/jdk8
+-- Found Java: /home/vimkim/gh/cb/workenv09-source/build_preset_debug_gcc/vm/jdk8/bin/java (found version "1.8.0.462")
+-- Found JNI: /home/vimkim/gh/cb/workenv09-source/build_preset_debug_gcc/vm/jdk8/include  found components: AWT JVM
+-- Found Java: /home/vimkim/gh/cb/workenv09-source/build_preset_debug_gcc/vm/jdk8/bin/java
+-- Found JNI: /home/vimkim/gh/cb/workenv09-source/build_preset_debug_gcc/vm/jdk8/include;/home/vimkim/gh/cb/workenv09-source/build_preset_debug_gcc/vm/jdk8/include/linux;/home/vimkim/gh/cb/workenv09-source/build_preset_debug_gcc/vm/jdk8/include
+-- ======== WITH_CCI ==========
+-- Get version information from /home/vimkim/gh/cb/workenv09-source/cubrid-cci/BUILD_NUMBER
+-- CCI_BUILD_NUMBER:[11.3.0.0049-79d0888]
+-- CCI component install dirs: cci/bin, cci/lib, cci/include
+-- Building CGW libraries.
+CMake Warning (dev) at cm_common/CMakeLists.txt:104 (install):
+  Target cmstat has PUBLIC_HEADER files but no PUBLIC_HEADER DESTINATION.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at cm_common/CMakeLists.txt:104 (install):
+  Target cmdep has PUBLIC_HEADER files but no PUBLIC_HEADER DESTINATION.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+-- .. timezone shared library
+-- .... gen_timezone executable
+-- ...... source files: /home/vimkim/gh/cb/workenv09-source/src/executables/generate_timezone.cpp
+-- .... generate timezone command
+-- .... cubrid_timezones lib
+  unit_tests/...
+   common
+-- Get version information CCI_VERSION: 11.3.0.0049-79d0888
+-- Configuring done (5.0s)
+-- Generating done (0.2s)
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    CUBVEC_TEAM_BUILD
+    ENABLE_CUBVEC_LOG
+    VIMKIM_BUILD
+
+
+-- Build files have been written to: /home/vimkim/gh/cb/workenv09-source/build_preset_debug_gcc

@@ -1,0 +1,3 @@
+testdb		/home/vimkim/tmp/cwe-flow09-insuwk4h/b/.cub-workenv/db/testdb/data	localhost	/home/vimkim/tmp/cwe-flow09-insuwk4h/b/.cub-workenv/db/testdb/log	file:/home/vimkim/tmp/cwe-flow09-insuwk4h/b/.cub-workenv/db/testdb/lob
+shareprobe	/home/vimkim/tmp/cwe-flow09-insuwk4h/shared09/data	localhost	/home/vimkim/tmp/cwe-flow09-insuwk4h/shared09/log	file:/home/vimkim/tmp/cwe-flow09-insuwk4h/shared09/lob
+sharefinal	/home/vimkim/tmp/cwe-flow09-insuwk4h/sharefinal/data	localhost	/home/vimkim/tmp/cwe-flow09-insuwk4h/sharefinal/log	file:/home/vimkim/tmp/cwe-flow09-insuwk4h/sharefinal/lob

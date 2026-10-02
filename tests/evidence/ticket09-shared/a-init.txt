@@ -1,0 +1,2 @@
+Initialized /tmp/cwe-lock-o6hfuip1/a-source with /tmp/cwe-lock-o6hfuip1/a (preset debug_gcc).
+Source /tmp/cwe-lock-o6hfuip1/a-source/.cub-workenv/env.sh in bash; use ordinary cubrid and csql commands.

@@ -1,0 +1,10 @@
+1 row affected. (0.001679 sec) Committed. (0.000357 sec)
+Execute OK. (0.000105 sec)
+
+=== <Result of SELECT Command in Line 1> ===
+
+              count(*)
+======================
+                     2
+
+1 row selected. (0.001948 sec) Committed. (0.000065 sec)

@@ -1,0 +1,2 @@
+@ cubrid server status
+ Server testdb (rel 11.5.0, pid 1303051)

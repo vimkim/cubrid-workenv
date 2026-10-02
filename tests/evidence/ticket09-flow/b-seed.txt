@@ -1,0 +1,8 @@
+[0mdirenv: loading ~/tmp/cwe-flow09-insuwk4h/b/.envrc
+Preset Mode: debug_gcc
+Install Dir: /home/vimkim/tmp/cwe-flow09-insuwk4h/install-b
+DB Dir: /home/vimkim/tmp/cwe-flow09-insuwk4h/b/.cub-workenv/databases
+Build Dir: /home/vimkim/tmp/cwe-flow09-insuwk4h/b/build_preset_debug_gcc
+Execute OK. (0.008246 sec) Committed. (0.000507 sec)
+1 row affected. (0.001505 sec) Committed. (0.000225 sec)
+Execute OK. (0.000058 sec)

@@ -6,7 +6,11 @@ import sys
 
 
 def main():
-    parser = argparse.ArgumentParser(prog='cub-workenv')
+    parser = argparse.ArgumentParser(
+        prog='cub-workenv',
+        description='Prepare a built host worktree explicitly; use ordinary cubrid/csql after loading its environment.',
+        epilog='Doctor is read-only. Native DB locking has bounded normal-path verification; init is not a sandbox. '
+               'See docs/workflow.md for manual recovery, external DB lifetime and build-version compatibility.')
     commands = parser.add_subparsers(dest='command', required=True)
     init = commands.add_parser('init', help='explicitly prepare a selected installation and testdb')
     init.add_argument('--worktree', type=Path, default=Path.cwd())
@@ -25,7 +29,7 @@ def main():
     init.add_argument('--java-home', type=Path, default=Path(os.environ['JAVA_HOME']) if os.environ.get('JAVA_HOME') else None,
                       help='JDK for PL (defaults to JAVA_HOME; otherwise uses CUBRID build default)')
     init.add_argument('--database-registry', type=Path, help='copy existing local DB registrations; never copy another instance settings')
-    init.add_argument('--no-db', action='store_true')
+    init.add_argument('--no-db', action='store_true', help='prepare only; create a database later with create-db')
     init.add_argument('--db-path', type=Path)
     create = commands.add_parser('create-db', help='create an additional database without replacing existing storage')
     create.add_argument('name')

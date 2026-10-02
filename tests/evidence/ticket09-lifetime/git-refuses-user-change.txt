@@ -1,0 +1,1 @@
+fatal: '/tmp/cwe-life-1r2uz062/a-source' contains modified or untracked files, use --force to delete it

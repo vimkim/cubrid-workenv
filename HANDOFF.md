@@ -2,29 +2,25 @@
 
 ## 시작 순서
 
-1. `/home/vimkim/my-cubrid/CUBRID.md`와 적용되는 `AGENTS.md`를 읽고 현재 branch, worktree, working-tree 상태를 확인한다. 기존 사용자 변경을 보존한다.
-2. [구현 명세](.scratch/workenv/spec.md)를 현재 동작 계약으로 읽는다. [용어집](GLOSSARY.md)과 [요구사항](docs/requirements.md)은 용어와 배경을 제공한다. 시간순 [인터뷰](.scratch/workenv/design-interview.md)에 남아 있는 과거 제안보다 최종 명세를 우선한다.
-3. 포트·UDS·shared memory 배정 전에 [인스턴스 격리 소스 인계](docs/handoff-instance-isolation.md)를 읽는다. 공유 물리 DB 관련 결정에는 [native 실험 결과](experiments/native-db-exclusion/README.md)를 사용하되 검증 범위를 넓혀 주장하지 않는다.
-4. 구현을 요청받으면 local Markdown tracker에 명세로부터 작은 구현 티켓을 만들거나 주어진 티켓을 수행한다. tracker 규칙은 [issue-tracker](docs/agents/issue-tracker.md)에 있다. 명세 작성 자체는 CLI 구현 요청이 아니다.
+1. `/home/vimkim/my-cubrid/CUBRID.md`와 적용되는 `AGENTS.md`를 읽고 branch, worktree, 상태를 확인한다.
+2. [구현 명세](.scratch/workenv/spec.md)와 [용어집](GLOSSARY.md)을 읽는다. 명세는 계약이며 과거 인터뷰 제안보다 우선한다.
+3. 현재 구현·통합 상태는 [구현 기록](.scratch/workenv/implementation.md), 명세별 증거는 [최종 검증](docs/evidence/ticket09-workflow.md)을 따른다. 설계 ledger 249와 구현 ledger 256을 구분한다.
+4. 실행·복구·삭제 작업에는 [사용자 흐름](docs/workflow.md), agent 실행에는 [실행 지침](docs/agents/test-execution.md)을 사용한다. 자원 배정 변경 전에는 [소스 조사](docs/handoff-instance-isolation.md)를 읽되 runtime 증거와 구분한다.
 
-## 현재 완료된 것
+## 현재 동작
 
-프로젝트 이름은 `cubrid-workenv`, CLI 이름은 `cub-workenv`다. 초기화·진단·환경 로딩·자원 배정·DB 수명에 대한 사용자 합의를 명세로 정리했다. CLI는 아직 구현하지 않았다.
+CLI `cub-workenv`는 명시적 `init`, `init --no-db`, `create-db`, 가벼운 `env`, 읽기 전용 `doctor`를 제공한다. 준비된 환경에서 일반 `cubrid`·`csql`을 직접 실행한다. 반복 init은 준비된 상태를 변경하지 않는다. 실패한 init은 단계·할당·DB 단서를 남기므로 범위를 바꾸어 재실행하는 것만으로 복구되지 않는다.
 
-설치된 Linux debug 빌드 `11.5.0.2602-a0026f9`에서 동일 물리 DB의 두 번째 서버와 `csql -S`가 native 잠금으로 거부되는 것을 검증했다. 기존 서버의 쓰기·조회와 정상 종료 뒤 순차 재사용도 확인했다. 사용자·호스트·PID·DB 경로가 native 오류에 포함된다. 다른 버전, 비정상 종료, 특수 유틸리티 경로는 이 실험의 증명 범위가 아니다.
+숫자 자원은 협력하는 host allocation namespace에서 배정한다. 정지한 worktree의 할당도 유지하며, 고갈 시 삭제된 worktree의 미사용 자원만 회수한다. 외부 도구의 사후 침범 방지나 sandbox는 제공하지 않는다. 공유 물리 DB의 검증된 정상 경로는 native 잠금을 사용하며 별도 run 강제·lease를 추가하지 않는다. 버전 호환성과 비정상 종료는 별도 판단이 필요하다.
 
-일반 `cubrid`·`csql` 사용에는 `cub-workenv run`을 강제하지 않는다. workenv는 명시적 초기화와 설정 충돌 회피에 집중한다. 전체 도구의 다중 인스턴스 격리나 빠른 환경 로딩이 구현·검증 완료된 것은 아니다.
+## 두 저장소의 적용 경계
 
-## 기존 도구와 연동
+개인 tooling 후보는 `/home/vimkim/my-cubrid-workenv-07`, `impl/workenv-07`, `74a13cf2508e1da8c528b0c0f1723566ab8a853d`이다. runtime 검증은 동일 코드의 직전 `aea80789165951be4602d042476c88bd5105e049`에서 수행했고 이후 변경은 문서 정정이다. 후보의 공유 envrc/build coordinator는 자동 init·진입 full validation을 제거한다. 후보를 `MY_CUBRID`와 `CUB_WORKENV_CLI`로 선택한 별도 fixture에서 실제 CUBRID source build를 검증했다.
 
-`/home/vimkim/my-cubrid`의 기존 runtime 도구, build coordinator와 공유 envrc를 조사했다. 기존 흐름에는 설치 후 자동 runtime 초기화와 진입 시 전체 validation이 있으므로 새 흐름과의 연동 작업이 필요하다. 기존 설정을 일괄 덮어쓰거나 기존 DB를 자동 이관하지 않는다.
+기존 source worktree가 tooling main의 `.envrc`·justfile을 직접 symlink하므로 그 저장소 적용은 기존 환경에 영향을 줄 수 있다. CLI 저장소 merge가 tooling의 전역 적용·restow·기존 DB 이관을 암묵적으로 승인하지 않는다. 최종 리뷰에서 두 저장소 diff와 적용 결정을 분리한다. 기존 develop의 사용자 변경과 설치는 보존한다.
 
-`/home/vimkim/gh/cb/my-cubrid-runtime-testdir`는 이전 조사 시작점이다. 이름만으로 초기화된 실험 환경이라고 가정하지 않고 현재 파일을 확인한다. direnv 지연의 이전 개선은 별도 도구의 측정 결과이며 새 CLI 성능 검증이 아니다.
+container는 별도 `cubrid-box` 책임이다. host init을 container의 전제조건으로 추가하지 않는다. HA·Manager·자동 복구·DB 변환은 범위 밖이다.
 
-컨테이너는 별도 `/home/vimkim/gh/cubrid-box` 프로젝트의 책임이다. 호스트 초기화를 container의 전제조건으로 추가하거나 상대 프로젝트 파일을 직접 변경하지 않는다.
+## 다음 작업
 
-## 작업 상태와 검토
-
-관련 work-tracker 항목은 249다. 현재 상태와 다음 작업은 ledger 및 Git 상태로 확인한다. 저장소 변경은 sibling topic worktree에서 수행하고 의미 있는 변경을 검증·커밋한다. 로컬 rebase와 fast-forward merge는 사용자 확인 후 수행하며 push는 별도 요청이 필요하다.
-
-구현 티켓은 [티켓 목록](.scratch/workenv/tickets.md)에 있으며, 다음 시작점은 선행 조건이 없는 01번이다. 일반 소스 worktree의 agent guidance 연결, 기존 도구 연동, 수동 복구 절차와 최종 사용자 흐름은 실제 구현에서 완료해야 한다.
+부모 orchestration agent가 최종 Standards/Spec 리뷰, 지적사항 수정, 실제 통합 기록을 관리한다. 완료된 topic commit을 검토한 뒤 사용자 확인으로 main에 rebase/fast-forward한다. push와 배포는 별도 요청이 필요하다. 소스 실험 cleanup 상태는 최종 검증 문서를 따른다.

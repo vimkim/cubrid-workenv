@@ -1,0 +1,97 @@
+{
+  "conf": {
+    "type": "directory"
+  },
+  "databases": {
+    "type": "directory"
+  },
+  "db": {
+    "type": "directory"
+  },
+  "external-link": {
+    "type": "symlink",
+    "target": "/tmp/cwe-life-1r2uz062/external-db"
+  },
+  "init.lock": {
+    "type": "file",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "state.json": {
+    "type": "file",
+    "sha256": "cc971d82c59362b74676c01b2f605a323fd2252baaaf8840efa937eab457cb9a"
+  },
+  "createdb-testdb.log": {
+    "type": "file",
+    "sha256": "ff48e444b7ab17b59063ee5c9eec56b01ea8fd04dcb8bd8a597ac5a77551c7a5"
+  },
+  "env.sh": {
+    "type": "file",
+    "sha256": "11fd480b1cad7206eaf9f48b1ddb20d2b4233dda84987b9d79ee6a34878a4fc6"
+  },
+  "createdb-externaldb.log": {
+    "type": "file",
+    "sha256": "ff48e444b7ab17b59063ee5c9eec56b01ea8fd04dcb8bd8a597ac5a77551c7a5"
+  },
+  "conf/cubrid.conf": {
+    "type": "file",
+    "sha256": "84d18d71a2b27e5ca2644977e4ca20a50665a9063034904837775cd8e166ecdc"
+  },
+  "conf/cubrid_broker.conf": {
+    "type": "file",
+    "sha256": "be5926845b57fb6dfe939c73c1a4c780d71408b7faef6ee7fc5be3775e9ca2c2"
+  },
+  "databases/databases.txt": {
+    "type": "file",
+    "sha256": "1cde8fa3680f3e91e2c0f851586916e8e8390324cc4c63a44bf37eeafacc44b3"
+  },
+  "db/testdb": {
+    "type": "directory"
+  },
+  "db/testdb/data": {
+    "type": "directory"
+  },
+  "db/testdb/log": {
+    "type": "directory"
+  },
+  "db/testdb/lob": {
+    "type": "directory"
+  },
+  "db/testdb/data/testdb_vinf": {
+    "type": "file",
+    "sha256": "d031251a34cdee4e947d48fcc15a715afad990f309d023e26729d6296408b24a"
+  },
+  "db/testdb/data/testdb": {
+    "type": "file",
+    "sha256": "62c6009b71f06ebb383623d47f8446048f5ff2a82c402817d0a084f13dd205ea"
+  },
+  "db/testdb/data/testdb_keys": {
+    "type": "file",
+    "sha256": "0ba9709e7afcdd33f29c8b0727e3df5e8def63d659346e200bdf72f4ea0048be"
+  },
+  "db/testdb/data/testdb_x001": {
+    "type": "file",
+    "sha256": "078f27d05894dcd69df7812975fb245a7ec2e33022818112d027a2d3c1a0d57e"
+  },
+  "db/testdb/log/testdb_lgat": {
+    "type": "file",
+    "sha256": "c0d6ffef8caaec96c00ce6f0744c8717bffcb60e28183d87aa2846cabfbb3efd"
+  },
+  "db/testdb/log/testdb_lginf": {
+    "type": "file",
+    "sha256": "c1b4e438b99f82e19cd2d59ce82ca58fb5d92ddfd533fa38f0a8f79a41b666b8"
+  },
+  "db/testdb/log/testdb_lgar_t": {
+    "type": "file",
+    "sha256": "2b832e87290ced1c229fe76b5b609d6e6e7702dfd4535e0bc809dac3cced76fa"
+  },
+  "db/testdb/lob/57715760": {
+    "type": "directory"
+  },
+  "db/testdb/lob/57715760/ces_465": {
+    "type": "directory"
+  },
+  "db/testdb/lob/57715760/ces_465/dba.sentinel.00001790931497105526_6259": {
+    "type": "file",
+    "sha256": "9d66963548610782d2230b9ed145ab872213fd2c4b0f7f9e0f3d0f602c1fb8cd"
+  }
+}

@@ -1,0 +1,102 @@
+
+Time: 10/02/26 18:00:10.307 - DEBUG *** file /home/vimkim/gh/cb/workenv09-source/src/storage/file_io.c, line 2208
+Created volume /home/vimkim/tmp/cwe-flow09-insuwk4h/shared09/log/shareprobe_dwb
+
+Time: 10/02/26 18:00:10.311 - DEBUG *** file /home/vimkim/gh/cb/workenv09-source/src/transaction/log_manager.c, line 1064
+LOG INITIALIZE
+	db_fullname = /home/vimkim/tmp/cwe-flow09-insuwk4h/shared09/data/shareprobe
+	logpath = /home/vimkim/tmp/cwe-flow09-insuwk4h/shared09/log
+	prefix_logname = shareprobe
+	ismedia_crash = 0
+
+Time: 10/02/26 18:00:10.328 - DEBUG *** file /home/vimkim/gh/cb/workenv09-source/src/storage/file_io.c, line 2768
+Destroyed volume /home/vimkim/tmp/cwe-flow09-insuwk4h/shared09/log/shareprobe_lgar_t
+
+Time: 10/02/26 18:00:10.328 - DEBUG *** file /home/vimkim/gh/cb/workenv09-source/src/storage/file_io.c, line 2208
+Created volume /home/vimkim/tmp/cwe-flow09-insuwk4h/shared09/log/shareprobe_lgar_t
+
+Time: 10/02/26 18:00:10.332 - DEBUG *** file /home/vimkim/gh/cb/workenv09-source/src/transaction/log_manager.c, line 1545
+log_initialize_internal: end of log initializaton, append_lsa = (174|13384)
+
+Time: 10/02/26 18:00:11.155 - DEBUG *** file /home/vimkim/gh/cb/workenv09-source/src/sp/pl_connection.cpp, line 185
+pl_connection_pool: connection retire (0)
+
+Time: 10/02/26 18:00:11.157 - DEBUG *** file /home/vimkim/gh/cb/workenv09-source/src/sp/pl_connection.cpp, line 185
+pl_connection_pool: connection retire (1)
+
+Time: 10/02/26 18:00:11.157 - DEBUG *** file /home/vimkim/gh/cb/workenv09-source/src/connection/server_support.c, line 1560
+css_change_ha_server_state: ha_Server_state idle state active force f heartbeat t
+
+Time: 10/02/26 18:00:11.157 - DEBUG *** file /home/vimkim/gh/cb/workenv09-source/src/connection/server_support.c, line 1405
+css_transit_ha_server_state: ha_Server_state (idle) -> (active)
+
+Time: 10/02/26 18:00:11.157 - DEBUG *** file /home/vimkim/gh/cb/workenv09-source/src/connection/server_support.c, line 1617
+css_change_ha_server_state: css_check_ha_log_applier_done ()
+
+Time: 10/02/26 18:00:11.157 - DEBUG *** file /home/vimkim/gh/cb/workenv09-source/src/connection/server_support.c, line 1623
+css_change_ha_server_state: logtb_enable_update()
+
+Time: 10/02/26 18:00:11.157 - DEBUG *** file /home/vimkim/gh/cb/workenv09-source/src/transaction/log_tran_table.c, line 3321
+logtb_enable_update: db_Disable_modifications = 0
+
+Time: 10/02/26 18:00:11.157 - DEBUG *** file /home/vimkim/gh/cb/workenv09-source/src/query/partition.c, line 725
+creating partition cache
+
+Time: 10/02/26 18:00:11.157 - NOTIFICATION *** file /home/vimkim/gh/cb/workenv09-source/src/transaction/boot_sr.c, line 238  CODE = -973, Tran = 0, CLIENT = :(0), EID = 1
+Server status is UP.
+
+Time: 10/02/26 18:00:11.197 - DEBUG *** file /home/vimkim/gh/cb/workenv09-source/src/connection/master_connector.cpp, line 773
+cub_server received 1 as response from master
+
+Time: 10/02/26 18:00:11.197 - DEBUG *** file /home/vimkim/gh/cb/workenv09-source/src/connection/master_connector.cpp, line 782
+successfully connected to master
+
+Time: 10/02/26 18:00:11.197 - DEBUG *** file /home/vimkim/gh/cb/workenv09-source/src/connection/master_connector.cpp, line 751
+successfully switched to unix domain socket
+
+Time: 10/02/26 18:00:41.491 - ERROR *** file /home/vimkim/gh/cb/workenv09-source/src/connection/tcp.c, line 173 ERROR CODE = -353, Tran = 0, CLIENT = :(0), EID = 2
+Cannot make connection to master server on host "dev2".... Connection refused
+
+Time: 10/02/26 18:00:51.497 - ERROR *** file /home/vimkim/gh/cb/workenv09-source/src/connection/tcp.c, line 173 ERROR CODE = -353, Tran = 0, CLIENT = :(0), EID = 3
+Cannot make connection to master server on host "dev2".... Connection refused
+
+Time: 10/02/26 18:01:01.497 - ERROR *** file /home/vimkim/gh/cb/workenv09-source/src/connection/tcp.c, line 173 ERROR CODE = -353, Tran = 0, CLIENT = :(0), EID = 4
+Cannot make connection to master server on host "dev2".... Connection refused
+
+Time: 10/02/26 18:01:11.503 - ERROR *** file /home/vimkim/gh/cb/workenv09-source/src/connection/tcp.c, line 173 ERROR CODE = -353, Tran = 0, CLIENT = :(0), EID = 5
+Cannot make connection to master server on host "dev2".... Connection refused
+
+Time: 10/02/26 18:01:21.509 - ERROR *** file /home/vimkim/gh/cb/workenv09-source/src/connection/tcp.c, line 173 ERROR CODE = -353, Tran = 0, CLIENT = :(0), EID = 6
+Cannot make connection to master server on host "dev2".... Connection refused
+
+Time: 10/02/26 18:01:31.515 - ERROR *** file /home/vimkim/gh/cb/workenv09-source/src/connection/tcp.c, line 173 ERROR CODE = -353, Tran = 0, CLIENT = :(0), EID = 7
+Cannot make connection to master server on host "dev2".... Connection refused
+
+Time: 10/02/26 18:01:41.520 - ERROR *** file /home/vimkim/gh/cb/workenv09-source/src/connection/tcp.c, line 173 ERROR CODE = -353, Tran = 0, CLIENT = :(0), EID = 8
+Cannot make connection to master server on host "dev2".... Connection refused
+
+Time: 10/02/26 18:01:51.524 - ERROR *** file /home/vimkim/gh/cb/workenv09-source/src/connection/tcp.c, line 173 ERROR CODE = -353, Tran = 0, CLIENT = :(0), EID = 9
+Cannot make connection to master server on host "dev2".... Connection refused
+
+Time: 10/02/26 18:02:01.529 - ERROR *** file /home/vimkim/gh/cb/workenv09-source/src/connection/tcp.c, line 173 ERROR CODE = -353, Tran = 0, CLIENT = :(0), EID = 10
+Cannot make connection to master server on host "dev2".... Connection refused
+
+Time: 10/02/26 18:02:11.534 - ERROR *** file /home/vimkim/gh/cb/workenv09-source/src/connection/tcp.c, line 173 ERROR CODE = -353, Tran = 0, CLIENT = :(0), EID = 11
+Cannot make connection to master server on host "dev2".... Connection refused
+
+Time: 10/02/26 18:02:21.540 - ERROR *** file /home/vimkim/gh/cb/workenv09-source/src/connection/tcp.c, line 173 ERROR CODE = -353, Tran = 0, CLIENT = :(0), EID = 12
+Cannot make connection to master server on host "dev2".... Connection refused
+
+Time: 10/02/26 18:02:31.545 - ERROR *** file /home/vimkim/gh/cb/workenv09-source/src/connection/tcp.c, line 173 ERROR CODE = -353, Tran = 0, CLIENT = :(0), EID = 13
+Cannot make connection to master server on host "dev2".... Connection refused
+
+Time: 10/02/26 18:02:41.551 - ERROR *** file /home/vimkim/gh/cb/workenv09-source/src/connection/tcp.c, line 173 ERROR CODE = -353, Tran = 0, CLIENT = :(0), EID = 14
+Cannot make connection to master server on host "dev2".... Connection refused
+
+Time: 10/02/26 18:02:51.554 - ERROR *** file /home/vimkim/gh/cb/workenv09-source/src/connection/tcp.c, line 173 ERROR CODE = -353, Tran = 0, CLIENT = :(0), EID = 15
+Cannot make connection to master server on host "dev2".... Connection refused
+
+Time: 10/02/26 18:03:01.559 - ERROR *** file /home/vimkim/gh/cb/workenv09-source/src/connection/tcp.c, line 173 ERROR CODE = -353, Tran = 0, CLIENT = :(0), EID = 16
+Cannot make connection to master server on host "dev2".... Connection refused
+
+*** The previous error message is the last one. ***

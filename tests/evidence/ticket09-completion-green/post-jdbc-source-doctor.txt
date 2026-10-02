@@ -1,0 +1,7 @@
+Worktree: /home/vimkim/gh/cb/workenv09-source
+State: ready
+Selected installation: /tmp/cwe-workflow09-install (preset debug_gcc)
+DB testdb: data=/home/vimkim/gh/cb/workenv09-source/.cub-workenv/db/testdb/data log=/home/vimkim/gh/cb/workenv09-source/.cub-workenv/db/testdb/log LOB=/home/vimkim/gh/cb/workenv09-source/.cub-workenv/db/testdb/lob (registration inspection only)
+DB shareprobe: data=/home/vimkim/tmp/cwe-flow09-insuwk4h/shared09/data log=/home/vimkim/tmp/cwe-flow09-insuwk4h/shared09/log LOB=/home/vimkim/tmp/cwe-flow09-insuwk4h/shared09/lob (registration inspection only)
+Process inspection: 2227 inaccessible PIDs; absent owner evidence is not proof of inactivity
+Ready: inspected settings, registration paths, allocation and live resources. No changes performed; no database opened.

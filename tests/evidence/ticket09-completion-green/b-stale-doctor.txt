@@ -1,0 +1,15 @@
+Worktree: /home/vimkim/tmp/cwe-flow09-insuwk4h/b
+State: ready
+Selected installation: /home/vimkim/tmp/cwe-flow09-insuwk4h/install-b (preset debug_gcc)
+DB testdb: data=/home/vimkim/tmp/cwe-flow09-insuwk4h/b/.cub-workenv/db/testdb/data log=/home/vimkim/tmp/cwe-flow09-insuwk4h/b/.cub-workenv/db/testdb/log LOB=/home/vimkim/tmp/cwe-flow09-insuwk4h/b/.cub-workenv/db/testdb/lob (registration inspection only)
+DB shareprobe: data=/home/vimkim/tmp/cwe-flow09-insuwk4h/shared09/data log=/home/vimkim/tmp/cwe-flow09-insuwk4h/shared09/log LOB=/home/vimkim/tmp/cwe-flow09-insuwk4h/shared09/lob (registration inspection only)
+DB sharefinal: data=/home/vimkim/tmp/cwe-flow09-insuwk4h/sharefinal/data log=/home/vimkim/tmp/cwe-flow09-insuwk4h/sharefinal/log LOB=/home/vimkim/tmp/cwe-flow09-insuwk4h/sharefinal/lob (registration inspection only)
+Process inspection: 2227 inaccessible PIDs; absent owner evidence is not proof of inactivity
+Unix socket /tmp/cwe-1000/4b73eb4c131f/sp_sharefinal.sock: occupied; PID 1384433 worktree=/home/vimkim/tmp/cwe-flow09-insuwk4h/b
+DB sharefinal: native active-log lock PID 1383731, worktree=/home/vimkim/gh/cb/workenv09-source, path=/home/vimkim/tmp/cwe-flow09-insuwk4h/sharefinal/log/sharefinal_lgat; another independent opener must wait for normal release
+Native error from /home/vimkim/gh/cubrid-workenv-09/tests/evidence/ticket09-completion-green/shared-b-rejected.txt (preserved):
+
+ERROR: Unable to restart/initialize the database server. Unable to mount disk volume "/home/vimkim/tmp/cwe-flow09-insuwk4h/sharefinal/log/sharefinal_lgat". The database "/home/vimkim/tmp/cwe-flow09-insuwk4h/sharefinal/data/sharefinal", to which the disk volume belongs, is in use by user vimkim on process 1383731 of host dev2 since Fri Oct  2 18:04:22 2026.
+
+Native owner confirmed now: PID 1383731, worktree=/home/vimkim/gh/cb/workenv09-source, active log=/home/vimkim/tmp/cwe-flow09-insuwk4h/sharefinal/log/sharefinal_lgat
+Ready: inspected settings, registration paths, allocation and live resources. No changes performed; no database opened.

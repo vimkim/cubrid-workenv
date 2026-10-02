@@ -29,6 +29,8 @@ fails and names `--port-start/--port-end` and `--shm-start/--shm-end` as explici
 configuration choices. The pool never grows automatically. The preparing state
 of a failed initialization remains for diagnosis and manual recovery.
 
+Before retrying after exhaustion, follow [the pre-allocation recovery procedure](workflow.md#diagnose-and-recover-deliberately). Changing ranges alone does not clear incomplete state.
+
 Permission uncertainty can prevent reclamation on a busy multi-user host even
 when a record appears stale. Resolve visibility or inspect the report manually;
 absence of the source directory alone is insufficient evidence. Reclamation

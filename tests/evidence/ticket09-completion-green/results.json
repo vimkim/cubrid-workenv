@@ -1,0 +1,146 @@
+{
+  "steps": [
+    {
+      "label": "post-jdbc-source-doctor",
+      "argv": [
+        "/home/vimkim/gh/cubrid-workenv-09/bin/cub-workenv",
+        "doctor",
+        "--worktree",
+        "/home/vimkim/gh/cb/workenv09-source"
+      ],
+      "returncode": 0
+    },
+    {
+      "label": "post-jdbc-source-start",
+      "argv": [
+        "cubrid",
+        "server",
+        "start",
+        "testdb"
+      ],
+      "returncode": 0
+    },
+    {
+      "label": "post-jdbc-sentinel",
+      "argv": [
+        "csql",
+        "-C",
+        "-u",
+        "dba",
+        "-c",
+        "select id from workflow_marker;",
+        "testdb"
+      ],
+      "returncode": 0
+    },
+    {
+      "label": "create-shared",
+      "argv": [
+        "/home/vimkim/gh/cubrid-workenv-09/bin/cub-workenv",
+        "create-db",
+        "sharefinal",
+        "--worktree",
+        "/home/vimkim/gh/cb/workenv09-source",
+        "--path",
+        "/home/vimkim/tmp/cwe-flow09-insuwk4h/sharefinal"
+      ],
+      "returncode": 0
+    },
+    {
+      "label": "shared-a-start",
+      "argv": [
+        "cubrid",
+        "server",
+        "start",
+        "sharefinal"
+      ],
+      "returncode": 0
+    },
+    {
+      "label": "shared-b-rejected",
+      "argv": [
+        "csql",
+        "-S",
+        "-u",
+        "dba",
+        "-c",
+        "select 1;",
+        "sharefinal"
+      ],
+      "returncode": 1
+    },
+    {
+      "label": "b-stale-doctor",
+      "argv": [
+        "/home/vimkim/gh/cubrid-workenv-09/bin/cub-workenv",
+        "doctor",
+        "--worktree",
+        "/home/vimkim/tmp/cwe-flow09-insuwk4h/b",
+        "--native-error-file",
+        "/home/vimkim/gh/cubrid-workenv-09/tests/evidence/ticket09-completion-green/shared-b-rejected.txt"
+      ],
+      "returncode": 0
+    },
+    {
+      "label": "b-after-owned-socket-remedy",
+      "argv": [
+        "/home/vimkim/gh/cubrid-workenv-09/bin/cub-workenv",
+        "doctor",
+        "--worktree",
+        "/home/vimkim/tmp/cwe-flow09-insuwk4h/b"
+      ],
+      "returncode": 0
+    },
+    {
+      "label": "stop-sharefinal",
+      "argv": [
+        "cubrid",
+        "server",
+        "stop",
+        "sharefinal"
+      ],
+      "returncode": 0
+    },
+    {
+      "label": "stop-testdb",
+      "argv": [
+        "cubrid",
+        "server",
+        "stop",
+        "testdb"
+      ],
+      "returncode": 0
+    },
+    {
+      "label": "master-stop",
+      "argv": [
+        "cubrid",
+        "service",
+        "stop"
+      ],
+      "returncode": 0
+    }
+  ],
+  "source_workflow_prior": "../ticket09-flow/results.json",
+  "build_daemons": [],
+  "stopped_socket_remedies": [
+    {
+      "path": "/tmp/cwe-1000/cac84ce4fd87/CUBRID49000",
+      "inode": 7156617
+    }
+  ],
+  "stale_socket": {
+    "path": "/tmp/cwe-1000/4b73eb4c131f/sp_sharefinal.sock",
+    "inode": 7194626,
+    "uid": 1000
+  },
+  "binary_sha256": {
+    "cubrid": "cbdb1638a64f577f26c82c02aed57e4a0aa623dccb7e55078ec21ccd5c2b9248",
+    "csql": "78c9a66d72942e27d907a1743b4d499966d551976adeeedd09e7130e9e9c63b5",
+    "cub_server": "2fde242c05a9fbe3344c24472ef4f73a16fc90db395129290f9d9edf0c7031d4"
+  },
+  "jdbc_sha256": "afe041d38b6797c2c3fe7fe0b57ac418ee6abe19748368d8af8e2268d1dcd99e",
+  "source_unchanged_binaries": true,
+  "remaining_owned_pids": [],
+  "verdict": "pass"
+}

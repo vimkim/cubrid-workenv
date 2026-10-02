@@ -1,0 +1,418 @@
+{
+  "root": "/home/vimkim/tmp/cwe-coexist-6fifu21r",
+  "install_source": "/tmp/cwe-workflow09-install",
+  "steps": [
+    {
+      "label": "java-version",
+      "argv": [
+        "/home/vimkim/.local/share/mise/installs/java/temurin-8.0.462+8/bin/java",
+        "-version"
+      ],
+      "returncode": 0
+    },
+    {
+      "label": "javac",
+      "argv": [
+        "/home/vimkim/.local/share/mise/installs/java/temurin-8.0.462+8/bin/javac",
+        "/home/vimkim/tmp/cwe-coexist-6fifu21r/Probe.java"
+      ],
+      "returncode": 0
+    },
+    {
+      "label": "a-init",
+      "argv": [
+        "/home/vimkim/gh/cubrid-workenv-09/bin/cub-workenv",
+        "init",
+        "--worktree",
+        "/home/vimkim/tmp/cwe-coexist-6fifu21r/a/source",
+        "--install",
+        "/home/vimkim/tmp/cwe-coexist-6fifu21r/a/install",
+        "--preset",
+        "debug_gcc",
+        "--state-home",
+        "/home/vimkim/tmp/cwe-coexist-6fifu21r/host",
+        "--port-start",
+        "45000",
+        "--port-end",
+        "45999",
+        "--java-home",
+        "/home/vimkim/.local/share/mise/installs/java/temurin-8.0.462+8"
+      ],
+      "returncode": 0
+    },
+    {
+      "label": "a-environment",
+      "argv": [
+        "/bin/bash",
+        "--noprofile",
+        "--norc",
+        "-c",
+        "source \"$1\" && env -0",
+        "bash",
+        "/home/vimkim/tmp/cwe-coexist-6fifu21r/a/source/.cub-workenv/env.sh"
+      ],
+      "returncode": 0
+    },
+    {
+      "label": "a-version",
+      "argv": [
+        "cubrid",
+        "--version"
+      ],
+      "returncode": 0
+    },
+    {
+      "label": "a-server-start",
+      "argv": [
+        "cubrid",
+        "server",
+        "start",
+        "testdb"
+      ],
+      "returncode": 0
+    },
+    {
+      "label": "a-setup",
+      "argv": [
+        "csql",
+        "-C",
+        "-u",
+        "dba",
+        "-c",
+        "create table marker (id integer); insert into marker values (111); create function cwe_abs(i integer) return integer as language java name 'java.lang.Math.abs(int) return int'; commit;",
+        "testdb"
+      ],
+      "returncode": 0
+    },
+    {
+      "label": "a-broker-start",
+      "argv": [
+        "cubrid",
+        "broker",
+        "start"
+      ],
+      "returncode": 0
+    },
+    {
+      "label": "a-health",
+      "argv": [
+        "csql",
+        "-C",
+        "-u",
+        "dba",
+        "-c",
+        "insert into marker select id from marker limit 1; commit; select distinct id from marker; select cwe_abs(-17);",
+        "testdb"
+      ],
+      "returncode": 0
+    },
+    {
+      "label": "a-health-jdbc",
+      "argv": [
+        "/home/vimkim/.local/share/mise/installs/java/temurin-8.0.462+8/bin/java",
+        "-cp",
+        "/home/vimkim/tmp/cwe-coexist-6fifu21r:/home/vimkim/tmp/cwe-coexist-6fifu21r/a/install/jdbc/cubrid_jdbc.jar",
+        "Probe",
+        "45001"
+      ],
+      "returncode": 0
+    },
+    {
+      "label": "b-init",
+      "argv": [
+        "/home/vimkim/gh/cubrid-workenv-09/bin/cub-workenv",
+        "init",
+        "--worktree",
+        "/home/vimkim/tmp/cwe-coexist-6fifu21r/b/source",
+        "--install",
+        "/home/vimkim/tmp/cwe-coexist-6fifu21r/b/install",
+        "--preset",
+        "debug_gcc",
+        "--state-home",
+        "/home/vimkim/tmp/cwe-coexist-6fifu21r/host",
+        "--port-start",
+        "45000",
+        "--port-end",
+        "45999",
+        "--java-home",
+        "/home/vimkim/.local/share/mise/installs/java/temurin-8.0.462+8"
+      ],
+      "returncode": 0
+    },
+    {
+      "label": "b-environment",
+      "argv": [
+        "/bin/bash",
+        "--noprofile",
+        "--norc",
+        "-c",
+        "source \"$1\" && env -0",
+        "bash",
+        "/home/vimkim/tmp/cwe-coexist-6fifu21r/b/source/.cub-workenv/env.sh"
+      ],
+      "returncode": 0
+    },
+    {
+      "label": "b-version",
+      "argv": [
+        "cubrid",
+        "--version"
+      ],
+      "returncode": 0
+    },
+    {
+      "label": "b-server-start",
+      "argv": [
+        "cubrid",
+        "server",
+        "start",
+        "testdb"
+      ],
+      "returncode": 0
+    },
+    {
+      "label": "b-setup",
+      "argv": [
+        "csql",
+        "-C",
+        "-u",
+        "dba",
+        "-c",
+        "create table marker (id integer); insert into marker values (222); create function cwe_abs(i integer) return integer as language java name 'java.lang.Math.abs(int) return int'; commit;",
+        "testdb"
+      ],
+      "returncode": 0
+    },
+    {
+      "label": "b-broker-start",
+      "argv": [
+        "cubrid",
+        "broker",
+        "start"
+      ],
+      "returncode": 0
+    },
+    {
+      "label": "b-health",
+      "argv": [
+        "csql",
+        "-C",
+        "-u",
+        "dba",
+        "-c",
+        "insert into marker select id from marker limit 1; commit; select distinct id from marker; select cwe_abs(-17);",
+        "testdb"
+      ],
+      "returncode": 0
+    },
+    {
+      "label": "b-health-jdbc",
+      "argv": [
+        "/home/vimkim/.local/share/mise/installs/java/temurin-8.0.462+8/bin/java",
+        "-cp",
+        "/home/vimkim/tmp/cwe-coexist-6fifu21r:/home/vimkim/tmp/cwe-coexist-6fifu21r/b/install/jdbc/cubrid_jdbc.jar",
+        "Probe",
+        "45003"
+      ],
+      "returncode": 0
+    },
+    {
+      "label": "a-server-status",
+      "argv": [
+        "cubrid",
+        "server",
+        "status"
+      ],
+      "returncode": 0
+    },
+    {
+      "label": "b-server-status",
+      "argv": [
+        "cubrid",
+        "server",
+        "status"
+      ],
+      "returncode": 0
+    },
+    {
+      "label": "a-server-stop",
+      "argv": [
+        "cubrid",
+        "server",
+        "stop",
+        "testdb"
+      ],
+      "returncode": 0
+    },
+    {
+      "label": "b-after-a-server-stop",
+      "argv": [
+        "csql",
+        "-C",
+        "-u",
+        "dba",
+        "-c",
+        "insert into marker select id from marker limit 1; commit; select distinct id from marker; select cwe_abs(-17);",
+        "testdb"
+      ],
+      "returncode": 0
+    },
+    {
+      "label": "b-after-a-server-stop-jdbc",
+      "argv": [
+        "/home/vimkim/.local/share/mise/installs/java/temurin-8.0.462+8/bin/java",
+        "-cp",
+        "/home/vimkim/tmp/cwe-coexist-6fifu21r:/home/vimkim/tmp/cwe-coexist-6fifu21r/b/install/jdbc/cubrid_jdbc.jar",
+        "Probe",
+        "45003"
+      ],
+      "returncode": 0
+    },
+    {
+      "label": "a-status-after-stop",
+      "argv": [
+        "cubrid",
+        "server",
+        "status"
+      ],
+      "returncode": 0
+    },
+    {
+      "label": "a-broker-stop",
+      "argv": [
+        "cubrid",
+        "broker",
+        "stop"
+      ],
+      "returncode": 0
+    },
+    {
+      "label": "b-after-a-broker-stop",
+      "argv": [
+        "csql",
+        "-C",
+        "-u",
+        "dba",
+        "-c",
+        "insert into marker select id from marker limit 1; commit; select distinct id from marker; select cwe_abs(-17);",
+        "testdb"
+      ],
+      "returncode": 0
+    },
+    {
+      "label": "b-after-a-broker-stop-jdbc",
+      "argv": [
+        "/home/vimkim/.local/share/mise/installs/java/temurin-8.0.462+8/bin/java",
+        "-cp",
+        "/home/vimkim/tmp/cwe-coexist-6fifu21r:/home/vimkim/tmp/cwe-coexist-6fifu21r/b/install/jdbc/cubrid_jdbc.jar",
+        "Probe",
+        "45003"
+      ],
+      "returncode": 0
+    },
+    {
+      "label": "a-cleanup-broker",
+      "argv": [
+        "cubrid",
+        "broker",
+        "stop"
+      ],
+      "returncode": 1
+    },
+    {
+      "label": "a-cleanup-server",
+      "argv": [
+        "cubrid",
+        "server",
+        "stop",
+        "testdb"
+      ],
+      "returncode": 1
+    },
+    {
+      "label": "b-cleanup-broker",
+      "argv": [
+        "cubrid",
+        "broker",
+        "stop"
+      ],
+      "returncode": 0
+    },
+    {
+      "label": "b-cleanup-server",
+      "argv": [
+        "cubrid",
+        "server",
+        "stop",
+        "testdb"
+      ],
+      "returncode": 0
+    }
+  ],
+  "environments": {
+    "a": {
+      "schema": 1,
+      "status": "ready",
+      "worktree": "/home/vimkim/tmp/cwe-coexist-6fifu21r/a/source",
+      "install": "/home/vimkim/tmp/cwe-coexist-6fifu21r/a/install",
+      "preset": "debug_gcc",
+      "state_home": "/home/vimkim/tmp/cwe-coexist-6fifu21r/host",
+      "java_home": "/home/vimkim/.local/share/mise/installs/java/temurin-8.0.462+8",
+      "stage": "complete",
+      "allocation": {
+        "worktree": "/home/vimkim/tmp/cwe-coexist-6fifu21r/a/source",
+        "master_port": 45000,
+        "broker_port": 45001,
+        "broker_master_shm_id": 1644167168,
+        "broker_appl_server_shm_id": 1644167169,
+        "install": "/home/vimkim/tmp/cwe-coexist-6fifu21r/a/install",
+        "tmp": "/tmp/cwe-1000/c113950236b7"
+      },
+      "sockets": [
+        "/tmp/cwe-1000/c113950236b7/CUBRID45000",
+        "/tmp/cwe-1000/c113950236b7/sp_testdb.sock"
+      ],
+      "pl_info": "1302080 -1"
+    },
+    "b": {
+      "schema": 1,
+      "status": "ready",
+      "worktree": "/home/vimkim/tmp/cwe-coexist-6fifu21r/b/source",
+      "install": "/home/vimkim/tmp/cwe-coexist-6fifu21r/b/install",
+      "preset": "debug_gcc",
+      "state_home": "/home/vimkim/tmp/cwe-coexist-6fifu21r/host",
+      "java_home": "/home/vimkim/.local/share/mise/installs/java/temurin-8.0.462+8",
+      "stage": "complete",
+      "allocation": {
+        "worktree": "/home/vimkim/tmp/cwe-coexist-6fifu21r/b/source",
+        "master_port": 45002,
+        "broker_port": 45003,
+        "broker_master_shm_id": 1644167170,
+        "broker_appl_server_shm_id": 1644167171,
+        "install": "/home/vimkim/tmp/cwe-coexist-6fifu21r/b/install",
+        "tmp": "/tmp/cwe-1000/e7d938c60115"
+      },
+      "sockets": [
+        "/tmp/cwe-1000/e7d938c60115/CUBRID45002",
+        "/tmp/cwe-1000/e7d938c60115/sp_testdb.sock"
+      ],
+      "pl_info": "1303075 -1"
+    }
+  },
+  "owned_pids_before_stop": [
+    1301941,
+    1302076,
+    1302080,
+    1302463,
+    1302474,
+    1302881,
+    1303051,
+    1303075,
+    1303662,
+    1303746
+  ],
+  "verdict": "pass",
+  "cleanup_remaining": [],
+  "cleanup_ipc_remaining": [],
+  "binary_sha256": "2fde242c05a9fbe3344c24472ef4f73a16fc90db395129290f9d9edf0c7031d4"
+}

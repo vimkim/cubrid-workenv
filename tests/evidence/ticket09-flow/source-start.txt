@@ -1,0 +1,14 @@
+[0mdirenv: loading ~/gh/cb/workenv09-source/.envrc
+Preset Mode: debug_gcc
+Install Dir: /tmp/cwe-workflow09-install
+DB Dir: /home/vimkim/gh/cb/workenv09-source/.cub-workenv/databases
+Build Dir: /home/vimkim/gh/cb/workenv09-source/build_preset_debug_gcc
+@ cubrid master start
+++ cubrid master start: success
+@ cubrid server start: testdb
+
+This may take a long time depending on the amount of recovery works to do.
+
+CUBRID 11.5.0 (11.5.0.2635) (64 debug build)
+
+++ cubrid server start: success

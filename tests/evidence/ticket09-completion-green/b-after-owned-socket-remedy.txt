@@ -1,0 +1,9 @@
+Worktree: /home/vimkim/tmp/cwe-flow09-insuwk4h/b
+State: ready
+Selected installation: /home/vimkim/tmp/cwe-flow09-insuwk4h/install-b (preset debug_gcc)
+DB testdb: data=/home/vimkim/tmp/cwe-flow09-insuwk4h/b/.cub-workenv/db/testdb/data log=/home/vimkim/tmp/cwe-flow09-insuwk4h/b/.cub-workenv/db/testdb/log LOB=/home/vimkim/tmp/cwe-flow09-insuwk4h/b/.cub-workenv/db/testdb/lob (registration inspection only)
+DB shareprobe: data=/home/vimkim/tmp/cwe-flow09-insuwk4h/shared09/data log=/home/vimkim/tmp/cwe-flow09-insuwk4h/shared09/log LOB=/home/vimkim/tmp/cwe-flow09-insuwk4h/shared09/lob (registration inspection only)
+DB sharefinal: data=/home/vimkim/tmp/cwe-flow09-insuwk4h/sharefinal/data log=/home/vimkim/tmp/cwe-flow09-insuwk4h/sharefinal/log LOB=/home/vimkim/tmp/cwe-flow09-insuwk4h/sharefinal/lob (registration inspection only)
+Process inspection: 2227 inaccessible PIDs; absent owner evidence is not proof of inactivity
+DB sharefinal: native active-log lock PID 1383731, worktree=/home/vimkim/gh/cb/workenv09-source, path=/home/vimkim/tmp/cwe-flow09-insuwk4h/sharefinal/log/sharefinal_lgat; another independent opener must wait for normal release
+Ready: inspected settings, registration paths, allocation and live resources. No changes performed; no database opened.

@@ -1,0 +1,2 @@
+Initialized /tmp/cwe-recovery09-tvcos_qh/victim with /tmp/cwe-recovery09-tvcos_qh/victim-install (preset debug_gcc).
+Source /tmp/cwe-recovery09-tvcos_qh/victim/.cub-workenv/env.sh in bash; use ordinary cubrid and csql commands.

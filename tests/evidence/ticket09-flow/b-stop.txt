@@ -1,0 +1,10 @@
+[0mdirenv: loading ~/tmp/cwe-flow09-insuwk4h/b/.envrc
+Preset Mode: debug_gcc
+Install Dir: /home/vimkim/tmp/cwe-flow09-insuwk4h/install-b
+DB Dir: /home/vimkim/tmp/cwe-flow09-insuwk4h/b/.cub-workenv/databases
+Build Dir: /home/vimkim/tmp/cwe-flow09-insuwk4h/b/build_preset_debug_gcc
+@ cubrid server stop: testdb
+
+Server testdb notified of shutdown.
+This may take several minutes. Please wait.
+++ cubrid server stop: success

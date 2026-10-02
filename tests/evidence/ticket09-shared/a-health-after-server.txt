@@ -1,0 +1,10 @@
+1 row affected. (0.001814 sec) Committed. (0.003470 sec)
+Execute OK. (0.000088 sec)
+
+=== <Result of SELECT Command in Line 1> ===
+
+          marker_count
+======================
+                     2
+
+1 row selected. (0.001969 sec) Committed. (0.000072 sec)

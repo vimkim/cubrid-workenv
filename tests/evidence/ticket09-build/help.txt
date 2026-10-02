@@ -1,0 +1,20 @@
+usage: cub-workenv [-h] {init,doctor,create-db,env} ...
+
+Prepare a built host worktree explicitly; use ordinary cubrid/csql after
+loading its environment.
+
+positional arguments:
+  {init,doctor,create-db,env}
+    init                explicitly prepare a selected installation and testdb
+    doctor              inspect initialization without changing it
+    create-db           create an additional database without replacing
+                        existing storage
+    env                 emit bash cleanup and load a completed environment
+                        without diagnosis
+
+options:
+  -h, --help            show this help message and exit
+
+Doctor is read-only. Native DB locking has bounded normal-path verification;
+init is not a sandbox. See docs/workflow.md for manual recovery, external DB
+lifetime and build-version compatibility.

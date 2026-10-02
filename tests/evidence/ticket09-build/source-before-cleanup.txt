@@ -1,0 +1,18 @@
+ m cubrid-cci
+?? .cub-workenv/
+!! .clangd
+!! .env
+!! .envrc
+!! .just
+!! .nvim.lua
+!! .vscode
+!! AGENTS.override.md
+!! CMakeUserPresets.json
+!! build_preset_debug_gcc/
+!! csql.err
+!! cub_server.gdb
+!! i.gdb
+!! justfile
+!! lefthook.yml
+!! local.just
+!! pl_engine/.gradle/

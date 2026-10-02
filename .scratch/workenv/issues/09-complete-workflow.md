@@ -4,24 +4,54 @@
 
 **Blocked by:** 04, 06, 07, 08
 
-**Status:** ready-for-agent
+**Status:** ready-for-human
 
 Parent: [구현 명세](../spec.md)
 User stories: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30
 
 ## Acceptance criteria
 
-- [ ] 각 선행 티켓의 검증 결과를 수집하고 명세 수용 기준과 대응시킨다. 이전에 통과한 변경 없는 테스트를 무조건 재실행하지 않되 실제 통합 경계와 새 차이는 검증한다.
-- [ ] 새 worktree의 빌드·설치 → init → 일반 cubrid/csql 사용 → 재진입 흐름과 --no-db → create-db 흐름을 확인한다.
-- [ ] 두 worktree의 서버·broker·PL 공존, same-name 별도 DB 연결, 한쪽 stop 이후 다른 쪽 정상 동작을 통합 환경에서 확인한다.
-- [ ] 공유 외부 DB의 native 중복 열기 거부와 순차 재사용을 확인하고 기존 서버 건강과 오류의 owner 정보를 보존한다. 기존 증거와 다른 빌드면 그 차이를 명시한다.
-- [ ] pool 고갈·불완전 초기화·환경 불일치의 사용자 메시지와 doctor 안내가 실제 조치로 연결되는지 확인한다.
-- [ ] 작업 종료 시 내부 DB 정리·외부 DB 보존·실험 프로세스 정리가 이루어지는지 확인한다. broad pkill이나 포괄적 강제 삭제를 사용하지 않는다.
-- [ ] 명령 도움말과 사용자·agent 안내에 초기화 책임, 일반 명령 허용, native 잠금 범위, 외부 침범 제한, 수동 복구, 버전 호환성 책임을 정확하게 설명한다.
-- [ ] 버전·명령·설정·반환 코드·관찰 결과를 남기고 미검증 항목은 완료와 구분한다. HA·Manager·container 구현·run 강제·추가 lease로 범위를 확장하지 않는다.
+- [x] 각 선행 티켓의 검증 결과를 수집하고 명세 수용 기준과 대응시킨다. 이전에 통과한 변경 없는 테스트를 무조건 재실행하지 않되 실제 통합 경계와 새 차이는 검증한다.
+- [x] 새 worktree의 빌드·설치 → init → 일반 cubrid/csql 사용 → 재진입 흐름과 --no-db → create-db 흐름을 확인한다.
+- [x] 두 worktree의 서버·broker·PL 공존, same-name 별도 DB 연결, 한쪽 stop 이후 다른 쪽 정상 동작을 통합 환경에서 확인한다.
+- [x] 공유 외부 DB의 native 중복 열기 거부와 순차 재사용을 확인하고 기존 서버 건강과 오류의 owner 정보를 보존한다. 기존 증거와 다른 빌드면 그 차이를 명시한다.
+- [x] pool 고갈·불완전 초기화·환경 불일치의 사용자 메시지와 doctor 안내가 실제 조치로 연결되는지 확인한다.
+- [x] 작업 종료 시 내부 DB 정리·외부 DB 보존·실험 프로세스 정리가 이루어지는지 확인한다. broad pkill이나 포괄적 강제 삭제를 사용하지 않는다.
+- [x] 명령 도움말과 사용자·agent 안내에 초기화 책임, 일반 명령 허용, native 잠금 범위, 외부 침범 제한, 수동 복구, 버전 호환성 책임을 정확하게 설명한다.
+- [x] 버전·명령·설정·반환 코드·관찰 결과를 남기고 미검증 항목은 완료와 구분한다. HA·Manager·container 구현·run 강제·추가 lease로 범위를 확장하지 않는다.
 
 ## Scope and context
 
 이 티켓만 테스트하는 구조가 아니다. 각 앞선 티켓이 자체 검증으로 완료되며 여기서는 연결부와 실제 사용자 흐름을 마무리한다. 원격 push와 배포는 포함하지 않는다.
 
 [용어집](../../../GLOSSARY.md)과 [native 중복 실행 실험](../../../experiments/native-db-exclusion/README.md)의 용어·검증 제한을 따른다. 공유 DB의 정상 경로 중복 열기는 CUBRID에 맡기고, init의 자원 할당 직렬화와 DB runtime 잠금을 혼동하지 않는다.
+
+## Acceptance evidence
+
+[Complete verification and specification coverage](../../../docs/evidence/ticket09-workflow.md)
+collects 01–08 evidence and maps every specification validation area and stories 1–30.
+A fresh pinned CUBRID source worktree compiled/installed 2635-30043f4 through the
+candidate live shared just interface. Direct source init/use/reentry, no-db/create,
+A→B, new-build broker/PL coexistence, native shared DB exclusion/reuse, read-only
+doctor and real Git/DB lifetime checks passed. CLI discovery 34/34 passed; configured
+engine ctest returned 0 with **no tests registered**, explicitly not engine-test coverage.
+
+[Recovery evidence](../../../tests/evidence/ticket09-recovery/results.json) proves
+that wider ranges alone do not resume incomplete initialization; the bounded
+owned pre-allocation archive/retry succeeds. Final continuous
+[source completion](../../../tests/evidence/ticket09-completion-green/results.json)
+proves stopped/unbound owned-socket remediation and normal shutdown. Earlier
+partial harness attempts and their exact cleanup evidence remain recorded.
+
+[Cleanup](../../../tests/evidence/ticket09-cleanup/results.json) confirms no owned
+process/IPC remainder, removed generated DB/build/install/fixture outputs, and
+preserved original develop dirty state. The clean pinned source checkout and
+`verify/workenv09-source` branch remain because Git refused non-force removal of
+initialized submodules. No force removal or global tooling application occurred.
+
+README, HANDOFF, AGENTS, execution guidance, command help and the
+[user workflow](../../../docs/workflow.md) now describe implemented responsibilities,
+manual recovery, lifetime, native-lock limits, external-interference and version
+compatibility accurately. Candidate runtime evidence is pinned to tooling aea8078;
+subsequent companion 74a13cf is documentation-only. Parent owns actual integration,
+review fixes and local-main approval; this ticket does not declare itself integrated.
