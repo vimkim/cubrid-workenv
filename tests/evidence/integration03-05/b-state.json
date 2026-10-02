@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "status": "ready",
+  "worktree": "/tmp/cwe-lock-d8ybacb_/b-source",
+  "install": "/tmp/cwe-lock-d8ybacb_/b",
+  "preset": "debug_gcc",
+  "state_home": "/tmp/cwe-lock-d8ybacb_/host",
+  "java_home": "/home/vimkim/.local/share/mise/installs/java/temurin-8.0.462+8",
+  "stage": "complete",
+  "allocation": {
+    "worktree": "/tmp/cwe-lock-d8ybacb_/b-source",
+    "master_port": 44002,
+    "broker_port": 44003,
+    "broker_master_shm_id": 1644167170,
+    "broker_appl_server_shm_id": 1644167171,
+    "install": "/tmp/cwe-lock-d8ybacb_/b",
+    "tmp": "/tmp/cwe-1000/2c34a0867e54"
+  }
+}

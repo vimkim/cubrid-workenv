@@ -1,0 +1,284 @@
+{
+  "runtime_root": "/tmp/cwe-lock-d8ybacb_",
+  "install_source": "/home/vimkim/.cub/install/develop/debug_gcc",
+  "steps": [
+    {
+      "label": "a-init",
+      "argv": [
+        "/home/vimkim/gh/cubrid-workenv-03/bin/cub-workenv",
+        "init",
+        "--worktree",
+        "/tmp/cwe-lock-d8ybacb_/a-source",
+        "--install",
+        "/tmp/cwe-lock-d8ybacb_/a",
+        "--preset",
+        "debug_gcc",
+        "--state-home",
+        "/tmp/cwe-lock-d8ybacb_/host",
+        "--port-start",
+        "44000",
+        "--port-end",
+        "44999",
+        "--no-db"
+      ],
+      "returncode": 0
+    },
+    {
+      "label": "create-db",
+      "argv": [
+        "/home/vimkim/gh/cubrid-workenv-03/bin/cub-workenv",
+        "create-db",
+        "testdb",
+        "--worktree",
+        "/tmp/cwe-lock-d8ybacb_/a-source",
+        "--path",
+        "/tmp/cwe-lock-d8ybacb_/shared"
+      ],
+      "returncode": 0
+    },
+    {
+      "label": "version",
+      "instance": "a",
+      "argv": [
+        "cubrid",
+        "--version"
+      ],
+      "returncode": 0,
+      "seconds": 0.032
+    },
+    {
+      "label": "a-start",
+      "instance": "a",
+      "argv": [
+        "cubrid",
+        "server",
+        "start",
+        "testdb"
+      ],
+      "returncode": 0,
+      "seconds": 3.121
+    },
+    {
+      "label": "seed",
+      "instance": "a",
+      "argv": [
+        "csql",
+        "-C",
+        "-u",
+        "dba",
+        "-c",
+        "create table marker (id integer primary key); insert into marker values (1); commit;",
+        "testdb"
+      ],
+      "returncode": 0,
+      "seconds": 0.064
+    },
+    {
+      "label": "b-init",
+      "argv": [
+        "/home/vimkim/gh/cubrid-workenv-03/bin/cub-workenv",
+        "init",
+        "--worktree",
+        "/tmp/cwe-lock-d8ybacb_/b-source",
+        "--install",
+        "/tmp/cwe-lock-d8ybacb_/b",
+        "--preset",
+        "debug_gcc",
+        "--state-home",
+        "/tmp/cwe-lock-d8ybacb_/host",
+        "--port-start",
+        "44000",
+        "--port-end",
+        "44999",
+        "--database-registry",
+        "/tmp/cwe-lock-d8ybacb_/a-source/.cub-workenv/databases/databases.txt"
+      ],
+      "returncode": 0
+    },
+    {
+      "label": "b-server-rejected",
+      "instance": "b",
+      "argv": [
+        "cubrid",
+        "server",
+        "start",
+        "testdb"
+      ],
+      "returncode": 1,
+      "seconds": 3.12
+    },
+    {
+      "label": "a-health-after-server",
+      "instance": "a",
+      "argv": [
+        "csql",
+        "-C",
+        "-u",
+        "dba",
+        "-c",
+        "insert into marker values (2); commit; select count(*) as marker_count from marker;",
+        "testdb"
+      ],
+      "returncode": 0,
+      "seconds": 0.032
+    },
+    {
+      "label": "b-status-after-rejection",
+      "instance": "b",
+      "argv": [
+        "cubrid",
+        "server",
+        "status"
+      ],
+      "returncode": 0,
+      "seconds": 0.064
+    },
+    {
+      "label": "b-standalone-rejected",
+      "instance": "b",
+      "argv": [
+        "csql",
+        "-S",
+        "-u",
+        "dba",
+        "-c",
+        "select count(*) from marker;",
+        "testdb"
+      ],
+      "returncode": 1,
+      "seconds": 2.068
+    },
+    {
+      "label": "a-health-after-standalone",
+      "instance": "a",
+      "argv": [
+        "csql",
+        "-C",
+        "-u",
+        "dba",
+        "-c",
+        "insert into marker values (3); commit; select count(*) as marker_count from marker;",
+        "testdb"
+      ],
+      "returncode": 0,
+      "seconds": 0.032
+    },
+    {
+      "label": "a-stop",
+      "instance": "a",
+      "argv": [
+        "cubrid",
+        "server",
+        "stop",
+        "testdb"
+      ],
+      "returncode": 0,
+      "seconds": 1.066
+    },
+    {
+      "label": "b-start-after-release",
+      "instance": "b",
+      "argv": [
+        "cubrid",
+        "server",
+        "start",
+        "testdb"
+      ],
+      "returncode": 0,
+      "seconds": 2.118
+    },
+    {
+      "label": "b-read-after-handoff",
+      "instance": "b",
+      "argv": [
+        "csql",
+        "-C",
+        "-u",
+        "dba",
+        "-c",
+        "select count(*) as marker_count from marker;",
+        "testdb"
+      ],
+      "returncode": 0,
+      "seconds": 0.064
+    },
+    {
+      "label": "b-stop",
+      "instance": "b",
+      "argv": [
+        "cubrid",
+        "server",
+        "stop",
+        "testdb"
+      ],
+      "returncode": 0,
+      "seconds": 1.066
+    },
+    {
+      "label": "b-standalone-after-release",
+      "instance": "b",
+      "argv": [
+        "csql",
+        "-S",
+        "-u",
+        "dba",
+        "-c",
+        "select count(*) as marker_count from marker;",
+        "testdb"
+      ],
+      "returncode": 0,
+      "seconds": 1.166
+    },
+    {
+      "label": "duplicate",
+      "argv": [
+        "/home/vimkim/gh/cubrid-workenv-03/bin/cub-workenv",
+        "create-db",
+        "testdb",
+        "--worktree",
+        "/tmp/cwe-lock-d8ybacb_/b-source",
+        "--path",
+        "/tmp/cwe-lock-d8ybacb_/must-not-exist"
+      ],
+      "returncode": 1
+    },
+    {
+      "label": "additional",
+      "argv": [
+        "/home/vimkim/gh/cubrid-workenv-03/bin/cub-workenv",
+        "create-db",
+        "additional",
+        "--worktree",
+        "/tmp/cwe-lock-d8ybacb_/b-source"
+      ],
+      "returncode": 0
+    }
+  ],
+  "binary_sha256": {
+    "bin/cubrid": "82171bed028cb92a57ed8144d76654f51975abcef9b79a176bb0eddac1778b39",
+    "bin/csql": "65f46b0d7cff6a2632c088d986da5cad4db278147a1d190fac488f942cfcdc79",
+    "bin/cub_server": "e1ef6f682ee541338f251747c3db93c0ca7104fb7b074ec5024d430d79307fe5",
+    "lib/libcubridsa.so": "8d87eee4eab56fa338735613af0aa42b6a856bffb94da3a89d02f83dd2ac1958",
+    "lib/libcubrid.so": "2b6c9097f2f25b644659c00d3ae6fb953e04bfe06a8ad3af42a080ac2a69d585"
+  },
+  "owner_pid": 950121,
+  "active_log_identity": {
+    "device": 64768,
+    "inode": 70717278
+  },
+  "verdict": "pass",
+  "cleanup_processes": [
+    {
+      "pid": 950016,
+      "instance": "a",
+      "cmdline": "cub_master "
+    },
+    {
+      "pid": 950608,
+      "instance": "b",
+      "cmdline": "cub_master "
+    }
+  ],
+  "cleanup_remaining": [],
+  "runtime_removed": true
+}

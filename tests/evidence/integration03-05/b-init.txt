@@ -1,0 +1,3 @@
+Reusing existing testdb registration without opening storage; file-format compatibility remains the user responsibility.
+Initialized /tmp/cwe-lock-d8ybacb_/b-source with /tmp/cwe-lock-d8ybacb_/b (preset debug_gcc).
+Source /tmp/cwe-lock-d8ybacb_/b-source/.cub-workenv/env.sh in bash; use ordinary cubrid and csql commands.
