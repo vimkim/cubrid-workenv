@@ -5,3 +5,4 @@ tests/evidence/ticket03/*.txt -whitespace
 tests/evidence/integration03-05/*.txt -whitespace
 tests/evidence/ticket08/*.txt -whitespace
 tests/evidence/ticket08-first-pass/*.txt -whitespace
+tests/evidence/ticket06/native/*.txt -whitespace
