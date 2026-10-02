@@ -10,12 +10,12 @@ The approved [specification](spec.md) and [tickets](tickets.md) govern implement
 | Ticket | Prerequisites | Implementation / integration | Accepted commit | Evidence |
 | --- | --- | --- | --- | --- |
 | 01 | — | Verified and integrated | `1e50074` | [Ticket01](issues/01-initialize-and-connect.md), 6 CLI tests and real server/client flow |
-| 02 | 01 | In progress | — | — |
+| 02 | 01 | Verified and integrated | `3b73e0f` | [Ticket02](issues/02-initialization-state.md), 13 CLI/state tests |
 | 03 | 01 | In progress | — | — |
-| 04 | 02 | Waiting | — | — |
+| 04 | 02 | Ready; awaiting allocation interface from 05 | — | — |
 | 05 | 01 | In progress | — | — |
 | 06 | 02, 03, 05 | Waiting | — | — |
-| 07 | 02 | Waiting | — | — |
+| 07 | 02 | In progress | — | — |
 | 08 | 03 | Waiting | — | — |
 | 09 | 04, 06, 07, 08 | Waiting | — | — |
 
