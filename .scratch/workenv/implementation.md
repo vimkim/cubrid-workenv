@@ -9,11 +9,11 @@ The approved [specification](spec.md) and [tickets](tickets.md) govern implement
 
 | Ticket | Prerequisites | Implementation / integration | Accepted commit | Evidence |
 | --- | --- | --- | --- | --- |
-| 01 | — | In progress | — | — |
-| 02 | 01 | Waiting | — | — |
-| 03 | 01 | Waiting | — | — |
+| 01 | — | Verified and integrated | `1e50074` | [Ticket01](issues/01-initialize-and-connect.md), 6 CLI tests and real server/client flow |
+| 02 | 01 | In progress | — | — |
+| 03 | 01 | In progress | — | — |
 | 04 | 02 | Waiting | — | — |
-| 05 | 01 | Waiting | — | — |
+| 05 | 01 | In progress | — | — |
 | 06 | 02, 03, 05 | Waiting | — | — |
 | 07 | 02 | Waiting | — | — |
 | 08 | 03 | Waiting | — | — |
