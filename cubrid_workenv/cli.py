@@ -15,12 +15,16 @@ def main():
     init.add_argument('--state-home', type=Path, default=Path(os.environ.get('XDG_STATE_HOME', str(Path.home() / '.local/state'))) / 'cub-workenv')
     init.add_argument('--port-start', type=int, default=41000)
     init.add_argument('--port-end', type=int, default=41999)
+    doctor = commands.add_parser('doctor', help='inspect initialization without changing it')
+    doctor.add_argument('--worktree', type=Path, default=Path.cwd())
     args = parser.parse_args()
     try:
-        if not all(os.access(args.install / 'bin' / name, os.X_OK) for name in ('cubrid', 'csql')):
-            raise ValueError('Selected installation is missing cubrid/csql; build and install your preset, then run init explicitly.')
-        from .state import initialize
-        initialize(args)
+        if args.command == 'doctor':
+            from .doctor import diagnose
+            diagnose(args)
+        else:
+            from .state import initialize
+            initialize(args)
         return 0
     except (ValueError, OSError) as error:
         print(f'cub-workenv: {error}', file=sys.stderr)
