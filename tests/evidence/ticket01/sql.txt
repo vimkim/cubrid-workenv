@@ -1,6 +1,6 @@
-Execute OK. (0.007421 sec) Committed. (0.000455 sec) 
-1 row affected. (0.001242 sec) Committed. (0.000204 sec) 
-Execute OK. (0.000048 sec) 
+Execute OK. (0.007421 sec) Committed. (0.000455 sec)
+1 row affected. (0.001242 sec) Committed. (0.000204 sec)
+Execute OK. (0.000048 sec)
 
 === <Result of SELECT Command in Line 1> ===
 
@@ -8,4 +8,4 @@ Execute OK. (0.000048 sec)
 =============
            42
 
-1 row selected. (0.001309 sec) Committed. (0.000075 sec) 
+1 row selected. (0.001309 sec) Committed. (0.000075 sec)

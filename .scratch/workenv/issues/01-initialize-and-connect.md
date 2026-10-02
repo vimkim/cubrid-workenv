@@ -32,7 +32,7 @@ broker·PL의 완전한 공존 보장은 05, direnv와 기존 build coordinator 
 - `python3 -m unittest discover -s tests -v`: 6 passing public CLI/artifact checks. Missing installation, preservation, active/recorded port avoidance, finite-pool exhaustion, incomplete readiness, distinct same-basename worktrees and an intentionally occupied short-digest directory are covered.
 - `python3 tests/real_smoke.py --install /home/vimkim/.cub/install/develop/debug_gcc --output /tmp/cwe-ticket01-green2`: passed using a copied disposable installation. [Recorded evidence](../../../tests/evidence/ticket01/results.json) includes selected preset, paths, master port 41000, commands and zero return codes. [Version](../../../tests/evidence/ticket01/version.txt): 11.5.0.2602-a0026f9. [SQL](../../../tests/evidence/ticket01/sql.txt) proves committed value 42; [registry](../../../tests/evidence/ticket01/databases.txt) proves matching data/log/LOB paths. Cleanup found no remaining exact-prefix processes and removed disposable runtime storage.
 - TDD: missing-install test first failed because the CLI did not exist, then passed; real flow first failed because initialization was absent, then passed; local existing-registry preservation first failed (init incorrectly succeeded), then passed after the explicit refusal. Supplemental artifact regressions cover the initialized behavior.
-- `git diff --check`: passed.
+- `git diff --check`: passed. Stored SQL transcript trims trailing spaces; SQL values and native messages are unchanged.
 
 ## Interface handoff and limits
 
