@@ -1,3 +1,4 @@
 # Preserve native command output verbatim, including CSQL trailing spaces.
 experiments/native-db-exclusion/evidence/*.txt -whitespace
 experiments/native-db-exclusion/evidence-final/*.txt -whitespace
+tests/evidence/ticket03/*.txt -whitespace
