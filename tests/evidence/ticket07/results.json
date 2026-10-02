@@ -1,5 +1,5 @@
 {
-  "root": "/tmp/cwe-env07-2a46ctpg",
+  "root": "/tmp/cwe-env07-ucbw14ia",
   "source_install": "/home/vimkim/.cub/install/develop/debug_gcc",
   "tooling": "/home/vimkim/my-cubrid-workenv-07",
   "steps": [
@@ -10,7 +10,7 @@
         "allow"
       ],
       "returncode": 0,
-      "seconds": 0.008809402817860246
+      "seconds": 0.008788336999714375
     },
     {
       "label": "a-before-init",
@@ -23,7 +23,7 @@
         "test \"$CUBRID_RUNTIME_READY\" = 0 && test -z \"${CUBRID_TMP:-}\" && printf \"build-only\\n\""
       ],
       "returncode": 0,
-      "seconds": 6.579446617979556
+      "seconds": 0.11495364201255143
     },
     {
       "label": "shared-recipes",
@@ -32,7 +32,7 @@
         "--list"
       ],
       "returncode": 0,
-      "seconds": 0.01669231103733182
+      "seconds": 0.016494045965373516
     },
     {
       "label": "build-recipe",
@@ -42,7 +42,7 @@
         "core::build"
       ],
       "returncode": 0,
-      "seconds": 0.01672815391793847
+      "seconds": 0.008444051025435328
     },
     {
       "label": "configure",
@@ -54,7 +54,7 @@
         "configure"
       ],
       "returncode": 0,
-      "seconds": 0.6664254649076611
+      "seconds": 0.7159917398821563
     },
     {
       "label": "build-before-init",
@@ -66,7 +66,7 @@
         "build"
       ],
       "returncode": 0,
-      "seconds": 0.8162635709159076
+      "seconds": 0.8168758561369032
     },
     {
       "label": "a-init",
@@ -74,20 +74,32 @@
         "/home/vimkim/gh/cubrid-workenv-07/bin/cub-workenv",
         "init",
         "--worktree",
-        "/tmp/cwe-env07-2a46ctpg/a",
+        "/tmp/cwe-env07-ucbw14ia/a",
         "--install",
-        "/tmp/cwe-env07-2a46ctpg/install-a",
+        "/tmp/cwe-env07-ucbw14ia/install-a",
         "--preset",
         "debug_gcc",
         "--state-home",
-        "/tmp/cwe-env07-2a46ctpg/host",
+        "/tmp/cwe-env07-ucbw14ia/host",
         "--port-start",
         "46000",
         "--port-end",
         "46999"
       ],
       "returncode": 0,
-      "seconds": 3.520396711071953
+      "seconds": 2.7183879110962152
+    },
+    {
+      "label": "ctest-after-init",
+      "command": [
+        "direnv",
+        "exec",
+        ".",
+        "just",
+        "ctest"
+      ],
+      "returncode": 0,
+      "seconds": 0.26528877997770905
     },
     {
       "label": "a-version",
@@ -99,7 +111,7 @@
         "--version"
       ],
       "returncode": 0,
-      "seconds": 0.1649935580790043
+      "seconds": 0.16505249892361462
     },
     {
       "label": "a-start",
@@ -113,7 +125,7 @@
         "testdb"
       ],
       "returncode": 0,
-      "seconds": 2.21915897494182
+      "seconds": 2.219340586103499
     },
     {
       "label": "a-seed",
@@ -130,7 +142,7 @@
         "testdb"
       ],
       "returncode": 0,
-      "seconds": 0.21526890294626355
+      "seconds": 0.21512661082670093
     },
     {
       "label": "a-entry-0",
@@ -143,7 +155,7 @@
         "test \"$CUBRID_RUNTIME_READY\" = 1; command -v cubrid; printf \"%s\\n\" \"$CUBRID\" \"$CUBRID_TMP\" \"$CUBRID_DATABASES\" \"$CUBRID_CUBRID_PORT_ID\""
       ],
       "returncode": 0,
-      "seconds": 0.1656383650843054
+      "seconds": 0.16506395605392754
     },
     {
       "label": "a-entry-1",
@@ -156,7 +168,7 @@
         "test \"$CUBRID_RUNTIME_READY\" = 1; command -v cubrid; printf \"%s\\n\" \"$CUBRID\" \"$CUBRID_TMP\" \"$CUBRID_DATABASES\" \"$CUBRID_CUBRID_PORT_ID\""
       ],
       "returncode": 0,
-      "seconds": 0.16505300696007907
+      "seconds": 0.1650970601476729
     },
     {
       "label": "a-entry-2",
@@ -169,7 +181,7 @@
         "test \"$CUBRID_RUNTIME_READY\" = 1; command -v cubrid; printf \"%s\\n\" \"$CUBRID\" \"$CUBRID_TMP\" \"$CUBRID_DATABASES\" \"$CUBRID_CUBRID_PORT_ID\""
       ],
       "returncode": 0,
-      "seconds": 0.1649943559896201
+      "seconds": 0.16505768289789557
     },
     {
       "label": "a-trace",
@@ -186,7 +198,7 @@
         "/usr/bin/true"
       ],
       "returncode": 0,
-      "seconds": 0.31527972407639027
+      "seconds": 0.3153495660517365
     },
     {
       "label": "b-allow",
@@ -195,7 +207,7 @@
         "allow"
       ],
       "returncode": 0,
-      "seconds": 0.008566978853195906
+      "seconds": 0.008458637166768312
     },
     {
       "label": "b-before-init",
@@ -208,7 +220,7 @@
         "test \"$CUBRID_RUNTIME_READY\" = 0 && test -z \"${CUBRID_TMP:-}\" && printf \"build-only\\n\""
       ],
       "returncode": 0,
-      "seconds": 0.16492527001537383
+      "seconds": 0.11487794015556574
     },
     {
       "label": "b-init",
@@ -216,20 +228,20 @@
         "/home/vimkim/gh/cubrid-workenv-07/bin/cub-workenv",
         "init",
         "--worktree",
-        "/tmp/cwe-env07-2a46ctpg/b",
+        "/tmp/cwe-env07-ucbw14ia/b",
         "--install",
-        "/tmp/cwe-env07-2a46ctpg/install-b",
+        "/tmp/cwe-env07-ucbw14ia/install-b",
         "--preset",
         "debug_gcc",
         "--state-home",
-        "/tmp/cwe-env07-2a46ctpg/host",
+        "/tmp/cwe-env07-ucbw14ia/host",
         "--port-start",
         "46000",
         "--port-end",
         "46999"
       ],
       "returncode": 0,
-      "seconds": 6.476172466063872
+      "seconds": 2.9701231149956584
     },
     {
       "label": "b-version",
@@ -241,7 +253,7 @@
         "--version"
       ],
       "returncode": 0,
-      "seconds": 0.1651245248503983
+      "seconds": 0.16532131610438228
     },
     {
       "label": "b-start",
@@ -255,7 +267,7 @@
         "testdb"
       ],
       "returncode": 0,
-      "seconds": 2.2192264129407704
+      "seconds": 2.2199172461405396
     },
     {
       "label": "b-seed",
@@ -272,7 +284,7 @@
         "testdb"
       ],
       "returncode": 0,
-      "seconds": 0.2152962579857558
+      "seconds": 0.21512457402423024
     },
     {
       "label": "b-entry-0",
@@ -285,7 +297,7 @@
         "test \"$CUBRID_RUNTIME_READY\" = 1; command -v cubrid; printf \"%s\\n\" \"$CUBRID\" \"$CUBRID_TMP\" \"$CUBRID_DATABASES\" \"$CUBRID_CUBRID_PORT_ID\""
       ],
       "returncode": 0,
-      "seconds": 0.1651219988707453
+      "seconds": 0.16512248292565346
     },
     {
       "label": "b-entry-1",
@@ -298,7 +310,7 @@
         "test \"$CUBRID_RUNTIME_READY\" = 1; command -v cubrid; printf \"%s\\n\" \"$CUBRID\" \"$CUBRID_TMP\" \"$CUBRID_DATABASES\" \"$CUBRID_CUBRID_PORT_ID\""
       ],
       "returncode": 0,
-      "seconds": 0.1652431059628725
+      "seconds": 0.16507342387922108
     },
     {
       "label": "b-entry-2",
@@ -311,7 +323,7 @@
         "test \"$CUBRID_RUNTIME_READY\" = 1; command -v cubrid; printf \"%s\\n\" \"$CUBRID\" \"$CUBRID_TMP\" \"$CUBRID_DATABASES\" \"$CUBRID_CUBRID_PORT_ID\""
       ],
       "returncode": 0,
-      "seconds": 0.16519312490709126
+      "seconds": 0.16514708404429257
     },
     {
       "label": "b-trace",
@@ -328,17 +340,17 @@
         "/usr/bin/true"
       ],
       "returncode": 0,
-      "seconds": 0.36579420091584325
+      "seconds": 0.31532753305509686
     },
     {
       "label": "switch-a-to-b",
       "command": [
         "bash",
         "-c",
-        "PATH_add() { export PATH=\"$1:$PATH\"; }; has() { command -v \"$1\" >/dev/null 2>&1; }; log_status() { :; };\ncd /tmp/cwe-env07-2a46ctpg/a; export CUB_WORKENV_INSTALL=/tmp/cwe-env07-2a46ctpg/install-a; source /home/vimkim/my-cubrid-workenv-07/stow/cubrid/.envrc >/dev/null || exit;\ncsql -C -u dba -c \"select id from workenv_marker\" testdb || exit;\ncd /tmp/cwe-env07-2a46ctpg/b; export CUB_WORKENV_INSTALL=/tmp/cwe-env07-2a46ctpg/install-b; source /home/vimkim/my-cubrid-workenv-07/stow/cubrid/.envrc >/dev/null || exit;\ncsql -C -u dba -c \"select id from workenv_marker\" testdb || exit;\nprintf \"SELECTED=%s|%s|%s|%s\\n\" \"$CUBRID\" \"$CUBRID_TMP\" \"$CUBRID_DATABASES\" \"$CUBRID_CUBRID_PORT_ID\""
+        "PATH_add() { export PATH=\"$1:$PATH\"; }; has() { command -v \"$1\" >/dev/null 2>&1; }; log_status() { :; };\ncd /tmp/cwe-env07-ucbw14ia/a; export CUB_WORKENV_INSTALL=/tmp/cwe-env07-ucbw14ia/install-a; source /home/vimkim/my-cubrid-workenv-07/stow/cubrid/.envrc >/dev/null || exit;\ncsql -C -u dba -c \"select id from workenv_marker\" testdb || exit;\ncd /tmp/cwe-env07-ucbw14ia/b; export CUB_WORKENV_INSTALL=/tmp/cwe-env07-ucbw14ia/install-b; source /home/vimkim/my-cubrid-workenv-07/stow/cubrid/.envrc >/dev/null || exit;\ncsql -C -u dba -c \"select id from workenv_marker\" testdb || exit;\nprintf \"SELECTED=%s|%s|%s|%s\\n\" \"$CUBRID\" \"$CUBRID_TMP\" \"$CUBRID_DATABASES\" \"$CUBRID_CUBRID_PORT_ID\""
       ],
       "returncode": 0,
-      "seconds": 0.31578646088019013
+      "seconds": 0.26529120397754014
     },
     {
       "label": "a-stop",
@@ -352,7 +364,7 @@
         "testdb"
       ],
       "returncode": 0,
-      "seconds": 1.2172859529964626
+      "seconds": 1.2178430990315974
     },
     {
       "label": "b-stop",
@@ -366,7 +378,7 @@
         "testdb"
       ],
       "returncode": 0,
-      "seconds": 1.2175844199955463
+      "seconds": 1.2174671839457005
     }
   ],
   "binary_sha256": {
@@ -383,29 +395,29 @@
     {
       "schema": 1,
       "status": "ready",
-      "worktree": "/tmp/cwe-env07-2a46ctpg/a",
-      "install": "/tmp/cwe-env07-2a46ctpg/install-a",
+      "worktree": "/tmp/cwe-env07-ucbw14ia/a",
+      "install": "/tmp/cwe-env07-ucbw14ia/install-a",
       "preset": "debug_gcc",
-      "state_home": "/tmp/cwe-env07-2a46ctpg/host",
+      "state_home": "/tmp/cwe-env07-ucbw14ia/host",
       "stage": "complete",
       "allocation": {
-        "worktree": "/tmp/cwe-env07-2a46ctpg/a",
+        "worktree": "/tmp/cwe-env07-ucbw14ia/a",
         "master_port": 46000,
-        "tmp": "/tmp/cwe-1000/f285721d11b4"
+        "tmp": "/tmp/cwe-1000/8cc262e15ac4"
       }
     },
     {
       "schema": 1,
       "status": "ready",
-      "worktree": "/tmp/cwe-env07-2a46ctpg/b",
-      "install": "/tmp/cwe-env07-2a46ctpg/install-b",
+      "worktree": "/tmp/cwe-env07-ucbw14ia/b",
+      "install": "/tmp/cwe-env07-ucbw14ia/install-b",
       "preset": "debug_gcc",
-      "state_home": "/tmp/cwe-env07-2a46ctpg/host",
+      "state_home": "/tmp/cwe-env07-ucbw14ia/host",
       "stage": "complete",
       "allocation": {
-        "worktree": "/tmp/cwe-env07-2a46ctpg/b",
+        "worktree": "/tmp/cwe-env07-ucbw14ia/b",
         "master_port": 46001,
-        "tmp": "/tmp/cwe-1000/e4e71c9a6c1c"
+        "tmp": "/tmp/cwe-1000/bfb47b30f2d3"
       }
     }
   ],

@@ -29,11 +29,9 @@ cli = Path(__file__).resolve().parents[1] / 'bin/cub-workenv'
 root = Path(tempfile.mkdtemp(prefix='cwe-env07-', dir='/tmp'))
 record = {'root': str(root), 'source_install': str(args.install), 'tooling': str(args.tooling), 'steps': []}
 base = {k: v for k, v in os.environ.items() if not k.startswith(('CUBRID', 'DIRENV'))}
-base.update(HOME=str(root / 'home'), MY_CUBRID=str(args.tooling), CUB_WORKENV_CLI=str(cli),
+base.update(MY_CUBRID=str(args.tooling), CUB_WORKENV_CLI=str(cli),
             XDG_DATA_HOME=str(root / 'xdg-data'), XDG_CONFIG_HOME=str(root / 'xdg-config'),
             XDG_RUNTIME_DIR=str(root / 'locks'), PRESET_MODE='debug_gcc', BROWSER='none')
-Path(base['HOME']).mkdir()
-(root / 'home/my-cubrid').symlink_to(args.tooling)
 (root / 'locks').mkdir()
 installs = []
 states = []
@@ -75,7 +73,7 @@ try:
         assert not (source / '.cub-workenv').exists()
         # Exercise the actual shared just/coordinator/CMake path once.
         if name == 'a':
-            (source / 'CMakeLists.txt').write_text('cmake_minimum_required(VERSION 3.21)\nproject(workenv_boundary C)\nadd_executable(probe probe.c)\ninstall(TARGETS probe DESTINATION bin)\n')
+            (source / 'CMakeLists.txt').write_text('cmake_minimum_required(VERSION 3.21)\nproject(workenv_boundary C)\nadd_executable(probe probe.c)\nenable_testing()\nadd_test(NAME probe COMMAND probe)\ninstall(TARGETS probe DESTINATION bin)\n')
             (source / 'probe.c').write_text('int main(void) { return 0; }\n')
             (source / 'CMakePresets.json').write_text(json.dumps({'version': 3,
                 'configurePresets': [{'name': 'debug_gcc', 'generator': 'Ninja', 'binaryDir': '${sourceDir}/build_preset_debug_gcc'}],
@@ -96,6 +94,8 @@ try:
             '--preset', 'debug_gcc', '--state-home', root / 'host', '--port-start', '46000', '--port-end', '46999'], source)
         state = json.loads((source / '.cub-workenv/state.json').read_text())
         states.append(state)
+        if name == 'a':
+            run('ctest-after-init', ['direnv', 'exec', '.', 'just', 'ctest'], source)
         run(f'{name}-version', ['direnv', 'exec', '.', 'cubrid', '--version'], source)
         record.setdefault('binary_sha256', {})[name] = {binary: hashlib.sha256((install / 'bin' / binary).read_bytes()).hexdigest() for binary in ('cubrid', 'csql')}
         run(f'{name}-start', ['direnv', 'exec', '.', 'cubrid', 'server', 'start', 'testdb'], source)
@@ -140,4 +140,6 @@ finally:
         for state in states:
             shutil.rmtree(state['allocation']['tmp'], ignore_errors=True)
         shutil.rmtree(root)
+    for log in args.output.glob('*.txt'):
+        log.write_text('\n'.join(line.rstrip() for line in log.read_text().splitlines()) + '\n')
     assert not record['cleanup_remaining'], record

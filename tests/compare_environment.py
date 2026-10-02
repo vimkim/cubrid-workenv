@@ -31,7 +31,7 @@ with tempfile.TemporaryDirectory(prefix='cwe-entry07-', dir='/tmp') as tmp:
     old = root / 'old-envrc'
     old.write_bytes(subprocess.check_output(['git', '-C', str(args.tooling), 'show', f'{args.baseline}:stow/cubrid/.envrc']))
     environment = {k: v for k, v in os.environ.items() if not k.startswith(('CUBRID', 'DIRENV'))}
-    environment.update(HOME=str(root / 'home'), XDG_DATA_HOME=str(root / 'xdg-data'),
+    environment.update(XDG_DATA_HOME=str(root / 'xdg-data'),
         XDG_CONFIG_HOME=str(root / 'xdg-config'), XDG_STATE_HOME=str(root / 'xdg-state'),
         MY_CUBRID=str(args.tooling), CUB_WORKENV_CLI=str(cli), PRESET_MODE='debug_gcc', BROWSER='none')
     rows = []

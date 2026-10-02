@@ -5,7 +5,7 @@
 =============
           701
 
-1 row selected. (0.002519 sec) Committed. (0.000009 sec) 
+1 row selected. (0.002485 sec) Committed. (0.000007 sec)
 
 === <Result of SELECT Command in Line 1> ===
 
@@ -13,5 +13,5 @@
 =============
           702
 
-1 row selected. (0.002127 sec) Committed. (0.000005 sec) 
-SELECTED=/tmp/cwe-env07-2a46ctpg/install-b|/tmp/cwe-1000/e4e71c9a6c1c|/tmp/cwe-env07-2a46ctpg/b/.cub-workenv/databases|46001
+1 row selected. (0.002189 sec) Committed. (0.000006 sec)
+SELECTED=/tmp/cwe-env07-ucbw14ia/install-b|/tmp/cwe-1000/bfb47b30f2d3|/tmp/cwe-env07-ucbw14ia/b/.cub-workenv/databases|46001

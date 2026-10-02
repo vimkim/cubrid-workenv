@@ -6,37 +6,37 @@
       "loader": "old",
       "iteration": 0,
       "returncode": 0,
-      "seconds": 6.146910817828029
+      "seconds": 0.23012648010626435
     },
     {
       "loader": "new",
       "iteration": 0,
       "returncode": 0,
-      "seconds": 0.10927510587498546
+      "seconds": 0.11190989101305604
     },
     {
       "loader": "old",
       "iteration": 1,
       "returncode": 0,
-      "seconds": 0.21742019709199667
+      "seconds": 0.20492372894659638
     },
     {
       "loader": "new",
       "iteration": 1,
       "returncode": 0,
-      "seconds": 0.11061659990809858
+      "seconds": 0.11031382414512336
     },
     {
       "loader": "old",
       "iteration": 2,
       "returncode": 0,
-      "seconds": 0.20967598096467555
+      "seconds": 0.21143917390145361
     },
     {
       "loader": "new",
       "iteration": 2,
       "returncode": 0,
-      "seconds": 0.11861102702096105
+      "seconds": 0.1152068239171058
     }
   ]
 }

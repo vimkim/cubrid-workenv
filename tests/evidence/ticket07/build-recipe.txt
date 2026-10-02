@@ -8,5 +8,5 @@ build: ensure-build-jdk
     log_file="$build_dir/build.log"
     echo "Logging build output to: $log_file"
     {
-      direnv exec . "$HOME/my-cubrid/bin/cubrid-build-coordinator.sh" build 0
+      direnv exec . "${MY_CUBRID:-$HOME/my-cubrid}/bin/cubrid-build-coordinator.sh" build 0
     } 2>&1 | tee "$log_file"

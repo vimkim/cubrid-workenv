@@ -3,7 +3,8 @@
 ## Scope and boundaries
 
 The implementation joins `cubrid-workenv` and the personal `my-cubrid` tooling in
-separate topic worktrees. Personal tooling commit: `44c1814c80914baac6c19434e4dd93c1bb555946`. It does not install the CLI globally, restow existing
+separate topic worktrees. Personal tooling commits: `44c1814c80914baac6c19434e4dd93c1bb555946` and
+`49e4b22253530baf240bc2cfee3dc4018834317e`. It does not install the CLI globally, restow existing
 source trees, migrate legacy state, alter user installations, or require host
 initialization for containers.
 
@@ -40,7 +41,8 @@ lifecycle operations refuse the legacy assumptions and give precise alternatives
   manifest rejection, and container host-init coupling.
 - [Real-flow script](../../tests/real_environment.py) runs the shared live
   `just configure`/`just build` on a disposable tiny CMake C project, proving actual
-  compile/install succeeds before `.cub-workenv` exists. This is a build-integration
+  compile/install succeeds before `.cub-workenv` exists. After explicit init, the
+  shared `just ctest` path executes and passes the fixture executable test. This is a build-integration
   test, **not a CUBRID engine rebuild**; ticket09 owns the full source build flow.
 - The script copies real CUBRID installations independently, explicitly initializes
   them in an isolated 46000–46999 pool, starts two `testdb` servers, writes different
@@ -67,13 +69,16 @@ on a ready legacy environment.
 
 | Entry | Old | New |
 | --- | ---: | ---: |
-| 0 | 6.146911 | 0.109275 |
-| 1 | 0.217420 | 0.110617 |
-| 2 | 0.209676 | 0.118611 |
+| 0 | 0.230126 | 0.111910 |
+| 1 | 0.204924 | 0.110314 |
+| 2 | 0.211439 | 0.115207 |
 
-The first old entry includes a cold-start outlier. Prepared new-environment entry
+Prepared new-environment entry
 samples are recorded separately in real-flow results. These local observations are
-not an SLA or a claim of equal warm/cold cache conditions.
+not an SLA or a claim of equal warm/cold cache conditions. The reproduction keeps
+HOME unchanged and uses task-specific XDG, install, and tooling paths. Native
+text logs normalize trailing whitespace; commands, return codes and values remain
+unchanged.
 
 The first native harness attempted capture through pipes and timed out because a
 CUBRID daemon retained the pipe. It cleaned up only owned processes. The corrected

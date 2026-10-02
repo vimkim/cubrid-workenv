@@ -1,2 +1,2 @@
-Initialized /tmp/cwe-env07-2a46ctpg/b with /tmp/cwe-env07-2a46ctpg/install-b (preset debug_gcc).
-Source /tmp/cwe-env07-2a46ctpg/b/.cub-workenv/env.sh in bash; use ordinary cubrid and csql commands.
+Initialized /tmp/cwe-env07-ucbw14ia/b with /tmp/cwe-env07-ucbw14ia/install-b (preset debug_gcc).
+Source /tmp/cwe-env07-ucbw14ia/b/.cub-workenv/env.sh in bash; use ordinary cubrid and csql commands.
