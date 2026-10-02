@@ -1,0 +1,2 @@
+Initialized /tmp/cwe-life-hgz8th1l/b-source with /tmp/cwe-life-hgz8th1l/b (preset debug_gcc).
+Source /tmp/cwe-life-hgz8th1l/b-source/.cub-workenv/env.sh in bash; use ordinary cubrid and csql commands.

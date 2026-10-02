@@ -3,3 +3,4 @@ experiments/native-db-exclusion/evidence/*.txt -whitespace
 experiments/native-db-exclusion/evidence-final/*.txt -whitespace
 tests/evidence/ticket03/*.txt -whitespace
 tests/evidence/integration03-05/*.txt -whitespace
+tests/evidence/ticket08/*.txt -whitespace

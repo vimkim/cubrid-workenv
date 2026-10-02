@@ -1,0 +1,2 @@
+?? .cub-workenv/
+!! .cub-workenv/notes.private

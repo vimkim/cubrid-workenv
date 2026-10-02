@@ -53,3 +53,7 @@ It does not establish cross-version compatibility, physical read-only
 access, crash recovery, network filesystems, disabled locking, or all
 utilities. Temporary runtime and owned processes are removed after the
 experiment; binary hashes and command results remain in `results.json`.
+
+Before removing a source worktree, follow the [database lifetime procedure](database-lifetime.md).
+It requires explicit artifact ownership, physical storage inspection, normal
+shutdown and non-force Git removal, and preserves external/symlink-target DBs.

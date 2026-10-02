@@ -1,0 +1,96 @@
+{
+  "runtime_root": "/tmp/cwe-life-i2tuu7le",
+  "install_source": "/home/vimkim/.cub/install/develop/debug_gcc",
+  "steps": [
+    {
+      "label": "git-init",
+      "argv": [
+        "git",
+        "init",
+        "/tmp/cwe-life-i2tuu7le/repo"
+      ],
+      "returncode": 0
+    },
+    {
+      "label": "git-add",
+      "argv": [
+        "git",
+        "-C",
+        "/tmp/cwe-life-i2tuu7le/repo",
+        "add",
+        "source.txt",
+        ".gitignore"
+      ],
+      "returncode": 0
+    },
+    {
+      "label": "git-commit",
+      "argv": [
+        "git",
+        "-C",
+        "/tmp/cwe-life-i2tuu7le/repo",
+        "-c",
+        "user.name=Lifetime fixture",
+        "-c",
+        "user.email=fixture@example.invalid",
+        "commit",
+        "-m",
+        "Disposable fixture"
+      ],
+      "returncode": 0
+    },
+    {
+      "label": "a-worktree-add",
+      "argv": [
+        "git",
+        "-C",
+        "/tmp/cwe-life-i2tuu7le/repo",
+        "worktree",
+        "add",
+        "--detach",
+        "/tmp/cwe-life-i2tuu7le/a-source"
+      ],
+      "returncode": 0
+    },
+    {
+      "label": "a-init",
+      "argv": [
+        "/home/vimkim/gh/cubrid-workenv-08/bin/cub-workenv",
+        "init",
+        "--worktree",
+        "/tmp/cwe-life-i2tuu7le/a-source",
+        "--install",
+        "/tmp/cwe-life-i2tuu7le/a",
+        "--preset",
+        "debug_gcc",
+        "--java-home",
+        "/home/vimkim/.local/share/mise/installs/java/temurin-8.0.462+8",
+        "--state-home",
+        "/tmp/cwe-life-i2tuu7le/host",
+        "--port-start",
+        "48000",
+        "--port-end",
+        "48999"
+      ],
+      "returncode": 0
+    },
+    {
+      "label": "external-create",
+      "argv": [
+        "/home/vimkim/gh/cubrid-workenv-08/bin/cub-workenv",
+        "create-db",
+        "externaldb",
+        "--worktree",
+        "/tmp/cwe-life-i2tuu7le/a-source",
+        "--path",
+        "/tmp/cwe-life-i2tuu7le/external-db"
+      ],
+      "returncode": 0
+    }
+  ],
+  "verdict": "fail",
+  "error": "StopIteration()",
+  "cleanup_processes": [],
+  "cleanup_remaining": [],
+  "runtime_retained": true
+}

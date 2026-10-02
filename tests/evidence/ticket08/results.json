@@ -1,0 +1,396 @@
+{
+  "runtime_root": "/tmp/cwe-life-hgz8th1l",
+  "install_source": "/home/vimkim/.cub/install/develop/debug_gcc",
+  "steps": [
+    {
+      "label": "git-init",
+      "argv": [
+        "git",
+        "init",
+        "/tmp/cwe-life-hgz8th1l/repo"
+      ],
+      "returncode": 0
+    },
+    {
+      "label": "git-add",
+      "argv": [
+        "git",
+        "-C",
+        "/tmp/cwe-life-hgz8th1l/repo",
+        "add",
+        "source.txt",
+        ".gitignore"
+      ],
+      "returncode": 0
+    },
+    {
+      "label": "git-commit",
+      "argv": [
+        "git",
+        "-C",
+        "/tmp/cwe-life-hgz8th1l/repo",
+        "-c",
+        "user.name=Lifetime fixture",
+        "-c",
+        "user.email=fixture@example.invalid",
+        "commit",
+        "-m",
+        "Disposable fixture"
+      ],
+      "returncode": 0
+    },
+    {
+      "label": "a-worktree-add",
+      "argv": [
+        "git",
+        "-C",
+        "/tmp/cwe-life-hgz8th1l/repo",
+        "worktree",
+        "add",
+        "--detach",
+        "/tmp/cwe-life-hgz8th1l/a-source"
+      ],
+      "returncode": 0
+    },
+    {
+      "label": "a-init",
+      "argv": [
+        "/home/vimkim/gh/cubrid-workenv-08/bin/cub-workenv",
+        "init",
+        "--worktree",
+        "/tmp/cwe-life-hgz8th1l/a-source",
+        "--install",
+        "/tmp/cwe-life-hgz8th1l/a",
+        "--preset",
+        "debug_gcc",
+        "--java-home",
+        "/home/vimkim/.local/share/mise/installs/java/temurin-8.0.462+8",
+        "--state-home",
+        "/tmp/cwe-life-hgz8th1l/host",
+        "--port-start",
+        "48000",
+        "--port-end",
+        "48999"
+      ],
+      "returncode": 0
+    },
+    {
+      "label": "external-create",
+      "argv": [
+        "/home/vimkim/gh/cubrid-workenv-08/bin/cub-workenv",
+        "create-db",
+        "externaldb",
+        "--worktree",
+        "/tmp/cwe-life-hgz8th1l/a-source",
+        "--path",
+        "/tmp/cwe-life-hgz8th1l/external-db"
+      ],
+      "returncode": 0
+    },
+    {
+      "label": "b-worktree-add",
+      "argv": [
+        "git",
+        "-C",
+        "/tmp/cwe-life-hgz8th1l/repo",
+        "worktree",
+        "add",
+        "--detach",
+        "/tmp/cwe-life-hgz8th1l/b-source"
+      ],
+      "returncode": 0
+    },
+    {
+      "label": "b-init",
+      "argv": [
+        "/home/vimkim/gh/cubrid-workenv-08/bin/cub-workenv",
+        "init",
+        "--worktree",
+        "/tmp/cwe-life-hgz8th1l/b-source",
+        "--install",
+        "/tmp/cwe-life-hgz8th1l/b",
+        "--preset",
+        "debug_gcc",
+        "--java-home",
+        "/home/vimkim/.local/share/mise/installs/java/temurin-8.0.462+8",
+        "--state-home",
+        "/tmp/cwe-life-hgz8th1l/host",
+        "--port-start",
+        "48000",
+        "--port-end",
+        "48999",
+        "--no-db",
+        "--database-registry",
+        "/tmp/cwe-life-hgz8th1l/external-registry.txt"
+      ],
+      "returncode": 0
+    },
+    {
+      "label": "version",
+      "argv": [
+        "/tmp/cwe-life-hgz8th1l/a/bin/cubrid",
+        "--version"
+      ],
+      "returncode": 0
+    },
+    {
+      "label": "testdb-start",
+      "argv": [
+        "/tmp/cwe-life-hgz8th1l/a/bin/cubrid",
+        "server",
+        "start",
+        "testdb"
+      ],
+      "returncode": 0
+    },
+    {
+      "label": "testdb-seed",
+      "argv": [
+        "/tmp/cwe-life-hgz8th1l/a/bin/csql",
+        "-C",
+        "-u",
+        "dba",
+        "-c",
+        "create table sentinel (id integer, payload blob); insert into sentinel values (8042, bit_to_blob(X'080042')); commit;",
+        "testdb"
+      ],
+      "returncode": 0
+    },
+    {
+      "label": "testdb-stop",
+      "argv": [
+        "/tmp/cwe-life-hgz8th1l/a/bin/cubrid",
+        "server",
+        "stop",
+        "testdb"
+      ],
+      "returncode": 0
+    },
+    {
+      "label": "externaldb-start",
+      "argv": [
+        "/tmp/cwe-life-hgz8th1l/a/bin/cubrid",
+        "server",
+        "start",
+        "externaldb"
+      ],
+      "returncode": 0
+    },
+    {
+      "label": "externaldb-seed",
+      "argv": [
+        "/tmp/cwe-life-hgz8th1l/a/bin/csql",
+        "-C",
+        "-u",
+        "dba",
+        "-c",
+        "create table sentinel (id integer, payload blob); insert into sentinel values (8042, bit_to_blob(X'080042')); commit;",
+        "externaldb"
+      ],
+      "returncode": 0
+    },
+    {
+      "label": "externaldb-stop",
+      "argv": [
+        "/tmp/cwe-life-hgz8th1l/a/bin/cubrid",
+        "server",
+        "stop",
+        "externaldb"
+      ],
+      "returncode": 0
+    },
+    {
+      "label": "a-master-stop",
+      "argv": [
+        "/tmp/cwe-life-hgz8th1l/a/bin/cubrid",
+        "service",
+        "stop"
+      ],
+      "returncode": 0
+    },
+    {
+      "label": "ignored-user-file",
+      "argv": [
+        "git",
+        "-C",
+        "/tmp/cwe-life-hgz8th1l/a-source",
+        "status",
+        "--short",
+        "--ignored"
+      ],
+      "returncode": 0
+    },
+    {
+      "label": "git-refuses-user-change",
+      "argv": [
+        "git",
+        "-C",
+        "/tmp/cwe-life-hgz8th1l/repo",
+        "worktree",
+        "remove",
+        "/tmp/cwe-life-hgz8th1l/a-source"
+      ],
+      "returncode": 128
+    },
+    {
+      "label": "save-user-change-add",
+      "argv": [
+        "git",
+        "-C",
+        "/tmp/cwe-life-hgz8th1l/a-source",
+        "add",
+        "source.txt"
+      ],
+      "returncode": 0
+    },
+    {
+      "label": "save-user-change-commit",
+      "argv": [
+        "git",
+        "-C",
+        "/tmp/cwe-life-hgz8th1l/a-source",
+        "-c",
+        "user.name=Lifetime fixture",
+        "-c",
+        "user.email=fixture@example.invalid",
+        "commit",
+        "-m",
+        "Preserved fixture user edit"
+      ],
+      "returncode": 0
+    },
+    {
+      "label": "save-user-change-branch",
+      "argv": [
+        "git",
+        "-C",
+        "/tmp/cwe-life-hgz8th1l/a-source",
+        "branch",
+        "preserved-user-edit"
+      ],
+      "returncode": 0
+    },
+    {
+      "label": "preserved-user-edit",
+      "argv": [
+        "git",
+        "-C",
+        "/tmp/cwe-life-hgz8th1l/repo",
+        "show",
+        "preserved-user-edit:source.txt"
+      ],
+      "returncode": 0
+    },
+    {
+      "label": "a-worktree-remove",
+      "argv": [
+        "git",
+        "-C",
+        "/tmp/cwe-life-hgz8th1l/repo",
+        "worktree",
+        "remove",
+        "/tmp/cwe-life-hgz8th1l/a-source"
+      ],
+      "returncode": 0
+    },
+    {
+      "label": "external-reopen",
+      "argv": [
+        "/tmp/cwe-life-hgz8th1l/b/bin/cubrid",
+        "server",
+        "start",
+        "externaldb"
+      ],
+      "returncode": 0
+    },
+    {
+      "label": "external-sentinel-after-removal",
+      "argv": [
+        "/tmp/cwe-life-hgz8th1l/b/bin/csql",
+        "-C",
+        "-u",
+        "dba",
+        "-c",
+        "select id, blob_to_bit(payload) from sentinel;",
+        "externaldb"
+      ],
+      "returncode": 0
+    },
+    {
+      "label": "external-stop-b",
+      "argv": [
+        "/tmp/cwe-life-hgz8th1l/b/bin/cubrid",
+        "server",
+        "stop",
+        "externaldb"
+      ],
+      "returncode": 0
+    },
+    {
+      "label": "b-master-stop",
+      "argv": [
+        "/tmp/cwe-life-hgz8th1l/b/bin/cubrid",
+        "service",
+        "stop"
+      ],
+      "returncode": 0
+    }
+  ],
+  "binary_sha256": {
+    "bin/cubrid": "059feea677443ee659f4116945abf1e8e9e86b3afff64b015be43d8a225acd51",
+    "bin/csql": "912599e87c86ac2a24ce1cd1a18278d9444196ebfe896f3f9939680e91cfa497",
+    "bin/cub_server": "8448866034e826d054993efe632be9ee29c9209351f59946b461d6c9cf29d5a0",
+    "lib/libcubridsa.so": "ec69048d0d4e996a3d4894abed2c77cca4f622339b3b9f3793645c5f7f2f4955",
+    "lib/libcubrid.so": "d0c4e00ef378516facfaca5afa9903ccd26de644cb36b82f0c09800300dd1a19"
+  },
+  "managed": {
+    "paths": [
+      "/tmp/cwe-life-hgz8th1l/a-source/.cub-workenv/db/testdb/data",
+      "/tmp/cwe-life-hgz8th1l/a-source/.cub-workenv/db/testdb/log",
+      "/tmp/cwe-life-hgz8th1l/a-source/.cub-workenv/db/testdb/lob"
+    ],
+    "resolved": [
+      "/tmp/cwe-life-hgz8th1l/a-source/.cub-workenv/db/testdb/data",
+      "/tmp/cwe-life-hgz8th1l/a-source/.cub-workenv/db/testdb/log",
+      "/tmp/cwe-life-hgz8th1l/a-source/.cub-workenv/db/testdb/lob"
+    ],
+    "classification": "internal"
+  },
+  "symlink": {
+    "paths": [
+      "/tmp/cwe-life-hgz8th1l/a-source/.cub-workenv/external-link/data",
+      "/tmp/cwe-life-hgz8th1l/a-source/.cub-workenv/external-link/log",
+      "/tmp/cwe-life-hgz8th1l/a-source/.cub-workenv/external-link/lob"
+    ],
+    "resolved": [
+      "/tmp/cwe-life-hgz8th1l/external-db/data",
+      "/tmp/cwe-life-hgz8th1l/external-db/log",
+      "/tmp/cwe-life-hgz8th1l/external-db/lob"
+    ],
+    "classification": "external"
+  },
+  "mixed_fixture": {
+    "paths": [
+      "/tmp/cwe-life-hgz8th1l/a-source/.cub-workenv/db/testdb/data",
+      "/tmp/cwe-life-hgz8th1l/a-source/.cub-workenv/external-link/log",
+      "/tmp/cwe-life-hgz8th1l/a-source/.cub-workenv/db/testdb/lob"
+    ],
+    "resolved": [
+      "/tmp/cwe-life-hgz8th1l/a-source/.cub-workenv/db/testdb/data",
+      "/tmp/cwe-life-hgz8th1l/external-db/log",
+      "/tmp/cwe-life-hgz8th1l/a-source/.cub-workenv/db/testdb/lob"
+    ],
+    "classification": "mixed: preserve and review"
+  },
+  "unknown_gate": "blocked: unknown or changed artifact",
+  "outside_ignored_gate": "blocked: user change outside generated artifacts",
+  "modified_generated_gate": "blocked: unknown or changed artifact",
+  "source_gate": "blocked: user change outside generated artifacts",
+  "cleanup": "cleaned exact owned manifest",
+  "external_unchanged_before_reopen": true,
+  "host_allocation_retained": true,
+  "verdict": "pass",
+  "cleanup_processes": [],
+  "cleanup_remaining": [],
+  "runtime_retained": true
+}

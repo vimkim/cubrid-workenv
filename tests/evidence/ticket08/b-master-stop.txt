@@ -1,0 +1,4 @@
+@ cubrid broker stop
+++ cubrid broker is not running.
+@ cubrid master stop
+++ cubrid master stop: success

@@ -1,0 +1,2 @@
+Preparing worktree (detached HEAD 1ed8505)
+HEAD is now at 1ed8505 Disposable fixture

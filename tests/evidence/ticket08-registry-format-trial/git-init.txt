@@ -1,0 +1,1 @@
+Initialized empty Git repository in /tmp/cwe-life-i2tuu7le/repo/.git/

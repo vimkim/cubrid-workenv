@@ -1,0 +1,1 @@
+mixedprobe /tmp/cwe-life-hgz8th1l/a-source/.cub-workenv/db/testdb/data localhost /tmp/cwe-life-hgz8th1l/a-source/.cub-workenv/external-link/log file:/tmp/cwe-life-hgz8th1l/a-source/.cub-workenv/db/testdb/lob

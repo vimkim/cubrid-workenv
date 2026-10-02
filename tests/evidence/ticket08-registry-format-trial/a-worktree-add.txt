@@ -1,0 +1,2 @@
+Preparing worktree (detached HEAD ecaa820)
+HEAD is now at ecaa820 Disposable fixture

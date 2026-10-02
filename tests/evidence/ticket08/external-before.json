@@ -1,0 +1,49 @@
+{
+  "data": {
+    "type": "directory"
+  },
+  "log": {
+    "type": "directory"
+  },
+  "lob": {
+    "type": "directory"
+  },
+  "data/externaldb_vinf": {
+    "type": "file",
+    "sha256": "7ec3b6dac5bd6a733f239deaca5b071426aa522aacb6c2e92c3cf98daa68a46f"
+  },
+  "data/externaldb": {
+    "type": "file",
+    "sha256": "aa9637396149361e881b5a564ba9cbaf6ce67e3cbfb4ec0071cec0fe226bdc06"
+  },
+  "data/externaldb_keys": {
+    "type": "file",
+    "sha256": "2cbb3fc41dcd3901973e025f69a15afe7447b1acbacf28cc602eb0654b3b176a"
+  },
+  "data/externaldb_x001": {
+    "type": "file",
+    "sha256": "153bbfdbd06ceba2db914e4a0467f8e244fa3db272afaed1260b6b71572a5aaf"
+  },
+  "log/externaldb_lgat": {
+    "type": "file",
+    "sha256": "670b970d8de691c8c01c5c24d2f7f7b123fbe4857ef64205e3c306bb7d9d901e"
+  },
+  "log/externaldb_lginf": {
+    "type": "file",
+    "sha256": "a8d107a757ea6c12c37e475735c979c7a8db51dc2deed853a6cb0b7ac39043d6"
+  },
+  "log/externaldb_lgar_t": {
+    "type": "file",
+    "sha256": "b7d47de5292afc4daaa5aa2e9148b583ac5c32110a952eac964fe94e5db92590"
+  },
+  "lob/57715760": {
+    "type": "directory"
+  },
+  "lob/57715760/ces_096": {
+    "type": "directory"
+  },
+  "lob/57715760/ces_096/dba.sentinel.00001790929773979530_8485": {
+    "type": "file",
+    "sha256": "9d66963548610782d2230b9ed145ab872213fd2c4b0f7f9e0f3d0f602c1fb8cd"
+  }
+}
