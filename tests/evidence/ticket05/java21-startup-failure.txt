@@ -1,0 +1,6 @@
+@ cubrid master start
+++ cubrid master start: success
+@ cubrid server start: testdb
+
+This may take a long time depending on the amount of recovery works to do.
+PL server can not be started: Error occured while starting Java SP Server by CallStaticIntMethod().

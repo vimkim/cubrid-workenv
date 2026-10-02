@@ -39,7 +39,11 @@ class AllocationAndPreservationTest(unittest.TestCase):
 
     def init(self, worktree, *extra):
         worktree.mkdir(parents=True, exist_ok=True)
-        return subprocess.run([str(CLI), 'init', '--worktree', str(worktree), '--install', str(self.install),
+        import shutil
+        install = worktree / 'install'
+        if not install.exists():
+            shutil.copytree(self.install, install)
+        return subprocess.run([str(CLI), 'init', '--worktree', str(worktree), '--install', str(install),
             '--preset', 'debug', '--state-home', str(self.root / 'host'), *extra], text=True, capture_output=True)
 
     def test_same_basename_avoids_active_and_recorded_ports(self):
@@ -58,6 +62,59 @@ class AllocationAndPreservationTest(unittest.TestCase):
             self.assertNotIn(port, [r['master_port'] for r in records])
             self.assertEqual(len({r['tmp'] for r in records}), 2)
             self.assertTrue(all(len(r['tmp'] + '/CUBRID65535') < 108 for r in records))
+
+    def test_broker_and_pl_settings_are_isolated(self):
+        import json
+        targets = [self.root / 'a', self.root / 'b']
+        for target in targets:
+            result = self.init(target, '--port-start', '45000', '--port-end', '45999')
+            self.assertEqual(result.returncode, 0, result.stderr)
+        records = json.loads((self.root / 'host/allocations.json').read_text())
+        ports = [r[key] for r in records for key in ('master_port', 'broker_port')]
+        keys = [r[key] for r in records for key in ('broker_master_shm_id', 'broker_appl_server_shm_id')]
+        self.assertEqual(len(set(ports)), 4)
+        self.assertEqual(len(set(keys)), 4)
+        for target in targets:
+            conf = (target / '.cub-workenv/conf/cubrid.conf').read_text()
+            self.assertIn('stored_procedure=yes', conf)
+            self.assertIn('stored_procedure_uds=yes', conf)
+            broker = (target / '.cub-workenv/conf/cubrid_broker.conf').read_text()
+            self.assertEqual(broker.count('[%'), 1)
+            self.assertIn('APPL_SERVER_SHM_ID=', broker)
+            self.assertIn('CUBRID_BROKER_CONF_FILE', (target / '.cub-workenv/env.sh').read_text())
+
+    def test_live_shared_memory_is_skipped(self):
+        import ctypes
+        import json
+        libc = ctypes.CDLL(None, use_errno=True)
+        key = 0x62100000
+        while True:
+            segment = libc.shmget(key, 4096, 0o1000 | 0o2000 | 0o600)
+            if segment >= 0:
+                break
+            if ctypes.get_errno() != 17:
+                self.fail('Cannot create disposable SysV shared memory')
+            key += 1
+        try:
+            target = self.root / 'ipc'
+            result = self.init(target, '--shm-start', hex(key), '--shm-end', hex(key + 20))
+            self.assertEqual(result.returncode, 0, result.stderr)
+            state = json.loads((target / '.cub-workenv/state.json').read_text())
+            self.assertNotIn(key, [state['allocation']['broker_master_shm_id'],
+                                   state['allocation']['broker_appl_server_shm_id']])
+        finally:
+            self.assertEqual(libc.shmctl(segment, 0, None), 0)
+
+    def test_shared_installation_is_rejected_for_pl_safety(self):
+        first = self.root / 'one'
+        self.assertEqual(self.init(first).returncode, 0)
+        second = self.root / 'two'
+        second.mkdir()
+        result = subprocess.run([str(CLI), 'init', '--worktree', str(second),
+            '--install', str(first / 'install'), '--preset', 'debug',
+            '--state-home', str(self.root / 'host')], text=True, capture_output=True)
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn('dedicated installation', result.stderr)
 
     def test_repeat_preserves_artifacts_and_unknown_settings_are_rejected(self):
         first = self.root / 'one'

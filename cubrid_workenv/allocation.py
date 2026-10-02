@@ -39,19 +39,45 @@ def available(port):
         return False
 
 
-def allocate(worktree, home, start, end):
+def occupied_shm_keys():
+    """Linux SysV IPC inventory: inability to inspect fails closed."""
+    rows = Path('/proc/sysvipc/shm').read_text().splitlines()
+    return {int(row.split()[0]) for row in rows[1:]}
+
+
+def allocate(worktree, home, start, end, *, install=None,
+             shm_start=0x62000000, shm_end=0x6200ffff):
     if not 1024 <= start <= end <= 65535:
         raise ValueError('Port pool must satisfy 1024 <= start <= end <= 65535')
+    if not 1 <= shm_start <= shm_end <= 0x7fffffff:
+        raise ValueError('Shared-memory pool must satisfy 1 <= start <= end <= 0x7fffffff')
     home.mkdir(parents=True, exist_ok=True)
     with locked(home / 'allocations.lock'):
         path = home / 'allocations.json'
         records = json.loads(path.read_text()) if path.exists() else []
         if any(item['worktree'] == str(worktree) for item in records):
             raise ValueError('Worktree already has an allocation; inspect with doctor before manual recovery')
-        used = {item['master_port'] for item in records}
-        port = next((p for p in range(start, end + 1) if p not in used and available(p)), None)
-        if port is None:
-            raise ValueError(f'Port pool {start}-{end} exhausted; inspect owners in {path} or explicitly adjust the pool')
+        if install and any(item.get('install') == str(install) for item in records):
+            raise ValueError('Selected installation is already allocated to another worktree; select a dedicated installation (PL info files are installation-local)')
+        used = {item[key] for item in records for key in ('master_port', 'broker_port') if key in item}
+        ports = []
+        for port in range(start, end + 1):
+            if port not in used and available(port):
+                ports.append(port)
+                if len(ports) == 2:
+                    break
+        if len(ports) != 2:
+            raise ValueError(f'Port pool {start}-{end} exhausted; two ports required; inspect owners in {path} or explicitly adjust the pool')
+        used_keys = occupied_shm_keys() | {item[key] for item in records
+            for key in ('broker_master_shm_id', 'broker_appl_server_shm_id') if key in item}
+        keys = []
+        for key in range(shm_start, shm_end + 1):
+            if key not in used_keys:
+                keys.append(key)
+                if len(keys) == 2:
+                    break
+        if len(keys) != 2:
+            raise ValueError(f'Shared-memory pool {shm_start:#x}-{shm_end:#x} exhausted; inspect owners in {path} or explicitly adjust the pool')
         base = Path('/tmp') / f'cwe-{os.getuid()}'
         base.mkdir(mode=0o700, exist_ok=True)
         if base.is_symlink() or base.stat().st_uid != os.getuid() or base.stat().st_mode & 0o077:
@@ -60,7 +86,7 @@ def allocate(worktree, home, start, end):
         tmp = None
         for size in range(12, 65, 4):
             candidate = base / digest[:size]
-            if len(str(candidate / 'CUBRID65535').encode()) >= 108:
+            if len(str(candidate / 'sp_testdb.sock').encode()) >= 108:
                 break
             if any(item['tmp'] == str(candidate) for item in records) or candidate.exists():
                 continue
@@ -72,7 +98,9 @@ def allocate(worktree, home, start, end):
                 continue
         if tmp is None:
             raise ValueError('No safe short TMP identity available; inspect existing socket directories')
-        result = {'worktree': str(worktree), 'master_port': port, 'tmp': str(tmp)}
+        result = {'worktree': str(worktree), 'master_port': ports[0], 'broker_port': ports[1],
+                  'broker_master_shm_id': keys[0], 'broker_appl_server_shm_id': keys[1],
+                  'install': str(install) if install else None, 'tmp': str(tmp)}
         records.append(result)
         atomic_json(path, records)
         return result

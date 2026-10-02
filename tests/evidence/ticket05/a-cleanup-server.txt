@@ -1,0 +1,2 @@
+@ cubrid server stop: testdb
+++ cubrid server 'testdb' is not running.

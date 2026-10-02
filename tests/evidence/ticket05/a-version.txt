@@ -1,0 +1,4 @@
+cubrid (CUBRID utilities)
+CUBRID 11.5.0 (11.5.0.2602-a0026f9) (64bit debug build for Linux) (Sep 22 2026 14:54:01)
+Copyright (C) 2008 Search Solution Corporation.
+Copyright (C) 2016 CUBRID Corporation.

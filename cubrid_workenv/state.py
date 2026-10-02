@@ -33,10 +33,13 @@ def initialize(args):
         state = {'schema': 1, 'status': 'preparing', 'worktree': str(worktree),
                  'install': str(args.install.resolve()), 'preset': args.preset,
                  'state_home': str(args.state_home.resolve())}
+        if args.java_home:
+            state['java_home'] = str(args.java_home.resolve(strict=True))
         state['stage'] = 'allocation'
         atomic_json(marker, state)
         try:
-            state['allocation'] = allocate(worktree, args.state_home.resolve(), args.port_start, args.port_end)
+            state['allocation'] = allocate(worktree, args.state_home.resolve(), args.port_start, args.port_end,
+                                           install=state['install'], shm_start=args.shm_start, shm_end=args.shm_end)
             state['stage'] = 'settings'
             atomic_json(marker, state)
             write_settings(state)
