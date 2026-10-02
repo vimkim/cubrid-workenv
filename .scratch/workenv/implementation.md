@@ -12,8 +12,8 @@ The approved [specification](spec.md) and [tickets](tickets.md) govern implement
 | 01 | — | Verified and integrated | `1e50074` | [Ticket01](issues/01-initialize-and-connect.md), 6 CLI tests and real server/client flow |
 | 02 | 01 | Verified and integrated | `3b73e0f` | [Ticket02](issues/02-initialization-state.md), 13 CLI/state tests |
 | 03 | 01 | In progress | — | — |
-| 04 | 02 | Ready; awaiting allocation interface from 05 | — | — |
-| 05 | 01 | In progress | — | — |
+| 04 | 02 | In progress | — | — |
+| 05 | 01 | Verified and integrated | `9878abc` | [Ticket05](issues/05-multiple-instances.md), native JDBC/PL/stop proof, 16 integrated tests |
 | 06 | 02, 03, 05 | Waiting | — | — |
 | 07 | 02 | In progress | — | — |
 | 08 | 03 | Waiting | — | — |
