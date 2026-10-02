@@ -1,0 +1,16 @@
+test_config_drift_has_manual_guidance_and_preserves_everything (test_doctor.DoctorTest.test_config_drift_has_manual_guidance_and_preserves_everything) ... ok
+test_conflicting_record_and_real_socket_report_pid_without_inventing_owner (test_doctor.DoctorTest.test_conflicting_record_and_real_socket_report_pid_without_inventing_owner) ... ok
+test_database_section_lock_disable_is_diagnosed_without_running_native_command (test_doctor.DoctorTest.test_database_section_lock_disable_is_diagnosed_without_running_native_command) ... ok
+test_external_and_additional_databases_are_valid_but_missing_volume_is_not (test_doctor.DoctorTest.test_external_and_additional_databases_are_valid_but_missing_volume_is_not) ... ok
+test_extra_broker_resources_cannot_be_reported_as_fully_checked (test_doctor.DoctorTest.test_extra_broker_resources_cannot_be_reported_as_fully_checked) ... ok
+test_legacy_additional_registration_without_lob_is_valid (test_doctor.DoctorTest.test_legacy_additional_registration_without_lob_is_valid) ... ok
+test_legacy_registration_lock_owner_matches_existing_error (test_doctor.DoctorTest.test_legacy_registration_lock_owner_matches_existing_error) ... ok
+test_live_process_lock_override_is_reported (test_doctor.DoctorTest.test_live_process_lock_override_is_reported) ... ok
+test_selected_installation_drift_from_allocation_is_reported (test_doctor.DoctorTest.test_selected_installation_drift_from_allocation_is_reported) ... ok
+test_selection_and_native_error_preserved_with_unknown_owner (test_doctor.DoctorTest.test_selection_and_native_error_preserved_with_unknown_owner) ... ok
+test_stale_socket_path_reports_uncertainty_without_removing_it (test_doctor.DoctorTest.test_stale_socket_path_reports_uncertainty_without_removing_it) ... ok
+
+----------------------------------------------------------------------
+Ran 11 tests in 3.108s
+
+OK

@@ -28,7 +28,13 @@ is an atomic snapshot; permissions, PID exits/reuse and other namespaces limit
 inspection. The inaccessible PID count is printed on every full scan.
 
 Local file-backed DB registrations are checked with filesystem metadata only.
-Additional DB names and the same name in other environments are allowed. Data,
+Additional DB names and the same name in other environments are allowed.
+Legacy four-field registrations without a LOB field are valid: doctor checks
+the data and active log and reports LOB as not registered. Native source
+`src/base/databases_file.c:449–462` and `:548–561` explicitly preserves this
+backward compatibility. Initial `testdb` reuse still requires the documented
+five-field local file-backed registration; this diagnostic support does not
+broaden initialization's reuse contract. Data,
 active-log and LOB paths may be external and are never removed. Remote/non-file
 LOB registrations are retained and explicitly marked outside physical storage
 verification. These checks do not establish file-format compatibility, complete

@@ -63,22 +63,24 @@ def registry_problems(worktree):
     except (OSError, ValueError) as error:
         return {}, [f'Cannot inspect DB registry: {error}']
     for name, fields in rows.items():
-        if len(fields) != 5:
-            problems.append(f'DB {name}: malformed registry row; expected name/data/host/log/LOB')
+        if len(fields) not in (4, 5):
+            problems.append(f'DB {name}: malformed registry row; expected name/data/host/log with optional LOB')
             continue
         # Remote and non-file LOB registrations are valid CUBRID extensions;
         # report our inspection boundary, never declare their storage corrupt.
-        if fields[2] != 'localhost' or not fields[4].startswith('file:'):
+        if fields[2] != 'localhost' or (len(fields) == 5 and not fields[4].startswith('file:')):
             print(f'DB {name}: remote host or non-file LOB; physical storage not verified')
             continue
-        paths = [Path(fields[1]), Path(fields[3]), Path(fields[4][5:])]
+        paths = [Path(fields[1]), Path(fields[3])]
+        if len(fields) == 5:
+            paths.append(Path(fields[4][5:]))
         for path in paths:
             if not path.is_absolute() or not path.is_dir():
                 problems.append(f'DB {name}: missing or inaccessible absolute storage directory {path}')
         for path in (paths[0] / name, paths[1] / (name + '_lgat')):
             if not path.is_file():
                 problems.append(f'DB {name}: missing physical volume or active log {path}; preserve storage and inspect registration manually')
-        print(f'DB {name}: data={paths[0]} log={paths[1]} LOB={paths[2]} (registration inspection only)')
+        print(f'DB {name}: data={paths[0]} log={paths[1]} LOB={paths[2] if len(paths) == 3 else "not registered"} (registration inspection only)')
     return rows, problems
 
 
@@ -120,13 +122,25 @@ def owner_worktree(pid, processes, records, active_log=None):
                 continue
             if active_log is not None:
                 rows = database_rows(record['worktree'])
-                if not any(len(fields) == 5 and fields[2] == 'localhost' and (Path(fields[3]) / (name + '_lgat')).samefile(active_log)
+                if not any(len(fields) in (4, 5) and fields[2] == 'localhost' and (Path(fields[3]) / (name + '_lgat')).samefile(active_log)
                            for name, fields in rows.items()):
                     continue
             matches.append(record['worktree'])
         except (OSError, ValueError, KeyError):
             continue
     return matches[0] if len(matches) == 1 else None
+
+
+def lock_owners(lines, stat):
+    """Yield holders for one inode; blocked lock requests are not owners."""
+    identity = (os.major(stat.st_dev), os.minor(stat.st_dev), stat.st_ino)
+    for line in lines:
+        parts = line.split()
+        if len(parts) < 6 or parts[1] == '->':
+            continue
+        device = parts[5].split(':')
+        if len(device) == 3 and (int(device[0], 16), int(device[1], 16), int(device[2])) == identity:
+            yield int(parts[4])
 
 
 def resource_observations(state, rows):
@@ -195,22 +209,16 @@ def resource_observations(state, rows):
                 occupied(f'SysV shared memory {key:#x}', pids)
         locks = Path('/proc/locks').read_text().splitlines()
         for name, fields in rows.items():
-            if len(fields) != 5 or fields[2] != 'localhost':
+            if len(fields) not in (4, 5) or fields[2] != 'localhost':
                 continue
             active = Path(fields[3]) / (name + '_lgat')
             try:
                 stat = active.stat()
             except OSError:
                 continue
-            for line in locks:
-                parts = line.split()
-                if len(parts) < 6 or parts[1] == '->':
-                    continue
-                dev = parts[5].split(':')
-                if len(dev) == 3 and (int(dev[0], 16), int(dev[1], 16), int(dev[2])) == (os.major(stat.st_dev), os.minor(stat.st_dev), stat.st_ino):
-                    pid = int(parts[4])
-                    owner = owner_worktree(pid, processes, records, active)
-                    print(f'DB {name}: native active-log lock PID {pid}, worktree={owner or "unconfirmed"}, path={active}; another independent opener must wait for normal release')
+            for pid in lock_owners(locks, stat):
+                owner = owner_worktree(pid, processes, records, active)
+                print(f'DB {name}: native active-log lock PID {pid}, worktree={owner or "unconfirmed"}, path={active}; another independent opener must wait for normal release')
     except (OSError, ValueError, IndexError) as error:
         problems.append(f'Cannot completely inspect live resources: {error}; inspect manually')
     return records, processes, problems
@@ -236,13 +244,7 @@ def explain_native_error(path, records, processes):
             for volume in re.findall(r'"([^"\n]+_lgat)"', text):
                 active = Path(volume)
                 stat = active.stat()
-                for line in Path('/proc/locks').read_text().splitlines():
-                    parts = line.split()
-                    if len(parts) < 6 or parts[4] != str(pid):
-                        continue
-                    dev = parts[5].split(':')
-                    if len(dev) != 3 or (int(dev[0], 16), int(dev[1], 16), int(dev[2])) != (os.major(stat.st_dev), os.minor(stat.st_dev), stat.st_ino):
-                        continue
+                if pid in lock_owners(Path('/proc/locks').read_text().splitlines(), stat):
                     owner = owner_worktree(pid, processes, records, active)
                     if owner:
                         print(f'Native owner confirmed now: PID {pid}, worktree={owner}, active log={active}')

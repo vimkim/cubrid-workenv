@@ -51,3 +51,18 @@ User stories: 9, 10, 25, 27
   uncertainty and native-build scope. No all-version or all-utility guarantee.
 - Status means implementation is ready for orchestration review; integration is
   recorded by the parent, not by this ticket's implementation agent.
+
+
+## Final review follow-up
+
+- P2: doctor accepts native-compatible four-field additional DB registrations
+  without a LOB path. Existing data/log files remain required for local rows;
+  malformed three/six-field rows remain errors. Initial DB reuse is unchanged.
+- P3: both live DB and captured-native-error reports now use one `/proc/locks`
+  device/inode holder parser, consistently excluding blocked requests.
+- Public CLI regressions cover the legacy row and both owner reports using a
+  real kernel advisory lock on synthetic files. No CUBRID process was launched
+  during these repairs; ticket 09 retained ownership of native fixtures.
+- Follow-up checks: see
+  [doctor](../../../tests/evidence/ticket06/review-doctor-checks.txt) and
+  [state](../../../tests/evidence/ticket06/review-state-checks.txt).

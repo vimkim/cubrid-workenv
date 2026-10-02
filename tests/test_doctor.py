@@ -145,3 +145,56 @@ class DoctorTest(unittest.TestCase):
         result = self.doctor()
         self.assertNotEqual(result.returncode, 0)
         self.assertIn('installation', result.stderr)
+
+    def test_legacy_additional_registration_without_lob_is_valid(self):
+        storage = self.root / 'legacy-storage'
+        storage.mkdir()
+        (storage / 'extra').touch()
+        (storage / 'extra_lgat').touch()
+        registry = self.runtime / 'databases/databases.txt'
+        registry.write_text(f'extra {storage} localhost {storage}\n')
+        result = self.doctor()
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+        self.assertIn('LOB=not registered', result.stdout)
+        (storage / 'extra_lgat').unlink()
+        result = self.doctor()
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn('missing physical volume or active log', result.stderr)
+        for row in (f'extra {storage} localhost', f'extra {storage} localhost {storage} file:{storage} unexpected'):
+            with self.subTest(row=row):
+                registry.write_text(row + '\n')
+                result = self.doctor()
+                self.assertNotEqual(result.returncode, 0)
+                self.assertIn('malformed registry row', result.stderr)
+
+    def test_legacy_registration_lock_owner_matches_existing_error(self):
+        # Exercise both public reports against a real kernel advisory lock on a
+        # synthetic volume. This fixture does not launch CUBRID or open a real DB.
+        import pwd
+        import sys
+        storage = self.root / 'lock-fixture'
+        storage.mkdir()
+        (storage / 'extra').touch()
+        active = storage / 'extra_lgat'
+        active.touch()
+        (self.runtime / 'databases/databases.txt').write_text(f'extra {storage} localhost {storage}\n')
+        allocation = self.state['allocation']
+        env = dict(os.environ, CUBRID=str(self.root / 'install'),
+            CUBRID_CONF_FILE=str(self.runtime / 'conf/cubrid.conf'),
+            CUBRID_DATABASES=str(self.runtime / 'databases'), CUBRID_TMP=allocation['tmp'],
+            CUBRID_CUBRID_PORT_ID=str(allocation['master_port']))
+        child = subprocess.Popen([sys.executable, '-u', '-c',
+            'import fcntl,sys; f=open(sys.argv[1], "r+"); fcntl.lockf(f, fcntl.LOCK_EX); print("locked"); input()',
+            str(active)], env=env, stdin=subprocess.PIPE, stdout=subprocess.PIPE, text=True)
+        try:
+            self.assertEqual(child.stdout.readline().strip(), 'locked')
+            error = self.root / 'captured-error.txt'
+            error.write_text(f'Unable to mount disk volume "{active}". The database is in use by user '
+                f'{pwd.getpwuid(os.getuid()).pw_name} on process {child.pid} of host {socket.gethostname()} since fixture.\n')
+            result = self.doctor('--native-error-file', str(error))
+            self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+            self.assertIn(f'DB extra: native active-log lock PID {child.pid}, worktree={self.work}', result.stdout)
+            self.assertIn(f'Native owner confirmed now: PID {child.pid}, worktree={self.work}', result.stdout)
+            self.assertIsNone(child.poll())
+        finally:
+            child.communicate(input='\n', timeout=5)
