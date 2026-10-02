@@ -16,7 +16,7 @@ The approved [specification](spec.md) and [tickets](tickets.md) govern implement
 | 05 | 01 | Verified and integrated | `9878abc` | [Ticket05](issues/05-multiple-instances.md), native JDBC/PL/stop proof, 16 integrated tests |
 | 06 | 02, 03, 05 | In progress | — | — |
 | 07 | 02 | In progress | — | — |
-| 08 | 03 | In progress | — | — |
+| 08 | 03 | Verified and integrated | `68060e0` | [Ticket08](issues/08-database-lifetime.md), real non-force Git removal and external SQL/BLOB preservation |
 | 09 | 04, 06, 07, 08 | Waiting | — | — |
 
 Ticket triage remains `ready-for-human` after implementation and verification; this table records actual integration separately. Acceptance evidence belongs in each ticket and its linked artifacts. Only verified integrated tickets unblock successors.
@@ -24,3 +24,7 @@ Ticket triage remains `ready-for-human` after implementation and verification; t
 ## Final review
 
 Pending Standards and Spec review of the integrated diff against the starting main commit, plus the separate ticket07 tooling diff. Findings return to the responsible ticket agent. Actual CUBRID execution evidence cannot be replaced by mocked commands.
+
+## Binary evidence provenance
+
+Tickets01/03/05 and parent integration03-05 used copied `11.5.0.2602-a0026f9`. The shared source installation changed externally during implementation: ticket08 records `11.5.0.2635-30043f4`. These are distinct evidence sets, not an unchanged binary. Each native run records its actual version; final workflow must identify its own isolated build. Existing engine develop user changes were observed and preserved.
