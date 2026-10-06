@@ -128,3 +128,10 @@ For a deliberate fresh numeric allocation, use the preview-first `reset` or
 Databases, logs, installation/configuration paths and TMP identities remain;
 only port and broker SHM assignments are released. Explicit reinitialization is
 required. This is separate from automatic reclamation and failed-init repair.
+
+## Missing worktrees
+
+Use [prune](prune.md) to preview and remove missing linked Git worktree
+registrations and release their proven-idle allocations. Existing worktrees,
+locked registrations and uncertain resources remain. This differs from reset,
+which invalidates an existing environment for explicit reinitialization.

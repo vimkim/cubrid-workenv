@@ -37,6 +37,10 @@ def process_reason(record, ignored_ancestors=()):
         words = []
         try:
             info = entry.stat()
+            # An unreaped zombie has no running code or open descriptors. Its
+            # environ may return EACCES instead of disappearing from /proc.
+            if (entry / 'stat').read_text().rsplit(')', 1)[1].split()[0] in ('Z', 'X'):
+                continue
             command = (entry / 'cmdline').read_bytes().split(b'\0')
             words = [word.decode(errors='replace') for word in command if word]
             # Foreign ordinary daemons cannot be inspected through environ;
@@ -53,7 +57,7 @@ def process_reason(record, ignored_ancestors=()):
             for item in environment:
                 key, _, value = item.partition(b'=')
                 if key.startswith(b'CUBRID') and (matches(value.decode(errors='replace')) or
-                        (key == b'CUBRID_CUBRID_PORT_ID' and value == str(record['master_port']).encode())):
+                        (key == b'CUBRID_CUBRID_PORT_ID' and value == str(record.get('master_port')).encode())):
                     return f'live owner PID {entry.name} has allocation environment'
             for link in ('cwd', 'exe'):
                 if matches(os.readlink(entry / link)):
@@ -71,11 +75,15 @@ def inactive_reason(record, available, occupied_keys):
         return reason
     for field in ('master_port', 'broker_port'):
         if field not in record:
+            if record.get('status') == 'reset':
+                continue
             return f'incomplete allocation: missing {field}'
         if not available(record[field]):
             return f'occupied or inaccessible TCP port {record[field]} ({field})'
     for field in ('broker_master_shm_id', 'broker_appl_server_shm_id'):
         if field not in record:
+            if record.get('status') == 'reset':
+                continue
             return f'incomplete allocation: missing {field}'
         if record[field] in occupied_keys:
             return f'SysV shared memory remains at key {record[field]:#x} ({field}); ownership uncertain'

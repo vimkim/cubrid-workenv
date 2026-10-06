@@ -45,9 +45,16 @@ def main():
         reset.add_argument('--apply', action='store_true', help='apply the reset after inactivity checks')
         if command == 'reset':
             reset.add_argument('--worktree', type=Path, default=Path.cwd())
+    prune = commands.add_parser('prune', help='prune missing linked Git worktrees and their idle allocations (preview by default)')
+    prune.add_argument('--worktree', type=Path, default=Path.cwd(), help='repository worktree root to inspect')
+    prune.add_argument('--state-home', type=Path, help='allocation namespace; defaults to current worktree selection or host default')
+    prune.add_argument('--apply', action='store_true', help='remove eligible stale registrations and release their allocations')
     args = parser.parse_args()
     try:
-        if args.command in ('reset', 'reset-all'):
+        if args.command == 'prune':
+            from .prune import prune
+            prune(args)
+        elif args.command in ('reset', 'reset-all'):
             from .reset import reset
             reset(args)
         elif args.command == 'env':
