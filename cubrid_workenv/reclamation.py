@@ -22,7 +22,7 @@ def deleted_path(path):
     return False, 'worktree still exists (stopped allocations are retained)'
 
 
-def process_reason(record):
+def process_reason(record, ignored_ancestors=()):
     roots = [record['worktree'], record['tmp']]
     if record.get('install'):
         roots.append(record['install'])
@@ -39,12 +39,14 @@ def process_reason(record):
             info = entry.stat()
             command = (entry / 'cmdline').read_bytes().split(b'\0')
             words = [word.decode(errors='replace') for word in command if word]
-            if any(matches(word) for word in words):
-                return f'live process PID {entry.name} references allocation paths'
             # Foreign ordinary daemons cannot be inspected through environ;
             # CUBRID and Java candidates still require proof and fail closed.
             candidate = any(Path(word).name.startswith(('cub_', 'cubrid', 'csql', 'java'))
                             for word in words[:1])
+            if int(entry.name) in ignored_ancestors and not candidate:
+                continue
+            if any(matches(word) for word in words):
+                return f'live process PID {entry.name} references allocation paths'
             if info.st_uid != os.getuid() and not candidate:
                 continue
             environment = (entry / 'environ').read_bytes().split(b'\0')

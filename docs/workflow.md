@@ -120,3 +120,11 @@ and this CLI's creation-provenance revision together. New creation records are
 consumed by the personal internal-DB lifecycle recipes; older/reused DBs remain
 preserved for manual review. See `my-cubrid/docs/host-workenv.md` for those recipes
 and `my-cubrid/docs/complete-workenv-migration.md` for the caller inventory.
+
+## Explicit numeric reset
+
+For a deliberate fresh numeric allocation, use the preview-first `reset` or
+`reset-all` workflow in [Reset numeric resource assignments](reset.md).
+Databases, logs, installation/configuration paths and TMP identities remain;
+only port and broker SHM assignments are released. Explicit reinitialization is
+required. This is separate from automatic reclamation and failed-init repair.

@@ -64,6 +64,9 @@ def diagnose(args):
         raise ValueError(f'Symlinked work environment directory {root}; inspect manually')
     state = read_state(worktree)
     print(f'Worktree: {worktree}\nState: {state.get("status", "unknown")}')
+    if state.get('status') == 'reset':
+        print(f"Preserved TMP: {state.get('allocation', {}).get('tmp')}")
+        raise ValueError('Numeric resources reset; explicitly init with the recorded install/preset/state-home, then reload the environment')
     if state.get('status') != 'ready':
         print(f'Last stage: {state.get("stage", "unknown")}')
         if state.get('error'):

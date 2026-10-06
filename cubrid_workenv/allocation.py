@@ -56,7 +56,7 @@ def occupied_shm_keys():
 
 
 def allocate(worktree, home, start, end, *, install=None,
-             shm_start=0x62000000, shm_end=0x6200ffff):
+             shm_start=0x62000000, shm_end=0x6200ffff, reuse_identity=None):
     if not 1024 <= start <= end <= 65535:
         raise ValueError('Port pool must satisfy 1024 <= start <= end <= 65535')
     if not 1 <= shm_start <= shm_end <= 0x7fffffff:
@@ -65,6 +65,12 @@ def allocate(worktree, home, start, end, *, install=None,
     with locked(home / 'allocations.lock'):
         path = home / 'allocations.json'
         records = json.loads(path.read_text()) if path.exists() else []
+        if reuse_identity is not None:
+            if (reuse_identity not in records or reuse_identity.get('status') != 'reset'
+                    or reuse_identity.get('worktree') != str(worktree)
+                    or reuse_identity.get('install') != str(install)):
+                raise ValueError('Reset identity is missing or changed; inspect before reinitialization')
+            records = [item for item in records if item != reuse_identity]
         if any(item['worktree'] == str(worktree) for item in records):
             raise ValueError('Worktree already has an allocation; inspect with doctor before manual recovery')
         if install and any(item.get('install') == str(install) for item in records):
@@ -103,7 +109,7 @@ def allocate(worktree, home, start, end, *, install=None,
                 print(f"Allocation {item['allocation']['worktree']}: {item['action']}: {item['reason']}", file=sys.stderr)
             if len(retained) != len(records):
                 records = retained
-                atomic_json(path, records)
+                atomic_json(path, records + ([reuse_identity] if reuse_identity is not None else []))
             ports, keys = select(records, occupied_shm_keys())
         if len(ports) != 2 or len(keys) != 2:
             raise ValueError(f'Pool exhausted: ports {start}-{end} ({len(ports)}/2 free), '
@@ -116,7 +122,14 @@ def allocate(worktree, home, start, end, *, install=None,
             raise ValueError(f'Unsafe TMP base: {base}')
         digest = hashlib.sha256(str(worktree).encode()).hexdigest()
         tmp = None
-        for size in range(12, 65, 4):
+        if reuse_identity is not None:
+            candidate = Path(reuse_identity['tmp'])
+            if (candidate.parent != base or candidate.is_symlink() or not candidate.is_dir()
+                    or candidate.stat().st_uid != os.getuid() or candidate.stat().st_mode & 0o077
+                    or any(item.get('tmp') == str(candidate) for item in records)):
+                raise ValueError(f'Reset TMP identity is missing, unsafe or in use: {candidate}')
+            tmp = candidate
+        for size in (() if tmp is not None else range(12, 65, 4)):
             candidate = base / digest[:size]
             if len(str(candidate / 'sp_testdb.sock').encode()) >= 108:
                 break

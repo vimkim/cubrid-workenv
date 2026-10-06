@@ -39,9 +39,18 @@ def main():
     env.add_argument('--worktree', type=Path, default=Path.cwd())
     env.add_argument('--preset')
     env.add_argument('--install', type=Path)
+    for command in ('reset', 'reset-all'):
+        reset = commands.add_parser(command, help='release numeric resources; preserve paths, databases and logs (preview by default)')
+        reset.add_argument('--state-home', type=Path, help='allocation namespace (reset defaults to recorded namespace; reset-all to the host default)')
+        reset.add_argument('--apply', action='store_true', help='apply the reset after inactivity checks')
+        if command == 'reset':
+            reset.add_argument('--worktree', type=Path, default=Path.cwd())
     args = parser.parse_args()
     try:
-        if args.command == 'env':
+        if args.command in ('reset', 'reset-all'):
+            from .reset import reset
+            reset(args)
+        elif args.command == 'env':
             from .loading import emit
             emit(args)
         elif args.command == 'doctor':

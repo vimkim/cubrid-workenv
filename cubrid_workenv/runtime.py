@@ -66,3 +66,47 @@ def write_environment(state):
             text += f'export {key}={shlex.quote(value)}\n'
     text += 'export CUBRID_RUNTIME_READY=1\n'
     (root / 'env.sh').write_text(text)
+
+
+def reallocated_settings(state, allocation):
+    """Replace only managed numeric settings; retain paths, comments and tuning."""
+    import configparser
+    import re
+    root = Path(state['worktree']) / '.cub-workenv/conf'
+    result = {}
+    for filename, replacements in (
+        ('cubrid.conf', {('common', 'cubrid_port_id'): str(allocation['master_port'])}),
+        ('cubrid_broker.conf', {('broker', 'master_shm_id'): f"{allocation['broker_master_shm_id']:#x}",
+                               ('%workenv', 'broker_port'): str(allocation['broker_port']),
+                               ('%workenv', 'appl_server_shm_id'): f"{allocation['broker_appl_server_shm_id']:#x}"})):
+        path = root / filename
+        if path.is_symlink():
+            raise ValueError(f'Symlinked configuration preserved: {path}')
+        text = path.read_text()
+        config = configparser.ConfigParser(interpolation=None, inline_comment_prefixes=('#', ';'))
+        try:
+            config.read_string(text)
+        except configparser.Error as error:
+            raise ValueError(f'Invalid configuration: {path}: {error}') from error
+        for section in config.sections():
+            if filename == 'cubrid.conf' and section.startswith('@') and config.has_option(section, 'cubrid_port_id'):
+                replacements[(section, 'cubrid_port_id')] = str(allocation['master_port'])
+            if filename == 'cubrid_broker.conf' and section.startswith('%') and section != '%workenv':
+                if config.get(section, 'service', fallback='on').lower() not in ('off', 'no', 'false', '0'):
+                    raise ValueError(f'Additional enabled broker in {path}; review its resources manually')
+        lines, found, section = [], set(), None
+        for line in text.splitlines(keepends=True):
+            match = re.match(r'\s*\[([^]]+)\]', line)
+            if match:
+                section = match[1]
+            match = re.match(r'(\s*([^=:#\s]+)\s*[=:]\s*)([^#;\r\n]*)(.*)', line)
+            key = (section, match[2].lower()) if match else None
+            if key in replacements:
+                suffix = match[3][len(match[3].rstrip()):] + match[4]
+                line = match[1] + replacements[key] + suffix + ('\n' if line.endswith('\n') else '')
+                found.add(key)
+            lines.append(line)
+        if found != set(replacements):
+            raise ValueError(f'Missing managed numeric settings in {path}; inspect manually')
+        result[path] = ''.join(lines)
+    return result
