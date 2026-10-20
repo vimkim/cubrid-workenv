@@ -53,6 +53,6 @@ def emit(args):
     print(CLEAN_SHELL, end='')
     artifact = selection(args.worktree.resolve(), args.preset, args.install)
     if artifact is None:
-        print('cub-workenv: build-only; build and install, then run cub-workenv init explicitly.', file=sys.stderr)
+        print('cub-workenv: host environment not initialized; after installation (just build-and-install), run cub-workenv init explicitly.', file=sys.stderr)
     else:
         print(f'source {shlex.quote(str(artifact))}')

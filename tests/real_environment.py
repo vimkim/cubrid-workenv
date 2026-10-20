@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Ticket07: shared just build, explicit init, direnv, and native A-to-B flow.
+"""Ticket07: shared just build-and-install, explicit init, direnv, and native A-to-B flow.
 
 A tiny CMake project exercises the real shared build boundary; this does not
 claim a CUBRID engine rebuild. Installed CUBRID binaries are separate copies.
@@ -79,10 +79,14 @@ try:
                 'configurePresets': [{'name': 'debug_gcc', 'generator': 'Ninja', 'binaryDir': '${sourceDir}/build_preset_debug_gcc'}],
                 'buildPresets': [{'name': 'debug_gcc', 'configurePreset': 'debug_gcc'}]}))
             run('shared-recipes', ['just', '--list'], source)
-            run('build-recipe', ['just', '--show', 'core::build'], source)
+            run('build-recipe', ['just', '--show', 'core::build-and-install'], source)
             run('configure', ['direnv', 'exec', '.', 'just', 'configure'], source)
             run('build-before-init', ['direnv', 'exec', '.', 'just', 'build'], source)
+            assert not (install / 'bin/probe').exists()
+            assert not (source / '.cub-workenv').exists()
+            run('install-before-init', ['direnv', 'exec', '.', 'just', 'install'], source)
             assert (install / 'bin/probe').is_file()
+            run('build-and-install-before-init', ['direnv', 'exec', '.', 'just', 'build-and-install'], source)
             assert not (source / '.cub-workenv').exists()
             run('ctest-before-init', ['direnv', 'exec', '.', 'just', 'ctest'], source)
         install.mkdir(exist_ok=True)

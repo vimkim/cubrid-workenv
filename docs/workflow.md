@@ -1,4 +1,4 @@
-# Build, initialize, use, diagnose
+# Build, install, initialize, use, diagnose
 
 `cub-workenv` prepares one host source worktree and one dedicated installed
 CUBRID/preset. Build and install first, then initialize explicitly. Entering a
@@ -10,7 +10,15 @@ worktrees that symlink shared tooling are affected when that tooling is applied.
 
 ## First use
 
-After building/installing with the chosen source tree's supported workflow:
+With the companion `my-cubrid` recipes, `just configure` generates build rules,
+`just build` produces artifacts without installing, and `just install` installs
+existing artifacts. `just build-and-install` combines the last two;
+`just configure-build-and-install` includes configuration. The former `compile`
+command is now `build`; the former installing `build` command is now
+`build-and-install`. Request service stops explicitly with
+`just build-and-install --stop-runtime`.
+
+After installation with the chosen source tree's supported workflow:
 
 ```sh
 cub-workenv init --worktree /path/to/source \
@@ -22,7 +30,7 @@ csql -C -u dba -c 'select 42;' testdb
 cubrid server stop testdb
 ```
 
-The preset is a recorded selection; init does not configure or compile it.
+The preset is a recorded selection; init does not configure, build, or install it.
 Installations must be dedicated because CUBRID also writes PL information beneath
 its installation. Keep all cooperating worktrees in the same host allocation
 namespace. `--state-home` is useful for deliberately isolated test fixtures, not

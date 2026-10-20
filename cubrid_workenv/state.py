@@ -93,4 +93,4 @@ def initialize(args):
 def validate_install(install):
     if not all((install / 'bin' / name).is_file() and os.access(install / 'bin' / name, os.X_OK)
                for name in ('cubrid', 'csql')):
-        raise ValueError('Selected installation is missing cubrid/csql; build and install your preset, then run init explicitly.')
+        raise ValueError('Selected installation is missing cubrid/csql; run just build-and-install for your preset, then run init explicitly.')

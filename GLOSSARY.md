@@ -31,3 +31,15 @@ _Avoid_: Shared-lifetime database
 **External database**:
 A database stored outside the worktree and preserved when that worktree is deleted. It may be reused by other work environments.
 _Avoid_: Automatically disposable database
+
+**Build**:
+Production of CUBRID artifacts in the selected build directory, including compilation and linking.
+_Avoid_: Build as a synonym for installation or host initialization
+
+**Install**:
+Placement of existing build artifacts into the selected CUBRID installation directory.
+_Avoid_: Initialization
+
+**Build and install**:
+The combined operation that produces CUBRID artifacts and then installs them. Host initialization remains a separate operation.
+_Avoid_: Build when installation is included

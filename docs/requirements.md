@@ -35,7 +35,7 @@
 
 ## 빌드와 도구 접근
 
-사용자는 `just configure-build`로 configure → build → install을 명시적으로 수행한다. 설치가 끝나면 해당 실행 환경의 PATH에서 `csql`, `cubrid` 등 설치된 바이너리를 찾아 실행할 수 있어야 한다. 새 worktree 진입 시 자동 빌드를 요구하지 않는다.
+사용자는 `just configure-build-and-install`로 configure → build → install을 명시적으로 수행한다. 설치가 끝나면 해당 실행 환경의 PATH에서 `csql`, `cubrid` 등 설치된 바이너리를 찾아 실행할 수 있어야 한다. 새 worktree 진입 시 자동 빌드를 요구하지 않는다.
 
 테스트에 필요한 CTP, `cubrid-testkit` 등의 도구와 TC를 사용할 수 있어야 한다. 실제 실행 도구는 해당 테스트 흐름에서 선택하며, 이 요구사항이 모든 테스트를 하나의 도구로 통일한다는 뜻은 아니다.
 
@@ -51,7 +51,7 @@
 | 호스트에서 여러 worktree의 CUBRID 실행 | 포트·UDS·설정 파일·shared memory 설정이 서로 충돌하지 않음 |
 | DB에 접속 | 다른 worktree의 동명 DB에 실수로 접속하는 상황을 방지하도록 선택된 master와 registry 등 접속 환경이 구분됨; DB 이름 중복은 허용 |
 | 초기화한 worktree에 다시 진입 | direnv가 환경변수와 PATH만 설정하며 DB 생성이나 빌드를 반복하지 않음 |
-| `just configure-build` 완료 | 설치된 `csql`, `cubrid` 등을 해당 실행 환경의 PATH에서 찾을 수 있음 |
+| `just configure-build-and-install` 완료 | 설치된 `csql`, `cubrid` 등을 해당 실행 환경의 PATH에서 찾을 수 있음 |
 | 호스트에서 서버 이름을 대상으로 `pkill` 수행 | 다른 호스트 worktree의 서버에 영향을 줄 위험은 수용한 제한이며 격리 보장에 포함하지 않음 |
 
 ## 구체화된 동작
