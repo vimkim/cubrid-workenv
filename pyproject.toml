@@ -1,0 +1,14 @@
+[project]
+name = "cubrid-workenv"
+version = "0.1.0"
+description = "Explicit host work environment preparation for CUBRID source worktrees"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = []
+
+[project.scripts]
+cub-workenv = "cubrid_workenv.cli:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

@@ -1,19 +1,21 @@
 # cubrid-workenv
 
 Explicit host work environment preparation for CUBRID source worktrees.
-Requires Linux, Python 3.10+ and bash. From a stable checkout, run `just install`
-to link `~/.local/bin/cub-workenv` to this checkout. The recipe is safe to repeat
-and refuses to replace a different existing file or link. Keep the checkout in
-place: the launcher imports its adjacent Python package. Set
-`CUB_WORKENV_BIN_DIR=/your/bin` to select another installation directory.
+Requires Linux, Python 3.10+ and bash. Run `just sync` (or `just install`) with
+uv installed to install or refresh an independent `cub-workenv` command using
+`uv tool install --reinstall .`. Source changes take effect after the next sync.
+The recipe also replaces the legacy launcher symlink from this checkout;
+unrelated existing files or links are preserved. Set
+`CUB_WORKENV_BIN_DIR=/your/bin` or `UV_TOOL_BIN_DIR=/your/bin` to select another
+installation directory; otherwise uv uses its default user command directory.
 
 If needed, add that directory to your shell PATH (`export PATH="$HOME/.local/bin:$PATH"`
-in Bash, or `path add ~/.local/bin` in Nushell). The installer prints guidance;
-it does not edit shell startup files. Without just, run `bin/cub-workenv` directly
-or add this checkout's `bin` directory to PATH.
+in Bash, or `path add ~/.local/bin` in Nushell). Without just, run
+`uv tool install --reinstall .` to install the package, or run `bin/cub-workenv`
+directly from the checkout.
 
 ```sh
-just install
+just sync
 cub-workenv --help
 cub-workenv init --worktree /path/to/source --install /path/to/installed/cubrid --preset debug_gcc
 source /path/to/source/.cub-workenv/env.sh
