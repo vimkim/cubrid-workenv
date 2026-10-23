@@ -11,7 +11,72 @@ ordinary `cubrid` and `csql` commands.
 A read `111` and B read `222` through csql and JDBC. B continued working after
 A's server and broker stopped. [See the verification report →](docs/evidence/ticket09-workflow.md)
 
-[Get started](#get-started) · [Commands](#commands) · [Boundaries](#boundaries) · [Verification](#verification)
+[Why this exists](#why-this-exists) · [How it works](#how-cubrid-workenv-solves-it) · [Get started](#get-started) · [Commands](#commands) · [Boundaries](#boundaries)
+
+## Why this exists
+
+Developers and agents often leave a database running in worktree A while testing
+another CUBRID branch in worktree B. **Git separates the source files; host
+runtime resources still need their own configuration.** With overlapping settings,
+B's commands can reach A's master and its same-named `testdb`, or a broker stop
+can affect the other environment.
+
+That makes test results misleading: a query intended to check B's changes may
+actually run against A's server. It can also interrupt another experiment or
+force developers to wait for long tests before starting their own work.
+
+The causes span several resources. Master and broker ports, broker shared-memory
+keys, database registries, and master/PL socket paths can overlap. PL also writes
+information files inside the installation. Shell commands select these through
+environment variables and configuration, so inherited or partially switched
+settings can select the wrong instance. Changing only the DB name or one port
+leaves other conflicts unresolved. The [source investigation](docs/handoff-instance-isolation.md)
+maps those relationships.
+
+There was a second workflow problem: the previous shared direnv loader ran full
+runtime validation on directory entry. Repeated filesystem comparisons,
+installation hashing, and host inspection made routine shell entry expensive.
+See the [original tooling observations](.scratch/workenv/design-interview.md#existing-tooling-facts).
+
+### Ways to address it
+
+| Approach | Trade-off |
+| --- | --- |
+| Run host environments one at a time | Stop and switch between runs; long tests block other work. |
+| Configure each host environment manually | Coordinate installations, registries, ports, IPC keys, and socket paths for every worktree. |
+| Use separate containers | Separate runtime namespaces and manage mounts/storage through a container workflow. |
+
+`cubrid-workenv` automates the coordinated host configuration while keeping
+ordinary native commands available. It also separates one-time preparation from
+everyday shell entry.
+
+## How cubrid-workenv solves it
+
+1. **Prepare explicitly.** After build and installation, `init` records a dedicated
+   installation and preset, writes worktree-local configuration and a database
+   registry, and prepares `testdb` unless `--no-db` is selected.
+2. **Allocate resources together.** A shared host allocation registry assigns
+   distinct master/broker ports and broker SysV shared-memory keys. Each worktree
+   gets a short TMP directory for master and PL sockets. Dedicated installations
+   keep installation-local PL files separate too.
+3. **Load one consistent selection.** The generated `env.sh` clears inherited
+   CUBRID overrides and selects the installation, configuration, registry, and
+   runtime resources together. Native `cubrid` and `csql` then use that selection.
+4. **Keep routine entry cheap.** Loading checks readiness without creating DBs or
+   running full diagnosis. Repeating `init` on a ready environment is a no-op;
+   explicit, read-only `doctor` handles deeper inspection.
+
+Settings, state, utility logs, and the Bash loader live in `.cub-workenv/`.
+New databases use `.cub-workenv/db/` unless you select external storage.
+Development-tool paths remain available when the selected CUBRID paths are loaded.
+
+Keep cooperating environments in the **same host allocation namespace**.
+It defaults to `${XDG_STATE_HOME:-$HOME/.local/state}/cub-workenv`.
+Stopped environments retain their assignments; allocation avoids recorded and
+currently occupied resources. It is not a lasting OS reservation.
+
+For pool ranges, storage defaults, direnv integration, and recovery, follow the
+[complete workflow](docs/workflow.md).
 
 ## Get started
 
@@ -62,29 +127,6 @@ or `UV_TOOL_BIN_DIR=/your/bin` when installing to select another directory.
 You can also run `bin/cub-workenv` directly from the checkout.
 
 </details>
-
-## What each worktree gets
-
-- **A selected installation.** One dedicated CUBRID installation and a recorded
-  preset, loaded together when you enter the environment.
-- **Local settings and storage.** Configuration, database registry, state,
-  utility logs, and the Bash loader live in `.cub-workenv/`. New databases use
-  `.cub-workenv/db/` unless you select external storage.
-- **Distinct runtime resources.** Allocated master and broker ports, two broker
-  SysV shared-memory keys, and a short TMP directory for master and PL sockets.
-
-Loading `env.sh` checks readiness, clears inherited CUBRID overrides, and selects
-the installation's binaries and libraries while retaining development-tool paths.
-It does not initialize databases or run diagnosis. Repeating `init` on a ready
-environment is a no-op, even with different options.
-
-Keep cooperating environments in the **same host allocation namespace**.
-It defaults to `${XDG_STATE_HOME:-$HOME/.local/state}/cub-workenv`.
-Stopped environments retain their assignments; allocation avoids recorded and
-currently occupied resources. It is not a lasting OS reservation.
-
-For pool ranges, storage defaults, direnv integration, and recovery, follow the
-[complete workflow](docs/workflow.md).
 
 ## Commands
 
