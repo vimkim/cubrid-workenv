@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="1200" height="550" viewBox="0 0 1200 550"
+     role="img" aria-labelledby="title desc">
+  <title id="title">Same database name. Separate worktrees.</title>
+  <desc id="desc">Two parallel CUBRID work environments from the recorded coexistence
+    test. Worktree A uses its own installation and physical testdb, returning 111.
+    Worktree B uses another installation and physical testdb, returning 222.
+    The lines represent separate environments, not shared physical storage.</desc>
+
+  <!-- Palette: deep teal, warm white, mint, sand, muted sage. -->
+  <rect width="1200" height="550" rx="20" fill="#102a30"/>
+
+  <g id="heading" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">
+    <text x="56" y="61" fill="#adc1bf" font-size="20" letter-spacing="3">CUBRID / HOST WORK ENVIRONMENTS</text>
+    <text x="56" y="136" fill="#f1f6f3" font-size="58" font-weight="700" letter-spacing="-1">Same name. Separate databases.</text>
+    <path d="M56 179H1144" stroke="#adc1bf" stroke-opacity="0.3" stroke-width="2"/>
+  </g>
+
+  <!-- Each lane has its own install, database and observed SQL value. -->
+  <g id="worktree-a" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">
+    <path d="M56 225V329H78" fill="none" stroke="#75d6bf" stroke-width="3"/>
+    <text x="86" y="296" fill="#f1f6f3" font-size="40" font-weight="600">worktree A</text>
+    <path d="M350 281H390M380 271L390 281L380 291" fill="none" stroke="#75d6bf" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <rect x="416" y="239" width="192" height="84" rx="12" fill="#75d6bf" fill-opacity="0.1"/>
+    <text x="512" y="295" text-anchor="middle" fill="#75d6bf" font-size="40" font-weight="500">install A</text>
+    <path d="M630 281H680M670 271L680 281L670 291" fill="none" stroke="#75d6bf" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <g id="database-a" fill="none" stroke="#75d6bf" stroke-width="2">
+      <path d="M714 248C714 222 918 222 918 248V317C918 343 714 343 714 317Z"/>
+      <path d="M714 248C714 274 918 274 918 248"/>
+    </g>
+    <text x="816" y="311" text-anchor="middle" fill="#f1f6f3" font-size="40" font-weight="600">testdb</text>
+    <path d="M950 281H992M982 271L992 281L982 291" fill="none" stroke="#75d6bf" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="1020" y="302" fill="#75d6bf" font-size="60" font-weight="600" font-family="ui-monospace, 'SFMono-Regular', Menlo, monospace">111</text>
+  </g>
+
+  <g id="worktree-b" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">
+    <path d="M56 385V489H78" fill="none" stroke="#e0b780" stroke-width="3"/>
+    <text x="86" y="456" fill="#f1f6f3" font-size="40" font-weight="600">worktree B</text>
+    <path d="M350 441H390M380 431L390 441L380 451" fill="none" stroke="#e0b780" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <rect x="416" y="399" width="192" height="84" rx="12" fill="#e0b780" fill-opacity="0.1"/>
+    <text x="512" y="455" text-anchor="middle" fill="#e0b780" font-size="40" font-weight="500">install B</text>
+    <path d="M630 441H680M670 431L680 441L670 451" fill="none" stroke="#e0b780" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <g id="database-b" fill="none" stroke="#e0b780" stroke-width="2">
+      <path d="M714 408C714 382 918 382 918 408V477C918 503 714 503 714 477Z"/>
+      <path d="M714 408C714 434 918 434 918 408"/>
+    </g>
+    <text x="816" y="471" text-anchor="middle" fill="#f1f6f3" font-size="40" font-weight="600">testdb</text>
+    <path d="M950 441H992M982 431L992 441L982 451" fill="none" stroke="#e0b780" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="1020" y="462" fill="#e0b780" font-size="60" font-weight="600" font-family="ui-monospace, 'SFMono-Regular', Menlo, monospace">222</text>
+  </g>
+</svg>
