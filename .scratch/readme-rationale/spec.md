@@ -8,6 +8,10 @@ The README must explain the original problem, its consequences, its causes,
 available approaches, and how this tool solves it. Preserve the existing
 visual design, examples, evidence scope, and native-command workflow.
 
+The approved follow-up also requests explicit limitations, the rigor of an
+academic technical README, and additional improvement proposals. Merge/push
+approval includes this requested documentation expansion.
+
 ## Evidence
 
 - `.scratch/workenv/spec.md`, Problem Statement: cross-worktree master, broker,
@@ -37,6 +41,14 @@ it before setup. Keep all critical instructions in Markdown.
 
 No runtime changes or additional native-engine experiments are needed.
 
+For the limitations expansion, organize verification around observations linked
+to recorded evidence. Separate implementation scope from unverified scenarios
+and future proposals. State the absent engine ctest coverage, stubbed CLI fixture
+boundary, diagnostic visibility limits, cooperative allocation assumption,
+native-locking prerequisites, finite resource/path constraints, manual recovery,
+and limited compatibility/performance evidence. Proposed compatibility, latency,
+failure-injection, and structured-diagnosis work must not be presented as shipped.
+
 ## Validation
 
 Check local links/anchors, shell syntax, SVG references, and the full diff.
@@ -52,7 +64,10 @@ the README in the task worktree for review.
 - Compared serial host runs, manual host configuration, and containers; tied
   the selected host approach to four preparation/allocation/loading/diagnosis
   steps. Replaced the older mechanism section to avoid duplication.
-- README image/SVG audit passed; 26 local links/anchors resolved; all five
+- Added an observation/evidence table, explicit validity and operational limits,
+  and four clearly labelled proposals. Distinguished native runs from stubbed
+  CLI fixtures and absent engine ctest coverage; retained performance caveats.
+- README image/SVG audit passed; 38 local links/anchors resolved; all five
   shell snippets parsed. Desktop/mobile light/dark previews inspected with
   no page overflow or missing image.
 - Artwork, commands, runtime implementation, and existing evidence unchanged.
